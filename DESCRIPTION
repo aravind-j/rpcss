@@ -1,0 +1,29 @@
+Package: rpcss
+Title: Core Collection Constitution by Principal Component Scoring Strategy
+Version: 0.0.0.9000
+Authors@R: c(
+    person(given = "J.", family = "Aravind",
+           email = "j.aravind@icar.gov.in",
+           role = c("aut", "cre"),
+		       comment = c(ORCID = "0000-0002-4791-442X")))
+Description: Generate a Core Collection with Principal Component Scoring 
+    Strategy (PCSS) (Noirot et al. 1996; Noirot et al. 2003) using qualitative 
+    and/or quantitative trait data.
+License: GPL-2 | GPL-3
+Encoding: UTF-8
+Depends: R (>= 3.5.0)
+VignetteBuilder: knitr
+RoxygenNote: 7.3.2
+Imports: FactoMineR,
+    ggplot2,
+    ggrepel,
+    gslnls,
+    Rdpack
+Suggests:
+    knitr,
+    rmarkdown,
+    pander
+RdMacros: mathjaxr,
+    Rdpack
+URL: https://github.com/aravind-j/rpcss
+BugReports: https://github.com/aravind-j/rpcss/issues
