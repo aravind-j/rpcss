@@ -7,9 +7,10 @@
 #'
 #' For qualitative traits, dimensionality reduction is performed by Principal
 #' Component Analysis (PCA). Similarly for quantitative traits, dimensionality
-#' reduction is done via Correspondence Analysis (CA). For cases where both
-#' quantitative and qualitative traits are available, dimensionality reduction
-#' is achieved by using the Factor Analysis for Mixed Data (FAMD) method.
+#' reduction is done via Multiple Correspondence Analysis (MCA). For cases where
+#' both quantitative and qualitative traits are available, dimensionality
+#' reduction is achieved by using the Factor Analysis for Mixed Data (FAMD)
+#' method.
 #'
 #' @param data The data as a data frame object. The data frame should possess
 #'   one row per individual and columns with the individual names and multiple
@@ -196,7 +197,7 @@ pcss.core <- function(data, names, quantitative, qualitative,
   dataf[, names] <- NULL
 
   pca_out <- NULL
-  ca_out <- NULL
+  mca_out <- NULL
   famd_out <- NULL
 
   # PCA ----
@@ -247,46 +248,55 @@ pcss.core <- function(data, names, quantitative, qualitative,
 
   }
 
-  # Run CA ----
+
+  # Run MCA ----
 
   if (!is.null(qualitative) & is.null(quantitative)) {
 
     dataf <- dataf[, qualitative]
 
+    # dataf[, qualitative] <- lapply(dataf[, qualitative], function(x) {
+    #   as.numeric(as.factor(x))
+    # })
+
     dataf[, qualitative] <- lapply(dataf[, qualitative], function(x) {
-      as.numeric(as.factor(x))
+      as.factor(x)
     })
 
-    ## Run CA ----
-    ca_out <- FactoMineR::CA(X = dataf,
-                             ncp = length(qualitative),
+    ncp <- sum(unlist(lapply(dataf, function(x) length(levels(x)))))
+
+    ## Run MCA ----
+    mca_out <- FactoMineR::MCA(X = dataf,
+                             ncp = ncp,
                              graph = FALSE)
 
     ## Get Eigen values ----
-    eig <- ca_out$eig[, "eigenvalue"]
+    eig <- mca_out$eig[, "eigenvalue"]
 
     ## Get Loadings ----
-    rot <- ca_out$svd$V
+    rot <- mca_out$svd$V
 
     ## Get Importance of factors/principal coordinates ----
     imp <-
-      data.frame(# `Standard deviation` = ca_out$svd$vs[1:(length(qualitative) - 1)],
-        `Eigen value` = ca_out$eig[, "eigenvalue"],
-        `Percentage of variance` = ca_out$eig[, "percentage of variance"],
-        `Cumulative percentage of variance` = ca_out$eig[, "cumulative percentage of variance"],
+      data.frame(# `Standard deviation` = mca_out$svd$vs[1:(length(qualitative) - 1)],
+        `Eigen value` = mca_out$eig[, "eigenvalue"],
+        `Percentage of variance` = mca_out$eig[, "percentage of variance"],
+        `Cumulative percentage of variance` = mca_out$eig[, "cumulative percentage of variance"],
         check.names = FALSE)
 
     rownames(imp) <- gsub("dim", "Dim", rownames(imp))
 
     ## Get Principal component scores ----
-    scores <- ca_out$row$coord
+    scores <- mca_out$ind$coord
 
     ## Coordinates for biplot
-    ind_coord <- ca_out$row$coord
+    ind_coord <- mca_out$ind$coord
     ind_coord <- ind_coord[, 1:biplot.ndim]
+    colnames(ind_coord) <- gsub("Dim.", "Dim ", colnames(ind_coord))
 
-    var_coord <- ca_out$col$coord
+    var_coord <- mca_out$var$coord
     var_coord <- var_coord[, 1:biplot.ndim]
+    colnames(var_coord) <- gsub("Dim.", "Dim ", colnames(var_coord))
     var_coord <- var_coord * biplot.trait.scale
 
   }
@@ -577,7 +587,7 @@ pcss.core <- function(data, names, quantitative, qualitative,
   # Generate ouput ----
 
   rawout_ind <- c(pca_out = !is.null(pca_out),
-                  ca_out = !is.null(ca_out),
+                  mca_out = !is.null(mca_out),
                   famd_out = !is.null(famd_out))
 
   detailsdf <-
