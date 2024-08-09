@@ -11,12 +11,7 @@ pcss.core(
   qualitative,
   eigen.threshold = NULL,
   size = 0.2,
-  var.threshold = 0.75,
-  screeplot.ndim = NULL,
-  biplot.ndim = 3,
-  biplot.trait.scale = 1,
-  biplot.point.alpha = 0.8,
-  biplot.segment.alpha = 0.8
+  var.threshold = 0.75
 )
 }
 \arguments{
@@ -38,38 +33,24 @@ eigen values.}
 
 \item{size}{The desired core set size proportion.}
 
-\item{var.threshold}{The desired percentage of total variabilty to be
-retained in the core set.}
-
-\item{screeplot.ndim}{The number of eigen values to be plotted in the scree
-plot.}
-
-\item{biplot.ndim}{The number of dimensions for which biplots have to
-plotted.}
-
-\item{biplot.trait.scale}{A scale factor to be applied to trait coordinates
-plotted in biplot.}
-
-\item{biplot.point.alpha}{Alpha transparency value for biplot points.}
-
-\item{biplot.segment.alpha}{Alpha transparency value for biplot segments.}
+\item{var.threshold}{The desired proportion of total variabilty to be}
 }
 \value{
 A list of class \code{pcss.core} with the following components.
   \item{details}{The details of the core set generaton process.}
   \item{raw.out}{The original output of \code{\link[FactoMineR]{PCA}},
   \code{\link[FactoMineR]{CA}} and \code{\link[FactoMineR]{FAMD}} functions
-  of \code{\link[FactoMineR]{FactoMineR}}} \item{eigen}{A vector of eigen
-  values.} \item{rotation}{A matrix of rotation values or loadings.}
-  \item{scores}{A matrix of scores from PCA, CA or FAMD.}
-  \item{variability.ret}{A data frame of genotypes ordered by variability
-  retained.} \item{scree.plot}{The scree plot as a \code{ggplot} object.}
-  \item{biplot}{A list of biplot \code{ggplot} objects.} \item{cores.info}{A
-  data frame of core set size and percentage variablity retained according to
-  the method used.} \item{core.plots}{A list of plots of cumulative
-  variability retained by genotypes as \code{ggplot} objects. The core set
-  size and corresponding percentage variability retained are highlighted
-  according to the method used.}
+  of \code{\link[FactoMineR]{FactoMineR}}} \item{eigen}{A data frame with
+  eigen values and their partial and cumulative contribution to percentage of
+  variance.} \item{eigen.threshold}{The threshold eigen value used.}
+  \item{rotation}{A matrix of rotation values or loadings.} \item{scores}{A
+  matrix of scores from PCA, CA or FAMD.} \item{variability.ret}{A data frame
+  of genotypes ordered by variability retained.} \item{cores.info}{A data frame of core set
+  size and percentage variablity retained according to the method used.}
+  \item{core.plots}{A list of plots of cumulative variability retained by
+  genotypes as \code{ggplot} objects. The core set size and corresponding
+  percentage variability retained are highlighted according to the method
+  used.}
 }
 \description{
 Generate a Core Collection with Principal Component Scoring Strategy (PCSS)
@@ -79,9 +60,10 @@ qualitative and/or quantitative trait data.
 \details{
 For qualitative traits, dimensionality reduction is performed by Principal
 Component Analysis (PCA). Similarly for quantitative traits, dimensionality
-reduction is done via Correspondence Analysis (CA). For cases where both
-quantitative and qualitative traits are available, dimensionality reduction
-is achieved by using the Factor Analysis for Mixed Data (FAMD) method.
+reduction is done via Multiple Correspondence Analysis (MCA). For cases where
+both quantitative and qualitative traits are available, dimensionality
+reduction is achieved by using the Factor Analysis for Mixed Data (FAMD)
+method \insertCite{husson_Exploratory_2017}.
 }
 \seealso{
 \code{\link[FactoMineR]{PCA}}, \code{\link[FactoMineR]{CA}} and

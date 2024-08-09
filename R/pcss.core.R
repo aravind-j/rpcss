@@ -25,41 +25,28 @@
 #'   eigen values.
 #' @param size The desired core set size proportion.
 #' @param var.threshold The desired proportion of total variabilty to be
-#'   retained in the core set.
-#' @param screeplot.ndim The number of eigen values to be plotted in the scree
-#'   plot.
-#' @param biplot.ndim The number of dimensions for which biplots have to
-#'   plotted.
-#' @param biplot.show.traits Which kind of the traits to be shown in the biplot.
-#'   Either "all", "none", "quantitative" or "qualitative".
-#' @param biplot.trait.scale A scale factor to be applied to trait coordinates
-#'   plotted in biplot.
-#' @param biplot.point.alpha Alpha transparency value for biplot points.
-#' @param biplot.segment.alpha Alpha transparency value for biplot segments.
 #'
 #' @return A list of class \code{pcss.core} with the following components.
 #'   \item{details}{The details of the core set generaton process.}
 #'   \item{raw.out}{The original output of \code{\link[FactoMineR]{PCA}},
 #'   \code{\link[FactoMineR]{CA}} and \code{\link[FactoMineR]{FAMD}} functions
-#'   of \code{\link[FactoMineR]{FactoMineR}}} \item{eigen}{A vector of eigen
-#'   values.} \item{rotation}{A matrix of rotation values or loadings.}
-#'   \item{scores}{A matrix of scores from PCA, CA or FAMD.}
-#'   \item{variability.ret}{A data frame of genotypes ordered by variability
-#'   retained.} \item{scree.plot}{The scree plot as a \code{ggplot} object.}
-#'   \item{biplot}{A list of biplot \code{ggplot} objects.} \item{cores.info}{A
-#'   data frame of core set size and percentage variablity retained according to
-#'   the method used.} \item{core.plots}{A list of plots of cumulative
-#'   variability retained by genotypes as \code{ggplot} objects. The core set
-#'   size and corresponding percentage variability retained are highlighted
-#'   according to the method used.}
+#'   of \code{\link[FactoMineR]{FactoMineR}}} \item{eigen}{A data frame with
+#'   eigen values and their partial and cumulative contribution to percentage of
+#'   variance.} \item{eigen.threshold}{The threshold eigen value used.}
+#'   \item{rotation}{A matrix of rotation values or loadings.} \item{scores}{A
+#'   matrix of scores from PCA, CA or FAMD.} \item{variability.ret}{A data frame
+#'   of genotypes ordered by variability retained.} \item{cores.info}{A data frame of core set
+#'   size and percentage variablity retained according to the method used.}
+#'   \item{core.plots}{A list of plots of cumulative variability retained by
+#'   genotypes as \code{ggplot} objects. The core set size and corresponding
+#'   percentage variability retained are highlighted according to the method
+#'   used.}
 #'
 #' @seealso \code{\link[FactoMineR]{PCA}}, \code{\link[FactoMineR]{CA}} and
 #'   \code{\link[FactoMineR]{FAMD}}
 #'
 #' @import ggplot2
 #' @import gslnls
-#' @importFrom dplyr bind_rows
-#' @importFrom ggrepel geom_text_repel
 #' @importFrom FactoMineR PCA CA FAMD
 #' @importFrom Rdpack reprompt
 #' @export
@@ -67,14 +54,7 @@
 #' @examples
 pcss.core <- function(data, names, quantitative, qualitative,
                       eigen.threshold = NULL,
-                      size = 0.2, var.threshold = 0.75,
-                      screeplot.ndim = NULL,
-                      biplot.ndim = 3, # at least 2
-                      biplot.show.traits = c("all", "none",
-                                             "quantitative", "qualitative"),
-                      biplot.trait.scale = 1,
-                      biplot.point.alpha = 0.8,
-                      biplot.segment.alpha = 0.8) {
+                      size = 0.2, var.threshold = 0.75) {
 
   # Checks ----
 
@@ -195,14 +175,14 @@ pcss.core <- function(data, names, quantitative, qualitative,
     stop('Duplicated entries exist in "names" column.')
   }
 
-  # check if 'eigen.threshold' argument is character vector of unit length
+  # check if 'eigen.threshold' argument is numeric vector of unit length
   if (!is.null(eigen.threshold)) {
-    if (!(is.character(eigen.threshold) && length(eigen.threshold) == 1)) {
+    if (!(is.numeric(eigen.threshold) && length(eigen.threshold) == 1)) {
       stop('"eigen.threshold" should be a numeric vector of unit length.')
     }
   }
 
-  # check if 'size' argument is character vector of unit length
+  # check if 'size' argument is numeric vector of unit length
   if (!is.null(size)) {
     if (!(is.numeric(size) && length(size) == 1)) {
       stop('"size" should be a numeric vector of unit length.')
@@ -214,7 +194,7 @@ pcss.core <- function(data, names, quantitative, qualitative,
     stop('"size" should be a proportion between 0 and 1.')
   }
 
-  # check if 'var.threshold' argument is character vector of unit length
+  # check if 'var.threshold' argument is numeric vector of unit length
   if (!is.null(var.threshold)) {
     if (!(is.numeric(var.threshold) && length(var.threshold) == 1)) {
       stop('"var.threshold" should be a numeric vector of unit length.')
@@ -226,73 +206,6 @@ pcss.core <- function(data, names, quantitative, qualitative,
     stop('"var.threshold" should be a proportion between 0 and 1.')
   }
 
-  # check if 'screeplot.ndim' argument is integer vector of unit length
-  if (!is.null(screeplot.ndim)) {
-    if (!(is.integer(screeplot.ndim) && length(screeplot.ndim) == 1)) {
-      stop('"screeplot.ndim" should be a integer vector of unit length.')
-    }
-  }
-
-  # check if 'biplot.ndim' argument is integer vector of unit length
-  if (!(is.integer(biplot.ndim) && length(biplot.ndim) == 1)) {
-    stop('"biplot.ndim" should be a integer vector of unit length.')
-  }
-
-  # check if at least two dimensions are plotted in biplot.ndim
-  if (biplot.ndim < 2L) {
-    stop('At least 2 dimensions are to be specified in "biplot.ndim".')
-  }
-
-  # check if biplot.ndim is not greater than total dimensions
-  if (is.null(qualitative) & !is.null(quantitative)) {
-    total.ndim <- length(quantitative)
-  }
-
-  if (!is.null(qualitative) & is.null(quantitative)) {
-    total.ndim <- sum(unlist(lapply(data[, c(qualitative)],
-                                  function(x) length(levels(x))))) -
-      length(qualitative)
-  }
-
-  if (is.null(qualitative) & is.null(quantitative)) {
-    total.ndim <- length(quantitative) + length(qualitative)
-  }
-
-  if (biplot.ndim > total.ndim) {
-    warning('"biplot.ndim" is greater than the total number of dimensions.\n',
-            paste('Using the total number of dimensions (',
-                  total.ndim, ') as "biplot.ndim".', sep = ""))
-    biplot.ndim <- total.ndim
-  }
-
-  # check biplot.show.traits argument
-  biplot.show.traits <- match.arg(biplot.show.traits)
-
-  # check biplot.trait.scale argument is numeric vector of unit length
-  if (!(is.numeric(biplot.trait.scale) && length(biplot.trait.scale) == 1)) {
-    stop('"screeplot.ndim" should be a numeric vector of unit length.')
-  }
-
-  # check biplot.point.alpha argument is numeric vector of unit length
-  if (!(is.numeric(biplot.point.alpha) && length(biplot.point.alpha) == 1)) {
-    stop('"screeplot.ndim" should be a numeric vector of unit length.')
-  }
-
-  # check if 'biplot.point.alpha' is a value between 0 and 1
-  if (biplot.point.alpha <= 0 | biplot.point.alpha >= 1) {
-    stop('"biplot.point.alpha" should be a value between 0 and 1.')
-  }
-
-  # check biplot.segment.alpha argument is numeric vector of unit length
-  if (!(is.numeric(biplot.segment.alpha) && length(biplot.segment.alpha) == 1)) {
-    stop('"screeplot.ndim" should be a numeric vector of unit length.')
-  }
-
-  # check if 'biplot.segment.alpha' is a value between 0 and 1
-  if (biplot.segment.alpha <= 0 | biplot.segment.alpha >= 1) {
-    stop('"biplot.segment.alpha" should be a value between 0 and 1.')
-  }
-
   # Prepare data ----
 
   dataf <- data[, c(names, quantitative, qualitative)]
@@ -302,6 +215,8 @@ pcss.core <- function(data, names, quantitative, qualitative,
   pca_out <- NULL
   mca_out <- NULL
   famd_out <- NULL
+
+  method <- NULL
 
   # PCA ----
 
@@ -339,18 +254,9 @@ pcss.core <- function(data, names, quantitative, qualitative,
     ## Get Principal component scores ----
     scores <- pca_out$ind$coord
 
-    ## Coordinates for biplot
-    ind_coord <- pca_out$ind$coord
-    ind_coord <- ind_coord[, 1:biplot.ndim]
-    colnames(ind_coord) <- gsub("Dim.", "Dim ", colnames(ind_coord))
-
-    quant_coord <- pca_out$var$coord
-    quant_coord <- quant_coord[, 1:biplot.ndim]
-    colnames(quant_coord) <- gsub("Dim.", "Dim ", colnames(quant_coord))
-    quant_coord <- quant_coord * biplot.trait.scale
-
+    ## Method ----
+    method <- "PCA"
   }
-
 
   # Run MCA ----
 
@@ -392,15 +298,8 @@ pcss.core <- function(data, names, quantitative, qualitative,
     ## Get Principal component scores ----
     scores <- mca_out$ind$coord
 
-    ## Coordinates for biplot
-    ind_coord <- mca_out$ind$coord
-    ind_coord <- ind_coord[, 1:biplot.ndim]
-    colnames(ind_coord) <- gsub("Dim.", "Dim ", colnames(ind_coord))
-
-    qual_coord <- mca_out$var$coord
-    qual_coord <- qual_coord[, 1:biplot.ndim]
-    colnames(qual_coord) <- gsub("Dim.", "Dim ", colnames(qual_coord))
-    qual_coord <- qual_coord * biplot.trait.scale
+    ## Method ----
+    method <- "MCA"
 
   }
 
@@ -442,33 +341,8 @@ pcss.core <- function(data, names, quantitative, qualitative,
     ## Get Principal component scores ----
     scores <- famd_out$ind$coord
 
-    ## Coordinates for biplot
-    ind_coord <- famd_out$ind$coord
-    ind_coord <- ind_coord[, 1:biplot.ndim]
-    colnames(ind_coord) <- gsub("Dim.", "Dim ", colnames(ind_coord))
-
-    quant_coord <- famd_out$quanti.var$coord
-    quant_coord <- quant_coord[, 1:biplot.ndim]
-    colnames(quant_coord) <- gsub("Dim.", "Dim ", colnames(quant_coord))
-    quant_coord <- quant_coord * biplot.trait.scale
-
-    qual_coord <- famd_out$quali.var$coord
-    qual_coord <- qual_coord[, 1:biplot.ndim]
-    colnames(qual_coord) <- gsub("Dim.", "Dim ", colnames(qual_coord))
-    qual_coord <- qual_coord * biplot.trait.scale
-
-    qual_levels <- lapply(data[, qualitative],
-                          function(x) data.frame(qual_levels = levels(x)))
-    qual_levels <- dplyr::bind_rows(qual_levels, .id = "qual")
-
-    if (any(qual_levels$qual_levels != rownames(qual_coord))) {
-      warning('Mismatch in levels of qualitative traits and ',
-              'the names of qualitative trait level coordinates.')
-    } else {
-      rownames(qual_coord) <- paste(qual_levels$qual,
-                                    qual_levels$qual_levels, sep = "_")
-    }
-
+    ## Method ----
+    method <- "FAMD"
   }
 
   # Contribution of individuals/genotypes to total GSS ----
@@ -502,39 +376,6 @@ pcss.core <- function(data, names, quantitative, qualitative,
 
   # plot(cumCRimax, col = "green")
   # points(cumCRi, col = "red")
-
-  eigen.threshold_label <- eigen.threshold
-  if (nchar(eigen.threshold > 5)) {
-    eigen.threshold_label <- round(eigen.threshold, 3)
-  }
-
-  # Plot eigen values ----
-  eigdf <- data.frame(sl = seq_along(eig), eig = eig)
-  eigdf$gp <- ifelse(eigdf$sl <= K, 1, 0)
-  eigdf$gp <- as.factor(eigdf$gp)
-
-  if (!is.null(screeplot.ndim)) {
-    if (nrow(eigdf) > screeplot.ndim) {
-      eigdf <- eigdf[1:screeplot.ndim, ]
-    }
-  }
-
-  eigg <- ggplot(eigdf) +
-    geom_segment(aes(x = sl, y = 0, xend = sl, yend = eig),
-                 linewidth = 2, colour = "gray20") +
-    geom_line(aes(x = sl, y = eig)) +
-    geom_point(aes(x = sl, y = eig, colour = gp), pch = 18, size = 3,
-               show.legend = FALSE) +
-    scale_colour_manual(values = c("gray", "red")) +
-    geom_hline(yintercept = eigen.threshold, linetype = 2) +
-    geom_label(x = length(eig), y = eigen.threshold, colour = "red",
-               label = eigen.threshold_label) +
-    # geom_label(aes(x = sl, y = eig, label = round(eig, 3)),
-    #            vjust = 1, hjust = -0.2) +
-    # scale_x_continuous(breaks = eigdf$sl, limits = c(1, length(eig) + 0.5)) +
-    xlab("Factors") +
-    ylab("Eigen value") +
-    theme_bw()
 
   # Select the core collection ----
 
@@ -665,77 +506,6 @@ pcss.core <- function(data, names, quantitative, qualitative,
     theme_bw()
 
 
-  # Plot Biplot ----
-
-  biplot_comb <- data.frame(t(combn(x = colnames(ind_coord), m = 2)))
-  biplot_comb$label <- paste(biplot_comb$X1, biplot_comb$X2, sep = " vs. ")
-
-  biplot_list <- vector("list", length = nrow(biplot_comb))
-  names(biplot_list) <- biplot_comb$label
-
-  for (i in seq_along(biplot_list)) {
-
-    xlb <- paste(biplot_comb[i, 1], " (",
-                 round(imp[biplot_comb[i, 1], ]$`Percentage of variance`, 2),
-                 "% explained variance)", sep = "")
-    ylb <- paste(biplot_comb[i, 2], " (",
-                 round(imp[biplot_comb[i, 2], ]$`Percentage of variance`, 2),
-                 "% explained variance)", sep = "")
-
-    bipg <- ggplot(data = ind_coord,
-                   aes(x = .data[[biplot_comb[i, 1]]],
-                       y = .data[[biplot_comb[i, 2]]])) +
-      geom_vline(xintercept = 0, linetype = 2, colour = "gray20") +
-      geom_hline(yintercept = 0, linetype = 2, colour = "gray20") +
-      geom_point(alpha = biplot.point.alpha) +
-      xlab(label = xlb) +
-      ylab(label = ylb) +
-      theme_bw()
-
-    if (biplot.show.traits == "all" | biplot.show.traits == "quantitative") {
-
-      if ((is.null(qualitative) & !is.null(quantitative)) |
-          (!is.null(qualitative) & !is.null(quantitative))) {
-
-        bipg <- bipg +
-        geom_segment(data = quant_coord, aes(x = 0, y = 0,
-                                             xend = .data[[biplot_comb[i, 1]]],
-                                             yend = .data[[biplot_comb[i, 2]]]),
-                     arrow = arrow(length = unit(0.2, "cm")),
-                     color = "blue", alpha = biplot.segment.alpha) +
-        geom_text_repel(data = quant_coord, aes(x = .data[[biplot_comb[i, 1]]],
-                                                y = .data[[biplot_comb[i, 2]]],
-                                                label = rownames(quant_coord)),
-                        color = "blue", vjust = -0.5)
-      }
-    }
-
-    if (biplot.show.traits == "all" | biplot.show.traits == "qualitative") {
-
-      if ((!is.null(qualitative) & is.null(quantitative)) |
-          (!is.null(qualitative) & !is.null(quantitative))) {
-
-        bipg <- bipg +
-        geom_segment(data = qual_coord, aes(x = 0, y = 0,
-                                             xend = .data[[biplot_comb[i, 1]]],
-                                             yend = .data[[biplot_comb[i, 2]]]),
-                     arrow = arrow(length = unit(0.2, "cm")),
-                     color = "red", alpha = biplot.segment.alpha) +
-        geom_text_repel(data = qual_coord, aes(x = .data[[biplot_comb[i, 1]]],
-                                                y = .data[[biplot_comb[i, 2]]],
-                                                label = rownames(qual_coord)),
-                        color = "red", vjust = -0.5)
-      }
-    }
-
-    biplot_list[[i]] <- bipg
-
-    rm(bipg, xlb, ylb)
-
-  }
-
-  # patchwork::wrap_plots(biplot_list)
-
   # Generate ouput ----
 
   rawout_ind <- c(pca_out = !is.null(pca_out),
@@ -745,6 +515,7 @@ pcss.core <- function(data, names, quantitative, qualitative,
   detailsdf <-
     data.frame(`Quantitative traits` =  paste(quantitative, collapse = ", "),
                `Qualitative traits` =  paste(qualitative, collapse = ", "),
+               `Method` = method,
                `Threshold eigen value` = eigen.threshold,
                `Number of eigen values selected` = K,
                `Threshold size` = size,
@@ -763,18 +534,21 @@ pcss.core <- function(data, names, quantitative, qualitative,
 
   out <- list(details = detailsdf,
               raw.out = get(names(which(rawout_ind))),
-              eigen = eig,
+              eigen = imp,
+              eigen.threshold = eigen.threshold,
               rotation = rot,
               scores = scores,
               variability.ret = gssdf,
-              scree.plot = eigg,
-              biplot = biplot_list,
               cores.info = coreinfodf,
               core.plots = list(by.size = size.gssg,
                                 by.var = var.gssg,
                                 by.reg = list(reg.gssg, reg.gssrateg)))
 
   class(out) <- "pcss.core"
+
+  attr(x = out, which = "method") <- method
+  attr(x = out, which = "quant") <- quantitative
+  attr(x = out, which = "quali") <- qualitative
 
   return(out)
 
