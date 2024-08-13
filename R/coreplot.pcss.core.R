@@ -1,0 +1,169 @@
+#' Plot the cumulative variability retained by individuals/genotypes from
+#' \code{pcss.core} Output
+#'
+#' \code{coreplot.pcss.core} generates plots of cumulative variability retained
+#' by individuals/genotypes from \code{pcss.core} Output. The size of core
+#' collection and the corresponding cumulative variance retained are highlighted
+#' according to the criterion used.
+#'
+#' Use \code{"size"} to highlight core collection according to the threshold
+#' \code{size} criterion or use \code{"variance"} to highlight core collection
+#' according to the variability threshold criterion or use  \code{"logistic"} to
+#' highlight core collection generated according to inflection point of rate of
+#' progress of cumulative variability retained identified by logistic
+#' regression.
+#'
+#' @param x An object of class \code{pcss.core}.
+#' @param criterion The core collection generation criterion. Either
+#'   \code{"size"}, \code{"variance"}, or \code{"logistic"}. See
+#'   \strong{Details}.
+#'
+#' @return A plot of cumulative variability retained by individuals/genotypes as
+#'   a \code{ggplot} object. In case of \code{criterion = "logistic"}, a list
+#'   with plots of cumulative variability retained by individuals/genotypes and
+#'   rate of progress of cumulative contribution to variability. The size and
+#'   variability retained by core collection are highlighted in each plot.
+#'
+#' @import ggplot2
+#' @export
+#'
+#' @examples
+coreplot.pcss.core <- function(x,
+                               criterion = c("size", "variance", "logistic")) {
+
+  # Checks ----
+
+  # Check class of "x"
+  if (!is(x, "pcss.core")) {
+    stop('"x" is not of class "pcss.core".')
+  }
+
+  criterion <- match.arg(criterion)
+
+  gssdf <- x$variability.ret
+
+  N <- nrow(gssdf)
+
+  # By size specified ----
+
+  if (criterion == "size") {
+
+    size.sel <-
+      x$cores.info[x$cores.info$Method == "By size specified", ]$Size
+    size.var <-
+      x$cores.info[x$cores.info$Method == "By size specified", ]$VarRet
+
+    size.segdf <- data.frame(x = c(-Inf, size.sel),
+                             xend = c(size.sel, size.sel),
+                             y = c(size.var, -Inf),
+                             yend = c(size.var, size.var))
+    size.segdf$label <- as.character(c(round(size.segdf[1, "y"], 2),
+                                       size.segdf[2, "x"]))
+
+    size.gssg <- ggplot(gssdf, aes(x = Rank, y = VarRet)) +
+      geom_point() +
+      geom_segment(data = size.segdf, aes(x = x, xend = xend,
+                                          y = y, yend = yend),
+                   colour = "red") +
+      geom_text(data = size.segdf, aes(x = x, y = y, label = label),
+                vjust = -0.5, hjust = -0.5, colour = "red") +
+      scale_x_continuous(name = "Number of selected individuals" ,
+                         sec.axis = sec_axis(transform = ~. / N,
+                                             name = "Proportion of selected individuals")) +
+      ylab("Variability retained (%)") +
+      theme_bw()
+
+    return(size.gssg)
+  }
+
+  # By threshold variance ----
+
+  if (criterion == "variance") {
+
+    var.sel <-
+      x$cores.info[x$cores.info$Method == "By threshold variance", ]$Size
+    var.threshold <-
+      x$cores.info[x$cores.info$Method == "By threshold variance", ]$VarRet
+
+    var.segdf <- data.frame(x = c(-Inf, var.sel),
+                            xend = c(var.sel, var.sel),
+                            y = c(var.threshold, -Inf),
+                            yend = c(var.threshold, var.threshold))
+    var.segdf$label <- as.character(c(round(var.segdf[1, "y"], 2),
+                                      var.segdf[2, "x"]))
+
+    var.gssg <- ggplot(gssdf, aes(x = Rank, y = VarRet)) +
+      geom_point() +
+      geom_segment(data = var.segdf, aes(x = x, xend = xend,
+                                         y = y, yend = yend),
+                   colour = "red") +
+      geom_text(data = var.segdf, aes(x = x, y = y, label = label),
+                vjust = -0.5, hjust = -0.5, colour = "red") +
+      scale_x_continuous(name = "Number of selected individuals" ,
+                         sec.axis = sec_axis(transform = ~. / N,
+                                             name = "Proportion of selected individuals")) +
+      ylab("Variability retained (%)") +
+      theme_bw()
+
+    return(var.gssg)
+  }
+
+  # With logistic regression ----
+
+  if (criterion == "logistic") {
+
+    reg.sel <-
+      x$cores.info[x$cores.info$Method == "By logistic regression", ]$Size
+    reg.var <-
+      x$cores.info[x$cores.info$Method == "By logistic regression", ]$VarRet
+
+    b <- attributes(x)$slope
+
+    reg.segdf <- data.frame(x = c(-Inf, reg.sel),
+                            xend = c(reg.sel, reg.sel),
+                            y = c(reg.var, -Inf),
+                            yend = c(reg.var, reg.var))
+    reg.segdf$label <- as.character(c(round(reg.segdf[1, "y"], 2),
+                                      reg.segdf[2, "x"]))
+
+    reg.gssg <- ggplot(gssdf, aes(x = Rank, y = VarRet)) +
+      geom_point() +
+      geom_segment(data = reg.segdf, aes(x = x, xend = xend,
+                                         y = y, yend = yend),
+                   colour = "red") +
+      geom_text(data = reg.segdf, aes(x = x, y = y, label = label),
+                vjust = -0.5, hjust = -0.5, colour = "red") +
+      scale_x_continuous(name = "Number of selected individuals" ,
+                         sec.axis = sec_axis(transform = ~. / N,
+                                             name = "Proportion of selected individuals")) +
+      ylab("Variability retained (%)") +
+      theme_bw()
+
+    dat <- data.frame(n = gssdf$Rank, y = gssdf$VarRet)
+    dat$rate <- -b * dat$y * (100 - dat$y)
+
+    reg.segdf2 <- data.frame(x = c(-Inf, reg.sel),
+                             xend = c(reg.sel, reg.sel),
+                             y = c(max(dat$rate), -Inf),
+                             yend = c(max(dat$rate), max(dat$rate)))
+    reg.segdf2$label <- as.character(c(round(reg.segdf2[1, "y"], 2),
+                                       reg.segdf2[2, "x"]))
+
+    reg.gssrateg <- ggplot(data = dat, aes(x = n, y = rate)) +
+      geom_point() +
+      geom_segment(data = reg.segdf2, aes(x = x, xend = xend,
+                                          y = y, yend = yend),
+                   colour = "red") +
+      geom_text(data = reg.segdf2, aes(x = x, y = y, label = label),
+                vjust = -0.5, hjust = -0.5, colour = "red") +
+      scale_x_continuous(name = "Number of selected individuals" ,
+                         sec.axis = sec_axis(transform = ~. / N,
+                                             name = "Proportion of selected individuals")) +
+      ylab("Rate of increase in variability retained (%)") +
+      theme_bw()
+
+    return(list(`Cumulative contribution` = reg.gssg,
+                `Rate of cumulative contribution` = reg.gssrateg))
+  }
+
+}

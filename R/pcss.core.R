@@ -2,8 +2,86 @@
 #' Principal Component Scoring to Generate Core collections
 #'
 #' Generate a Core Collection with Principal Component Scoring Strategy (PCSS)
-#' \insertCite{noirot_principal_1996,noirot_method_2003}{rpcss} using
-#' qualitative and/or quantitative trait data.
+#' \insertCite{hamon_proposed_1990,noirot_principal_1996,noirot_method_2003}{rpcss}
+#' using qualitative and/or quantitative trait data. \loadmathjax
+#'
+#' A core collection is constituted from an entire collection of \mjseqn{N}
+#' genotypes using quantitative data of \mjseqn{J} traits using Principal
+#' Component Scoring Strategy (PCSS)
+#' \insertCite{hamon_proposed_1990,noirot_principal_1996,noirot_method_2003}{rpcss}
+#' as follows:
+#'
+#' \enumerate{
+#'
+#' \item Principal Component Analysis (PCA) is performed on the standardized
+#' genotype \mjseqn{\times} trait data. This takes care of multicollinearity
+#' between the traits to generate \mjseqn{J} standardized and independent
+#' variables or factors or principal component.
+#'
+#' \item Considering only a subset of factors \mjseqn{K}, the Generalized Sum of
+#'  Squares (GSS) of N individuals in K factorial spaces is computed as
+#' \mjseqn{N \times K}.
+#'
+#' \mjseqn{K} can be the number of factors for which the eigen value
+#' \mjseqn{\lambda} is greater than a threshold value such as 1 or the average
+#' of all the eigen values.
+#'
+#' \item The contribution of the \mjseqn{i}th genotype to GSS (\mjseqn{P_{i}})
+#' or total variability is calculated as below.
+#'
+#' \mjsdeqn{P_{i} = \sum_{j = 1}^{K} x_{ij}^{2}}
+#'
+#' Where \mjseqn{x_{ij}} is the component score or coordinate of the
+#' \mjseqn{i}th genotype on the \mjseqn{j}th principal component.
+#'
+#' \item For each genotype, its relative contribution to GSS or total
+#' variabilityis computed as below.
+#'
+#' \mjsdeqn{CR_{i} = \frac{P_{i}}{N \times K}}
+#'
+#' \item The genotypes are sorted in descending order of magnitude of their
+#' contribution to GSS and then the cumulative contribution of successive
+#' genotypes to GSS is computed.
+#'
+#' \item The core collection can then be selected by three different methods.
+#'
+#'  \enumerate{
+#'
+#'  \item Selection of fixed proportion or percentage or number of the top
+#'  accessions.
+#'
+#'  \item Selection of the top accessions that contribute up to a fixed
+#'  percentage of the GSS.
+#'
+#'  \item Fitting a logistic regression model of the following form to the
+#'  cumulative contribution of successive genotypes to GSS
+#'  \insertCite{balakrishnan_method_2000}{rpcss}.
+#'
+#'  \mjsdeqn{\frac{y}{A-y} = e^{a + bn}}
+#'
+#'  The above equation can  be reparameterized as below.
+#'
+#'  \mjsdeqn{\log_{e} \left ( {\frac{y}{A-y}} \right ) = a + bn}
+#'
+#'  Where, \mjseqn{a} and \mjseqn{b} are the intercept and regression
+#'  coefficient, respectively; \mjseqn{y} is the cumulative contribution of
+#'  successive genotypes to GSS; \mjseqn{n} is the rank of the genotype when
+#'  sorted according to the contribution to GSS and \mjseqn{A} is the asymptote
+#'  of the curve (\mjseqn{A = 100}).
+#'
+#'  The rate of increase in the successive contribution of genotypes to GSS can
+#'  be computed as
+#'
+#'  \mjsdeqn{\frac{\mathrm{d} y}{\mathrm{d} x} = by(A-y)}
+#'
+#'  to find the point of inflection where the rate of increase starts declining.
+#'
+#'  The number of accessions included till the peak or infection point are
+#'  selected #'  to constitute the core collection.
+#'
+#'  }
+#'
+#' }
 #'
 #' For qualitative traits, dimensionality reduction is performed by Principal
 #' Component Analysis (PCA). Similarly for quantitative traits, dimensionality
@@ -12,10 +90,12 @@
 #' reduction is achieved by using the Factor Analysis for Mixed Data (FAMD)
 #' method \insertCite{husson_Exploratory_2017}.
 #'
+#'
 #' @param data The data as a data frame object. The data frame should possess
 #'   one row per individual and columns with the individual names and multiple
 #'   trait/character data.
-#' @param names Name of column with the individual names as a character string.
+#' @param names Name of column with the individual/genotype names as a character
+#'   string.
 #' @param quantitative Name of columns with the quantitative traits as a
 #'   character vector.
 #' @param qualitative Name of columns with the qualitative traits as a character
@@ -24,7 +104,7 @@
 #'   included in the estimation. The default value is the average of all the
 #'   eigen values.
 #' @param size The desired core set size proportion.
-#' @param var.threshold The desired proportion of total variabilty to be
+#' @param var.threshold The desired proportion of total variability to be
 #'
 #' @return A list of class \code{pcss.core} with the following components.
 #'   \item{details}{The details of the core set generaton process.}
@@ -35,18 +115,15 @@
 #'   variance.} \item{eigen.threshold}{The threshold eigen value used.}
 #'   \item{rotation}{A matrix of rotation values or loadings.} \item{scores}{A
 #'   matrix of scores from PCA, CA or FAMD.} \item{variability.ret}{A data frame
-#'   of genotypes ordered by variability retained.} \item{cores.info}{A data frame of core set
-#'   size and percentage variablity retained according to the method used.}
-#'   \item{core.plots}{A list of plots of cumulative variability retained by
-#'   genotypes as \code{ggplot} objects. The core set size and corresponding
-#'   percentage variability retained are highlighted according to the method
-#'   used.}
+#'   of individuals/genotypes ordered by variability retained.}
+#'   \item{cores.info}{A data frame of core set size and percentage variability
+#'   retained according to the method used.}
 #'
 #' @seealso \code{\link[FactoMineR]{PCA}}, \code{\link[FactoMineR]{CA}} and
 #'   \code{\link[FactoMineR]{FAMD}}
 #'
-#' @import ggplot2
 #' @import gslnls
+#' @import mathjaxr
 #' @importFrom FactoMineR PCA CA FAMD
 #' @importFrom Rdpack reprompt
 #' @export
@@ -362,11 +439,13 @@ pcss.core <- function(data, names, quantitative, qualitative,
   N <- nrow(scores)
   K <- max(which((eig > eigen.threshold)))
 
+  GSS <- N * K
+
   Pi <- rowSums(scores[, 1:K] ^ 2)
   Pimax <- rowSums(scores ^ 2)
 
-  CRi <- (Pi / (N * K))
-  CRimax <- (Pimax / (N * K))
+  CRi <- Pi / GSS
+  CRimax <- Pimax / GSS
 
   CRi <- sort(CRi, decreasing = TRUE)
   CRimax <- sort(CRimax, decreasing = TRUE)
@@ -389,49 +468,9 @@ pcss.core <- function(data, names, quantitative, qualitative,
   size.sel <- ceiling(size * N)
   size.var <- gssdf[gssdf$Rank == size.sel, ]$VarRet
 
-  size.segdf <- data.frame(x = c(-Inf, size.sel),
-                           xend = c(size.sel, size.sel),
-                           y = c(size.var, -Inf),
-                           yend = c(size.var, size.var))
-  size.segdf$label <- as.character(c(round(size.segdf[1, "y"], 2),
-                                     size.segdf[2, "x"]))
-
-  size.gssg <- ggplot(gssdf, aes(x = Rank, y = VarRet)) +
-    geom_point() +
-    geom_segment(data = size.segdf, aes(x = x, xend = xend,
-                                        y = y, yend = yend),
-                 colour = "red") +
-    geom_text(data = size.segdf, aes(x = x, y = y, label = label),
-              vjust = -0.5, hjust = -0.5, colour = "red") +
-    scale_x_continuous(name = "Number of selected individuals" ,
-                       sec.axis = sec_axis(transform = ~. / N,
-                                           name = "Proportion of selected individuals")) +
-    ylab("Variability retained (%)") +
-    theme_bw()
-
   ## By threshold variance ----
   var.threshold <- var.threshold * 100
   var.sel <- max(which(gssdf$VarRet <= var.threshold))
-
-  var.segdf <- data.frame(x = c(-Inf, var.sel),
-                          xend = c(var.sel, var.sel),
-                          y = c(var.threshold, -Inf),
-                          yend = c(var.threshold, var.threshold))
-  var.segdf$label <- as.character(c(round(var.segdf[1, "y"], 2),
-                                    var.segdf[2, "x"]))
-
-  var.gssg <- ggplot(gssdf, aes(x = Rank, y = VarRet)) +
-    geom_point() +
-    geom_segment(data = var.segdf, aes(x = x, xend = xend,
-                                       y = y, yend = yend),
-                 colour = "red") +
-    geom_text(data = var.segdf, aes(x = x, y = y, label = label),
-              vjust = -0.5, hjust = -0.5, colour = "red") +
-    scale_x_continuous(name = "Number of selected individuals" ,
-                       sec.axis = sec_axis(transform = ~. / N,
-                                           name = "Proportion of selected individuals")) +
-    ylab("Variability retained (%)") +
-    theme_bw()
 
   ## With logistic regression ----
 
@@ -444,7 +483,6 @@ pcss.core <- function(data, names, quantitative, qualitative,
   warnOnly = TRUE
 
   dat <- data.frame(n = gssdf$Rank, y = gssdf$VarRet)
-
 
   mod <-
     gslnls::gsl_nls(
@@ -459,51 +497,11 @@ pcss.core <- function(data, names, quantitative, qualitative,
   # dat$pred <- 100 / (1 + exp(coef(mod)["a"] + (coef(mod)["b"] * dat$n)))
 
   # Compute rate of increase in variability retained
-  dat$rate <- -coef(mod)["b"] * dat$y * (100 - dat$y)
+  b <- coef(mod)["b"]
+  dat$rate <- -b * dat$y * (100 - dat$y)
 
   reg.sel <- dat[dat$rate == max(dat$rate), ]$n
   reg.var <- gssdf[gssdf$Rank == reg.sel, ]$VarRet
-
-  reg.segdf <- data.frame(x = c(-Inf, reg.sel),
-                          xend = c(reg.sel, reg.sel),
-                          y = c(reg.var, -Inf),
-                          yend = c(reg.var, reg.var))
-  reg.segdf$label <- as.character(c(round(reg.segdf[1, "y"], 2),
-                                    reg.segdf[2, "x"]))
-
-
-  reg.gssg <- ggplot(gssdf, aes(x = Rank, y = VarRet)) +
-    geom_point() +
-    geom_segment(data = reg.segdf, aes(x = x, xend = xend,
-                                       y = y, yend = yend),
-                 colour = "red") +
-    geom_text(data = reg.segdf, aes(x = x, y = y, label = label),
-              vjust = -0.5, hjust = -0.5, colour = "red") +
-    scale_x_continuous(name = "Number of selected individuals" ,
-                       sec.axis = sec_axis(transform = ~. / N,
-                                           name = "Proportion of selected individuals")) +
-    ylab("Variability retained (%)") +
-    theme_bw()
-
-  reg.segdf2 <- data.frame(x = c(-Inf, reg.sel),
-                           xend = c(reg.sel, reg.sel),
-                           y = c(max(dat$rate), -Inf),
-                           yend = c(max(dat$rate), max(dat$rate)))
-  reg.segdf2$label <- as.character(c(round(reg.segdf2[1, "y"], 2),
-                                     reg.segdf2[2, "x"]))
-
-  reg.gssrateg <- ggplot(data = dat, aes(x = n, y = rate)) +
-    geom_point() +
-    geom_segment(data = reg.segdf2, aes(x = x, xend = xend,
-                                        y = y, yend = yend),
-                 colour = "red") +
-    geom_text(data = reg.segdf2, aes(x = x, y = y, label = label),
-              vjust = -0.5, hjust = -0.5, colour = "red") +
-    scale_x_continuous(name = "Number of selected individuals" ,
-                       sec.axis = sec_axis(transform = ~. / N,
-                                           name = "Proportion of selected individuals")) +
-    ylab("Rate of increase in variability retained (%)") +
-    theme_bw()
 
 
   # Generate ouput ----
@@ -513,7 +511,8 @@ pcss.core <- function(data, names, quantitative, qualitative,
                   famd_out = !is.null(famd_out))
 
   detailsdf <-
-    data.frame(`Quantitative traits` =  paste(quantitative, collapse = ", "),
+    data.frame(`Total number of individuals/genotypes` = N,
+               `Quantitative traits` =  paste(quantitative, collapse = ", "),
                `Qualitative traits` =  paste(qualitative, collapse = ", "),
                `Method` = method,
                `Threshold eigen value` = eigen.threshold,
@@ -539,16 +538,14 @@ pcss.core <- function(data, names, quantitative, qualitative,
               rotation = rot,
               scores = scores,
               variability.ret = gssdf,
-              cores.info = coreinfodf,
-              core.plots = list(by.size = size.gssg,
-                                by.var = var.gssg,
-                                by.reg = list(reg.gssg, reg.gssrateg)))
+              cores.info = coreinfodf)
 
   class(out) <- "pcss.core"
 
   attr(x = out, which = "method") <- method
   attr(x = out, which = "quant") <- quantitative
   attr(x = out, which = "quali") <- qualitative
+  attr(x = out, which = "slope") <- b
 
   return(out)
 

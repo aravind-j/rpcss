@@ -19,7 +19,8 @@ pcss.core(
 one row per individual and columns with the individual names and multiple
 trait/character data.}
 
-\item{names}{Name of column with the individual names as a character string.}
+\item{names}{Name of column with the individual/genotype names as a character
+string.}
 
 \item{quantitative}{Name of columns with the quantitative traits as a
 character vector.}
@@ -33,7 +34,7 @@ eigen values.}
 
 \item{size}{The desired core set size proportion.}
 
-\item{var.threshold}{The desired proportion of total variabilty to be}
+\item{var.threshold}{The desired proportion of total variability to be}
 }
 \value{
 A list of class \code{pcss.core} with the following components.
@@ -45,19 +46,96 @@ A list of class \code{pcss.core} with the following components.
   variance.} \item{eigen.threshold}{The threshold eigen value used.}
   \item{rotation}{A matrix of rotation values or loadings.} \item{scores}{A
   matrix of scores from PCA, CA or FAMD.} \item{variability.ret}{A data frame
-  of genotypes ordered by variability retained.} \item{cores.info}{A data frame of core set
-  size and percentage variablity retained according to the method used.}
-  \item{core.plots}{A list of plots of cumulative variability retained by
-  genotypes as \code{ggplot} objects. The core set size and corresponding
-  percentage variability retained are highlighted according to the method
-  used.}
+  of individuals/genotypes ordered by variability retained.}
+  \item{cores.info}{A data frame of core set size and percentage variability
+  retained according to the method used.}
 }
 \description{
 Generate a Core Collection with Principal Component Scoring Strategy (PCSS)
-\insertCite{noirot_principal_1996,noirot_method_2003}{rpcss} using
-qualitative and/or quantitative trait data.
+\insertCite{hamon_proposed_1990,noirot_principal_1996,noirot_method_2003}{rpcss}
+using qualitative and/or quantitative trait data. \loadmathjax
 }
 \details{
+A core collection is constituted from an entire collection of \mjseqn{N}
+genotypes using quantitative data of \mjseqn{J} traits using Principal
+Component Scoring Strategy (PCSS)
+\insertCite{hamon_proposed_1990,noirot_principal_1996,noirot_method_2003}{rpcss}
+as follows:
+
+\enumerate{
+
+\item Principal Component Analysis (PCA) is performed on the standardized
+genotype \mjseqn{\times} trait data. This takes care of multicollinearity
+between the traits to generate \mjseqn{J} standardized and independent
+variables or factors or principal component.
+
+\item Considering only a subset of factors \mjseqn{K}, the Generalized Sum of
+ Squares (GSS) of N individuals in K factorial spaces is computed as
+\mjseqn{N \times K}.
+
+\mjseqn{K} can be the number of factors for which the eigen value
+\mjseqn{\lambda} is greater than a threshold value such as 1 or the average
+of all the eigen values.
+
+\item The contribution of the \mjseqn{i}th genotype to GSS (\mjseqn{P_{i}})
+or total variability is calculated as below.
+
+\mjsdeqn{P_{i} = \sum_{j = 1}^{K} x_{ij}^{2}}
+
+Where \mjseqn{x_{ij}} is the component score or coordinate of the
+\mjseqn{i}th genotype on the \mjseqn{j}th principal component.
+
+\item For each genotype, its relative contribution to GSS or total
+variabilityis computed as below.
+
+\mjsdeqn{CR_{i} = \frac{P_{i}}{N \times K}}
+
+\item The genotypes are sorted in descending order of magnitude of their
+contribution to GSS and then the cumulative contribution of successive
+genotypes to GSS is computed.
+
+\item The core collection can then be selected by three different methods.
+
+ \enumerate{
+
+ \item Selection of fixed proportion or percentage or number of the top
+ accessions.
+
+ \item Selection of the top accessions that contribute up to a fixed
+ percentage of the GSS.
+
+ \item Fitting a logistic regression model of the following form to the
+ cumulative contribution of successive genotypes to GSS
+ \insertCite{balakrishnan_method_2000}{rpcss}.
+
+ \mjsdeqn{\frac{y}{A-y} = e^{a + bn}}
+
+ The above equation can  be reparameterized as below.
+
+ \mjsdeqn{\log_{e} \left ( {\frac{y}{A-y}} \right ) = a + bn}
+
+ Where, \mjseqn{a} and \mjseqn{b} are the intercept and regression
+ coefficient, respectively; \mjseqn{y} is the cumulative contribution of
+ successive genotypes to GSS; \mjseqn{n} is the rank of the genotype when
+ sorted according to the contribution to GSS and \mjseqn{A} is the asymptote
+ of the curve (\mjseqn{A = 100}).
+
+ The rate of increase in the successive contribution of genotypes to GSS can
+ be computed as
+
+ \mjsdeqn{\frac{\mathrm{d} y}{\mathrm{d} x} = by(A-y)}
+
+ to find the point of inflection where the rate of increase starts declining.
+
+ The number of accessions included at the peak or infection point is selected
+ to constitute the core collection.
+
+
+
+ }
+
+}
+
 For qualitative traits, dimensionality reduction is performed by Principal
 Component Analysis (PCA). Similarly for quantitative traits, dimensionality
 reduction is done via Multiple Correspondence Analysis (MCA). For cases where

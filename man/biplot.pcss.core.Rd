@@ -6,9 +6,11 @@
 \usage{
 \method{biplot}{pcss.core}(
   x,
-  ndim = 3L,
+  ndim = 3,
+  highlight.core = c("size", "variance", "logistic", "none"),
   show.traits = c("all", "none", "quantitative", "qualitative"),
-  trait.scale = 1,
+  qual.scale = 1,
+  quant.scale = 1,
   point.alpha = 0.8,
   segment.alpha = 0.8
 )
@@ -16,11 +18,18 @@
 \arguments{
 \item{ndim}{The number of dimensions for which biplots have to plotted.}
 
-\item{show.traits}{Which kind of the traits to be shown in the biplot. Either
-"all", "none", "quantitative" or "qualitative".}
+\item{highlight.core}{The core collection to be highlighted. Either
+\code{"size"}, \code{"variance"}, \code{"logistic"}, or \code{"none"}. See
+\strong{Details}.}
 
-\item{trait.scale}{A scale factor to be applied to trait coordinates plotted
-in biplot.}
+\item{show.traits}{Which kind of the traits to be shown in the biplot. Either
+\code{"all"}, \code{"none"}, \code{"quantitative"} or \code{"qualitative"}.}
+
+\item{qual.scale}{A scale factor to be applied to qualitative trait
+coordinates plotted in biplot.}
+
+\item{quant.scale}{A scale factor to be applied to quantitative trait
+coordinates plotted in biplot.}
 
 \item{point.alpha}{Alpha transparency value for biplot points.}
 
@@ -34,4 +43,12 @@ A list of biplots as \code{ggplot} objects.
 \description{
 \code{biplot.pcss.core} generates biplots of scores of genotypes with or
 without vectors for traits from the output of \code{pcss.core}.
+}
+\details{
+Use \code{"size"} to highlight core collection according to the threshold
+\code{size} criterion or use \code{"variance"} to highlight core collection
+according to the variability threshold criterion or use  \code{"logistic"} to
+highlight core collection generated according to inflection point of rate of
+progress of cumulative variability retained identified by logistic
+regression. Use \code{"none"} to not highlight any accessions.
 }
