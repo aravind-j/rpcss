@@ -15,10 +15,12 @@ Encoding: UTF-8
 Depends: R (>= 3.5.0)
 VignetteBuilder: knitr
 RoxygenNote: 7.3.2
+BuildManual: TRUE
 Imports: FactoMineR,
     ggplot2,
     ggrepel,
     gslnls,
+    mathjaxr,
     Rdpack
 Suggests:
     knitr,

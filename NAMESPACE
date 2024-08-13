@@ -2,10 +2,13 @@
 
 S3method(biplot,pcss.core)
 S3method(screeplot,pcss.core)
+S3method(subset,pcss.core)
 export(contrib.pcss.core)
+export(coreplot.pcss.core)
 export(pcss.core)
 import(ggplot2)
 import(gslnls)
+import(mathjaxr)
 importFrom(FactoMineR,CA)
 importFrom(FactoMineR,FAMD)
 importFrom(FactoMineR,PCA)
