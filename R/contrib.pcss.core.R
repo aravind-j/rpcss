@@ -35,7 +35,7 @@ contrib.pcss.core <- function(x, ndim = NULL,
 
   if (!is.null(ndim)) {
     # check if 'ndim' argument is integer vector of unit length
-    if (!(is.integer(ndim) && length(ndim) == 1)) {
+    if (!(as.integer(ndim) == ndim && length(ndim) == 1)) {
       stop('"ndim" should be a integer vector of unit length.')
     }
 
