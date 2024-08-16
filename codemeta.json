@@ -1,0 +1,179 @@
+{
+  "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
+  "@type": "SoftwareSourceCode",
+  "identifier": "rpcss",
+  "description": "Generate a Core Collection with Principal Component Scoring Strategy (PCSS) (Noirot et al. 1996 <doi:10.2307/2527837> ; Noirot et al. 2003 <https://horizon.documentation.ird.fr/exl-doc/pleins_textes/divers21-03/010031886.pdf>) using qualitative and/or quantitative trait data.",
+  "name": "rpcss: Core Collection Constitution by Principal Component Scoring Strategy",
+  "codeRepository": "https://github.com/aravind-j/rpcss",
+  "issueTracker": "https://github.com/aravind-j/rpcss/issues",
+  "license": "https://spdx.org/licenses/GPL-2.0",
+  "version": "0.0.0.9000",
+  "programmingLanguage": {
+    "@type": "ComputerLanguage",
+    "name": "R",
+    "url": "https://r-project.org"
+  },
+  "runtimePlatform": "R Under development (unstable) (2024-07-20 r86909 ucrt)",
+  "author": [
+    {
+      "@type": "Person",
+      "givenName": "J.",
+      "familyName": "Aravind",
+      "email": "j.aravind@icar.gov.in",
+      "@id": "https://orcid.org/0000-0002-4791-442X"
+    }
+  ],
+  "maintainer": [
+    {
+      "@type": "Person",
+      "givenName": "J.",
+      "familyName": "Aravind",
+      "email": "j.aravind@icar.gov.in",
+      "@id": "https://orcid.org/0000-0002-4791-442X"
+    }
+  ],
+  "softwareSuggestions": [
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "EvaluateCore",
+      "name": "EvaluateCore",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=EvaluateCore"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "factoextra",
+      "name": "factoextra",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=factoextra"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "knitr",
+      "name": "knitr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=knitr"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "rmarkdown",
+      "name": "rmarkdown",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=rmarkdown"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "pander",
+      "name": "pander",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=pander"
+    }
+  ],
+  "softwareRequirements": {
+    "1": {
+      "@type": "SoftwareApplication",
+      "identifier": "R",
+      "name": "R",
+      "version": ">= 3.5.0"
+    },
+    "2": {
+      "@type": "SoftwareApplication",
+      "identifier": "FactoMineR",
+      "name": "FactoMineR",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=FactoMineR"
+    },
+    "3": {
+      "@type": "SoftwareApplication",
+      "identifier": "ggplot2",
+      "name": "ggplot2",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=ggplot2"
+    },
+    "4": {
+      "@type": "SoftwareApplication",
+      "identifier": "ggrepel",
+      "name": "ggrepel",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=ggrepel"
+    },
+    "5": {
+      "@type": "SoftwareApplication",
+      "identifier": "gslnls",
+      "name": "gslnls",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=gslnls"
+    },
+    "6": {
+      "@type": "SoftwareApplication",
+      "identifier": "mathjaxr",
+      "name": "mathjaxr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=mathjaxr"
+    },
+    "7": {
+      "@type": "SoftwareApplication",
+      "identifier": "Rdpack",
+      "name": "Rdpack",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=Rdpack"
+    },
+    "SystemRequirements": null
+  },
+  "fileSize": "815.655KB"
+}
