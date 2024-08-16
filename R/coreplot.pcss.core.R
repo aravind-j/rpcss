@@ -24,10 +24,89 @@
 #'   rate of progress of cumulative contribution to variability. The size and
 #'   variability retained by core collection are highlighted in each plot.
 #'
+#' @seealso \code{\link[rpcss]{pcss.core}}
+#'
 #' @import ggplot2
 #' @export
 #'
 #' @examples
+#'
+#' #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#' # Prepare example data
+#' #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#'
+#' library(EvaluateCore)
+#'
+#' # Get data from EvaluateCore
+#'
+#' data("cassava_EC", package = "EvaluateCore")
+#' data = cbind(Genotypes = rownames(cassava_EC), cassava_EC)
+#' quant <- c("NMSR", "TTRN", "TFWSR", "TTRW", "TFWSS", "TTSW", "TTPW", "AVPW",
+#'            "ARSR", "SRDM")
+#' qual <- c("CUAL", "LNGS", "PTLC", "DSTA", "LFRT", "LBTEF", "CBTR", "NMLB",
+#'           "ANGB", "CUAL9M", "LVC9M", "TNPR9M", "PL9M", "STRP", "STRC",
+#'           "PSTR")
+#' rownames(data) <- NULL
+#'
+#' # Convert qualitative data columns to factor
+#' data[, qual] <- lapply(data[, qual], as.factor)
+#'
+#'
+#' library(FactoMineR)
+#' library(factoextra)
+#'
+#' #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#' # With quantitative data
+#' #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#'
+#' out1 <- pcss.core(data = data, names = "Genotypes",
+#'                   quantitative = quant,
+#'                   qualitative = NULL, eigen.threshold = NULL, size = 0.2,
+#'                   var.threshold = 0.75)
+#'
+#' # For core set constituted by size criterion
+#' coreplot.pcss.core(x = out1, criterion = "size")
+#'
+#' # For core set constituted by variance criterion
+#' coreplot.pcss.core(x = out1, criterion = "variance")
+#'
+#' # For core set constituted by logistic regression criterion
+#' coreplot.pcss.core(x = out1, criterion = "logistic")
+#'
+#' #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#' # Get core sets with PCSS (qualitative data)
+#' #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#'
+#' out2 <- pcss.core(data = data, names = "Genotypes", quantitative = NULL,
+#'                   qualitative = qual, eigen.threshold = NULL,
+#'                   size = 0.2, var.threshold = 0.75)
+#'
+#' # For core set constituted by size criterion
+#' coreplot.pcss.core(x = out2, criterion = "size")
+#'
+#' # For core set constituted by variance criterion
+#' coreplot.pcss.core(x = out2, criterion = "variance")
+#'
+#' # For core set constituted by logistic regression criterion
+#' coreplot.pcss.core(x = out2, criterion = "logistic")
+#'
+#' #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#' # Get core sets with PCSS (quantitative and qualitative data)
+#' #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#'
+#' out3 <- pcss.core(data = data, names = "Genotypes",
+#'                   quantitative = quant,
+#'                   qualitative = qual, eigen.threshold = NULL)
+#'
+#' # For core set constituted by size criterion
+#' coreplot.pcss.core(x = out3, criterion = "size")
+#'
+#' # For core set constituted by variance criterion
+#' coreplot.pcss.core(x = out3, criterion = "variance")
+#'
+#' # For core set constituted by logistic regression criterion
+#' coreplot.pcss.core(x = out3, criterion = "logistic")
+#'
 coreplot.pcss.core <- function(x,
                                criterion = c("size", "variance", "logistic")) {
 

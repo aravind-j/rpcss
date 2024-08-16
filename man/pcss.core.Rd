@@ -74,8 +74,8 @@ variables or factors or principal component.
 \mjseqn{N \times K}.
 
 \mjseqn{K} can be the number of factors for which the eigen value
-\mjseqn{\lambda} is greater than a threshold value such as 1 or the average
-of all the eigen values.
+\mjseqn{\lambda} is greater than a threshold value such as 1 (Kaiser-Guttman
+criterion) or the average of all the eigen values.
 
 \item The contribution of the \mjseqn{i}th genotype to GSS (\mjseqn{P_{i}})
 or total variability is calculated as below.
@@ -127,21 +127,79 @@ genotypes to GSS is computed.
 
  to find the point of inflection where the rate of increase starts declining.
 
- The number of accessions included at the peak or infection point is selected
- to constitute the core collection.
-
-
+ The number of accessions included till the peak or infection point are
+ selected to constitute the core collection.
 
  }
 
 }
 
-For qualitative traits, dimensionality reduction is performed by Principal
-Component Analysis (PCA). Similarly for quantitative traits, dimensionality
-reduction is done via Multiple Correspondence Analysis (MCA). For cases where
-both quantitative and qualitative traits are available, dimensionality
-reduction is achieved by using the Factor Analysis for Mixed Data (FAMD)
-method \insertCite{husson_Exploratory_2017}.
+Similarly for qualitative traits, standardized and independent variables or
+factors can be obtained by Correspondence Analysis (CA) on complete
+disjunctive table of genotype \mjseqn{\times} trait data or to be specific
+Multiple Correspondence Analysis (MCA). In \code{rpcss}, this has also been
+extended for data sets having both quantitative and qualitative traits by
+implementing Factor Analysis for Mixed Data (FAMD) for obtaining standardized
+and independent variables or factors.
+
+In \code{rpcss}, PCA, MCA and FAMD are implemented via the
+\code{\link[FactoMineR]{FactoMineR}} package.
+\insertCite{le_FactoMineR_2008,husson_Exploratory_2017}{rpcss}.
+}
+\examples{
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Prepare example data
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+library(EvaluateCore)
+
+# Get data from EvaluateCore
+
+data("cassava_EC", package = "EvaluateCore")
+data = cbind(Genotypes = rownames(cassava_EC), cassava_EC)
+quant <- c("NMSR", "TTRN", "TFWSR", "TTRW", "TFWSS", "TTSW", "TTPW", "AVPW",
+           "ARSR", "SRDM")
+qual <- c("CUAL", "LNGS", "PTLC", "DSTA", "LFRT", "LBTEF", "CBTR", "NMLB",
+          "ANGB", "CUAL9M", "LVC9M", "TNPR9M", "PL9M", "STRP", "STRC",
+          "PSTR")
+rownames(data) <- NULL
+
+# Convert qualitative data columns to factor
+data[, qual] <- lapply(data[, qual], as.factor)
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Get core sets with PCSS (quantitative data)
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+out1 <- pcss.core(data = data, names = "Genotypes",
+                  quantitative = quant,
+                  qualitative = NULL, eigen.threshold = NULL, size = 0.2,
+                  var.threshold = 0.75)
+
+out1
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Get core sets with PCSS (qualitative data)
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+out2 <- pcss.core(data = data, names = "Genotypes", quantitative = NULL,
+                  qualitative = qual, eigen.threshold = NULL,
+                  size = 0.2, var.threshold = 0.75)
+
+out2
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Get core sets with PCSS (quantitative and qualitative data)
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+out3 <- pcss.core(data = data, names = "Genotypes",
+                  quantitative = quant,
+                  qualitative = qual, eigen.threshold = NULL)
+
+out3
+
+
 }
 \seealso{
 \code{\link[FactoMineR]{PCA}}, \code{\link[FactoMineR]{CA}} and

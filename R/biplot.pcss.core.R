@@ -26,12 +26,131 @@
 #'
 #' @return A list of biplots as \code{ggplot} objects.
 #'
+#' @seealso \code{\link[rpcss]{pcss.core}}, \code{\link[FactoMineR]{plot.PCA}},
+#'   \code{\link[FactoMineR]{plot.MCA}}, \code{\link[FactoMineR]{plot.FAMD}},
+#'   \code{\link[factoextra]{fviz_pca}}, \code{\link[factoextra]{fviz_mca}},
+#'   \code{\link[factoextra]{fviz_famd}}
+#'
 #' @import ggplot2
 #' @importFrom dplyr bind_rows
 #' @importFrom ggrepel geom_label_repel
 #' @export
 #'
 #' @examples
+#'
+#' ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#' # Prepare example data
+#' #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#'
+#' library(EvaluateCore)
+#'
+#' # Get data from EvaluateCore
+#'
+#' data("cassava_EC", package = "EvaluateCore")
+#' data = cbind(Genotypes = rownames(cassava_EC), cassava_EC)
+#' quant <- c("NMSR", "TTRN", "TFWSR", "TTRW", "TFWSS", "TTSW", "TTPW", "AVPW",
+#'            "ARSR", "SRDM")
+#' qual <- c("CUAL", "LNGS", "PTLC", "DSTA", "LFRT", "LBTEF", "CBTR", "NMLB",
+#'           "ANGB", "CUAL9M", "LVC9M", "TNPR9M", "PL9M", "STRP", "STRC",
+#'           "PSTR")
+#' rownames(data) <- NULL
+#'
+#' # Convert qualitative data columns to factor
+#' data[, qual] <- lapply(data[, qual], as.factor)
+#'
+#'
+#' library(FactoMineR)
+#' library(factoextra)
+#'
+#' #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#' # With quantitative data
+#' #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#'
+#' out1 <- pcss.core(data = data, names = "Genotypes",
+#'                   quantitative = quant,
+#'                   qualitative = NULL, eigen.threshold = NULL, size = 0.2,
+#'                   var.threshold = 0.75)
+#'
+#' # Plot biplot
+#' biplot(out1, ndim = 3, highlight.core = "size", quant.scale = 3,
+#'        point.alpha = 0.5)
+#'
+#' # Plot biplot with FactoMineR
+#' plot(out1$raw.out, choix=c("ind"), label  = "none", axes = c(1, 2))
+#'
+#' plot(out1$raw.out, choix=c("ind"), label  = "none", axes = c(1, 3))
+#'
+#' plot(out1$raw.out, choix=c("ind"), label  = "none", axes = c(2, 3))
+#'
+#' # Plot biplot with factoextra
+#' fviz_pca_biplot(out1$raw.out, geom.ind = "point", axes = c(1, 2))
+#'
+#' fviz_pca_biplot(out1$raw.out, geom.ind = "point", axes = c(1, 3))
+#'
+#' fviz_pca_biplot(out1$raw.out, geom.ind = "point", axes = c(2, 3))
+#'
+#' #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#' # Get core sets with PCSS (qualitative data)
+#' #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#'
+#' out2 <- pcss.core(data = data, names = "Genotypes", quantitative = NULL,
+#'                   qualitative = qual, eigen.threshold = NULL,
+#'                   size = 0.2, var.threshold = 0.75)
+#'
+#' # Plot biplot
+#' biplot(out2, ndim = 3, highlight.core = "size", qual.scale = 1,
+#'        point.alpha = 0.5)
+#'
+#' # Plot biplot with FactoMineR
+#' plot(out2$raw.out, choix=c("ind"), label  = "none", axes = c(1, 2))
+#'
+#' plot(out2$raw.out, choix=c("ind"), label  = "none", axes = c(1, 3))
+#'
+#' plot(out2$raw.out, choix=c("ind"), label  = "none", axes = c(2, 3))
+#'
+#' # Plot biplot with factoextra
+#' fviz_mca_biplot(out2$raw.out, geom.ind = "point", axes = c(1, 2))
+#'
+#' fviz_mca_biplot(out2$raw.out, geom.ind = "point", axes = c(1, 3))
+#'
+#' fviz_mca_biplot(out2$raw.out, geom.ind = "point", axes = c(2, 3))
+#'
+#' #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#' # Get core sets with PCSS (quantitative and qualitative data)
+#' #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#'
+#' out3 <- pcss.core(data = data, names = "Genotypes",
+#'                   quantitative = quant,
+#'                   qualitative = qual, eigen.threshold = NULL)
+#'
+#' # Plot biplot
+#' biplot(out3, ndim = 3, highlight.core = "size",
+#'        quant.scale = 3, qual.scale = 1,
+#'        point.alpha = 0.5)
+#'
+#' # Plot biplot with FactoMineR
+#' plot(out3$raw.out, choix=c("ind"), label  = "none", axes = c(1, 2))
+#'
+#' plot(out3$raw.out, choix=c("ind"), label  = "none", axes = c(1, 3))
+#'
+#' plot(out3$raw.out, choix=c("ind"), label  = "none", axes = c(2, 3))
+#'
+#' # Plot biplot with factoextra
+#'
+#' # Fix rownames
+#' row.names(out3$raw.out$quali.var$coord) <-
+#'   unlist(lapply(seq_along(data[, qual]),
+#'                 function(i) paste(qual[i],
+#'                                   levels(data[, qual[i]]), sep = "_")))
+#'
+#' fviz_famd_ind(out3$raw.out, geom = "point", axes = c(1, 2))
+#'
+#' fviz_famd_ind(out3$raw.out, geom = "point", axes = c(1, 3))
+#'
+#' fviz_famd_ind(out3$raw.out, geom = "point", axes = c(2, 3))
+#'
+#'
+#'
 biplot.pcss.core <- function(x,
                              ndim = 3, # at least 2
                              highlight.core = c("size", "variance",
