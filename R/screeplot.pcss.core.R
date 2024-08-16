@@ -3,10 +3,11 @@
 #' \code{screeplot.pcss.core} generates a scree plot of eigen values from the
 #' output of \code{pcss.core}.
 #'
-#' @param An object of class \code{pcss.core}.
+#' @param x An object of class \code{pcss.core}.
 #' @param ndim The number of eigen values to be plotted in the scree plot.
 #' @param show.values If \code{TRUE}, the eigen values are shown in the plot as
 #'   annotation labels. Default is \code{TRUE}.
+#' @param ... Unused.
 #'
 #' @return The scree plot as a \code{ggplot} object.
 #'
@@ -14,7 +15,8 @@
 #'   \code{\link[factoextra]{fviz_screeplot}}
 #'
 #' @import ggplot2
-#' @export
+#' @importFrom stats screeplot
+#' @exportS3Method rpcss::screeplot
 #'
 #' @examples
 #'
@@ -52,7 +54,7 @@
 #'                   var.threshold = 0.75)
 #'
 #' # Plot scree plot
-#' screeplot.pcss.core(x = out1)
+#' screeplot(x = out1)
 #'
 #' # Plot biplot with factoextra
 #' fviz_screeplot(out1$raw.out)
@@ -66,7 +68,7 @@
 #'                   size = 0.2, var.threshold = 0.75)
 #'
 #' # Plot scree plot
-#' screeplot.pcss.core(x = out2)
+#' screeplot(x = out2)
 #'
 #' # Plot biplot with factoextra
 #' fviz_screeplot(out2$raw.out)
@@ -80,14 +82,14 @@
 #'                   qualitative = qual, eigen.threshold = NULL)
 #'
 #' # Plot scree plot
-#' screeplot.pcss.core(x = out3)
+#' screeplot(x = out3)
 #'
 #' # Plot biplot with factoextra
 #' fviz_screeplot(out3$raw.out)
 #'
 #'
 #'
-screeplot.pcss.core <- function(x, ndim = NULL, show.values = TRUE) {
+screeplot.pcss.core <- function(x, ndim = NULL, show.values = TRUE, ...) {
 
   # Checks ----
 

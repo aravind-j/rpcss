@@ -129,6 +129,8 @@
 #' @import mathjaxr
 #' @importFrom FactoMineR PCA CA FAMD
 #' @importFrom Rdpack reprompt
+#' @importFrom stats coef
+#' @importFrom utils data
 #' @export
 #'
 #' @examples
@@ -553,7 +555,7 @@ pcss.core <- function(data, names, quantitative, qualitative,
   # dat$pred <- 100 / (1 + exp(coef(mod)["a"] + (coef(mod)["b"] * dat$n)))
 
   # Compute rate of increase in variability retained
-  b <- coef(mod)["b"]
+  b <- stats::coef(mod)["b"]
   dat$rate <- -b * dat$y * (100 - dat$y)
 
   reg.sel <- dat[dat$rate == max(dat$rate), ]$n

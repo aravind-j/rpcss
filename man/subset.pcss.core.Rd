@@ -5,7 +5,7 @@
 \title{Fetch the names of individuals/genotypes in the core set generated from
 \code{pcss.core} Output}
 \usage{
-\method{subset}{pcss.core}(x, criterion = c("size", "variance", "logistic"))
+\method{subset}{pcss.core}(x, criterion = c("size", "variance", "logistic"), ...)
 }
 \arguments{
 \item{x}{An object of class \code{pcss.core}.}
@@ -13,6 +13,8 @@
 \item{criterion}{The core collection generation criterion. Either
 \code{"size"}, \code{"variance"}, or \code{"logistic"}. See
 \strong{Details}.}
+
+\item{...}{Unused.}
 }
 \value{
 The names of individuals/genotypes in the core collection as a
@@ -65,13 +67,13 @@ out1 <- pcss.core(data = data, names = "Genotypes",
 out1$cores.info
 
 # Fetch genotype names of core set by size criterion
-subset.pcss.core(x = out1, criterion = "size")
+subset(x = out1, criterion = "size")
 
 # Fetch genotype names of core set by variance criterion
-subset.pcss.core(x = out1, criterion = "variance")
+subset(x = out1, criterion = "variance")
 
 # Fetch genotype names of core set by logistic regression criterion
-subset.pcss.core(x = out1, criterion = "logistic")
+subset(x = out1, criterion = "logistic")
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Get core sets with PCSS (qualitative data)
@@ -85,13 +87,13 @@ out2 <- pcss.core(data = data, names = "Genotypes", quantitative = NULL,
 out2$cores.info
 
 # Fetch genotype names of core set by size criterion
-subset.pcss.core(x = out2, criterion = "size")
+subset(x = out2, criterion = "size")
 
 # Fetch genotype names of core set by variance criterion
-subset.pcss.core(x = out2, criterion = "variance")
+subset(x = out2, criterion = "variance")
 
 # Fetch genotype names of core set by logistic regression criterion
-subset.pcss.core(x = out2, criterion = "logistic")
+subset(x = out2, criterion = "logistic")
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Get core sets with PCSS (quantitative and qualitative data)
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -104,13 +106,13 @@ out3 <- pcss.core(data = data, names = "Genotypes",
 out3$cores.info
 
 # Fetch genotype names of core set by size criterion
-subset.pcss.core(x = out3, criterion = "size")
+subset(x = out3, criterion = "size")
 
 # Fetch genotype names of core set by variance criterion
-subset.pcss.core(x = out3, criterion = "variance")
+subset(x = out3, criterion = "variance")
 
 # Fetch genotype names of core set by logistic regression criterion
-subset.pcss.core(x = out3, criterion = "logistic")
+subset(x = out3, criterion = "logistic")
 
 }
 \seealso{

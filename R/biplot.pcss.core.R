@@ -10,7 +10,7 @@
 #' progress of cumulative variability retained identified by logistic
 #' regression. Use \code{"none"} to not highlight any accessions.
 #'
-#' @param An object of class \code{pcss.core}.
+#' @param x An object of class \code{pcss.core}.
 #' @param ndim The number of dimensions for which biplots have to plotted.
 #' @param highlight.core The core collection to be highlighted. Either
 #'   \code{"size"}, \code{"variance"}, \code{"logistic"}, or \code{"none"}. See
@@ -23,6 +23,7 @@
 #'   coordinates plotted in biplot.
 #' @param point.alpha Alpha transparency value for biplot points.
 #' @param segment.alpha Alpha transparency value for biplot segments.
+#' @param ... Unused.
 #'
 #' @return A list of biplots as \code{ggplot} objects.
 #'
@@ -34,11 +35,14 @@
 #' @import ggplot2
 #' @importFrom dplyr bind_rows
 #' @importFrom ggrepel geom_label_repel
-#' @export
+#' @importFrom stats biplot
+#' @importFrom utils combn
+#' @import ggplot2
+#' @exportS3Method rpcss::biplot
 #'
 #' @examples
 #'
-#' ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#' #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #' # Prepare example data
 #' #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #'
@@ -149,8 +153,6 @@
 #'
 #' fviz_famd_ind(out3$raw.out, geom = "point", axes = c(2, 3))
 #'
-#'
-#'
 biplot.pcss.core <- function(x,
                              ndim = 3, # at least 2
                              highlight.core = c("size", "variance",
@@ -160,7 +162,7 @@ biplot.pcss.core <- function(x,
                              qual.scale = 1,
                              quant.scale = 1,
                              point.alpha = 0.8,
-                             segment.alpha = 0.8) {
+                             segment.alpha = 0.8, ...) {
 
   # Checks ----
 
@@ -284,9 +286,13 @@ biplot.pcss.core <- function(x,
     colnames(qual_coord) <- gsub("Dim.", "Dim ", colnames(qual_coord))
     qual_coord <- qual_coord * qual.scale
 
-    qual_levels <- lapply(data[, qualitative],
-                          function(x) data.frame(qual_levels = levels(x)))
-    qual_levels <- dplyr::bind_rows(qual_levels, .id = "qual")
+    quali.levels <- attr(x, "quali.levels")
+    qual_levels <-
+      lapply(seq_along(quali.levels), function(i) {
+        data.frame(qual = names(quali.levels)[i],
+                   qual_levels = quali.levels[[i]])
+      })
+    qual_levels <- dplyr::bind_rows(qual_levels)
 
     if (any(qual_levels$qual_levels != rownames(qual_coord))) {
       warning('Mismatch in levels of qualitative traits and ',

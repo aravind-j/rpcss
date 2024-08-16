@@ -9,7 +9,7 @@
 \arguments{
 \item{x}{An object of class \code{pcss.core}.}
 
-\item{...}{Unused}
+\item{...}{Unused.}
 }
 \description{
 \code{pcss.core} prints to console the summary of an object of class

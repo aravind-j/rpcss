@@ -21,8 +21,11 @@ Imports: dplyr,
     ggrepel,
     gslnls,
     mathjaxr,
+    methods,
     Rdpack,
-    tidyr
+    stats,
+    tidyr,
+    utils
 Suggests: EvaluateCore,
     factoextra,
     knitr,

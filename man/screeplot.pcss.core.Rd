@@ -4,15 +4,17 @@
 \alias{screeplot.pcss.core}
 \title{Plot Eigen values as a Scree Plot from \code{pcss.core} Output}
 \usage{
-\method{screeplot}{pcss.core}(x, ndim = NULL, show.values = TRUE)
+\method{screeplot}{pcss.core}(x, ndim = NULL, show.values = TRUE, ...)
 }
 \arguments{
+\item{x}{An object of class \code{pcss.core}.}
+
 \item{ndim}{The number of eigen values to be plotted in the scree plot.}
 
 \item{show.values}{If \code{TRUE}, the eigen values are shown in the plot as
 annotation labels. Default is \code{TRUE}.}
 
-\item{An}{object of class \code{pcss.core}.}
+\item{...}{Unused.}
 }
 \value{
 The scree plot as a \code{ggplot} object.
@@ -57,7 +59,7 @@ out1 <- pcss.core(data = data, names = "Genotypes",
                   var.threshold = 0.75)
 
 # Plot scree plot
-screeplot.pcss.core(x = out1)
+screeplot(x = out1)
 
 # Plot biplot with factoextra
 fviz_screeplot(out1$raw.out)
@@ -71,7 +73,7 @@ out2 <- pcss.core(data = data, names = "Genotypes", quantitative = NULL,
                   size = 0.2, var.threshold = 0.75)
 
 # Plot scree plot
-screeplot.pcss.core(x = out2)
+screeplot(x = out2)
 
 # Plot biplot with factoextra
 fviz_screeplot(out2$raw.out)
@@ -85,7 +87,7 @@ out3 <- pcss.core(data = data, names = "Genotypes",
                   qualitative = qual, eigen.threshold = NULL)
 
 # Plot scree plot
-screeplot.pcss.core(x = out3)
+screeplot(x = out3)
 
 # Plot biplot with factoextra
 fviz_screeplot(out3$raw.out)

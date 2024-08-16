@@ -5,7 +5,7 @@
 \title{Plot the cumulative variability retained by individuals/genotypes from
 \code{pcss.core} Output}
 \usage{
-coreplot.pcss.core(x, criterion = c("size", "variance", "logistic"))
+\method{coreplot}{pcss.core}(x, criterion = c("size", "variance", "logistic"), ...)
 }
 \arguments{
 \item{x}{An object of class \code{pcss.core}.}
@@ -13,6 +13,8 @@ coreplot.pcss.core(x, criterion = c("size", "variance", "logistic"))
 \item{criterion}{The core collection generation criterion. Either
 \code{"size"}, \code{"variance"}, or \code{"logistic"}. See
 \strong{Details}.}
+
+\item{...}{Unused.}
 }
 \value{
 A plot of cumulative variability retained by individuals/genotypes as
@@ -71,13 +73,13 @@ out1 <- pcss.core(data = data, names = "Genotypes",
                   var.threshold = 0.75)
 
 # For core set constituted by size criterion
-coreplot.pcss.core(x = out1, criterion = "size")
+coreplot(x = out1, criterion = "size")
 
 # For core set constituted by variance criterion
-coreplot.pcss.core(x = out1, criterion = "variance")
+coreplot(x = out1, criterion = "variance")
 
 # For core set constituted by logistic regression criterion
-coreplot.pcss.core(x = out1, criterion = "logistic")
+coreplot(x = out1, criterion = "logistic")
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Get core sets with PCSS (qualitative data)
@@ -88,13 +90,13 @@ out2 <- pcss.core(data = data, names = "Genotypes", quantitative = NULL,
                   size = 0.2, var.threshold = 0.75)
 
 # For core set constituted by size criterion
-coreplot.pcss.core(x = out2, criterion = "size")
+coreplot(x = out2, criterion = "size")
 
 # For core set constituted by variance criterion
-coreplot.pcss.core(x = out2, criterion = "variance")
+coreplot(x = out2, criterion = "variance")
 
 # For core set constituted by logistic regression criterion
-coreplot.pcss.core(x = out2, criterion = "logistic")
+coreplot(x = out2, criterion = "logistic")
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Get core sets with PCSS (quantitative and qualitative data)
@@ -105,13 +107,13 @@ out3 <- pcss.core(data = data, names = "Genotypes",
                   qualitative = qual, eigen.threshold = NULL)
 
 # For core set constituted by size criterion
-coreplot.pcss.core(x = out3, criterion = "size")
+coreplot(x = out3, criterion = "size")
 
 # For core set constituted by variance criterion
-coreplot.pcss.core(x = out3, criterion = "variance")
+coreplot(x = out3, criterion = "variance")
 
 # For core set constituted by logistic regression criterion
-coreplot.pcss.core(x = out3, criterion = "logistic")
+coreplot(x = out3, criterion = "logistic")
 
 }
 \seealso{

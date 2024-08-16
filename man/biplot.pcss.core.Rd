@@ -12,10 +12,13 @@
   qual.scale = 1,
   quant.scale = 1,
   point.alpha = 0.8,
-  segment.alpha = 0.8
+  segment.alpha = 0.8,
+  ...
 )
 }
 \arguments{
+\item{x}{An object of class \code{pcss.core}.}
+
 \item{ndim}{The number of dimensions for which biplots have to plotted.}
 
 \item{highlight.core}{The core collection to be highlighted. Either
@@ -35,7 +38,7 @@ coordinates plotted in biplot.}
 
 \item{segment.alpha}{Alpha transparency value for biplot segments.}
 
-\item{An}{object of class \code{pcss.core}.}
+\item{...}{Unused.}
 }
 \value{
 A list of biplots as \code{ggplot} objects.
@@ -54,7 +57,7 @@ regression. Use \code{"none"} to not highlight any accessions.
 }
 \examples{
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Prepare example data
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -164,8 +167,6 @@ fviz_famd_ind(out3$raw.out, geom = "point", axes = c(1, 2))
 fviz_famd_ind(out3$raw.out, geom = "point", axes = c(1, 3))
 
 fviz_famd_ind(out3$raw.out, geom = "point", axes = c(2, 3))
-
-
 
 }
 \seealso{

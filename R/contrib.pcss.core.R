@@ -1,11 +1,11 @@
 #' Plot Contribution or Loadings of Traits for each Dimension/Factor from
 #' \code{pcss.core} Output
 #'
-#' \code{screeplot.pcss.core} generates bar plots of contributions or loadings
+#' \code{contrib.pcss.core} generates bar plots of contributions or loadings
 #' ("right singular vectors") of traits for each dimension/factor from the
 #' output of \code{pcss.core}.
 #'
-#' @param An object of class \code{pcss.core}.
+#' @param x An object of class \code{pcss.core}.
 #' @param ndim The number of dimensions for which contribution or loadings of
 #'   traits are to be plotted.
 #' @param plot.loadings If \code{TRUE}, the loadings or "right singular vectors"
@@ -14,6 +14,7 @@
 #'   of their corresponding coordinates. Default is \code{TRUE}.
 #' @param sort.value If \code{TRUE}, the bars are sorted according to their
 #'   value.
+#' @param ... Unused.
 #'
 #' @return The contributions/loadings bar plot as a \code{ggplot} object.
 #'
@@ -59,16 +60,16 @@
 #'                   var.threshold = 0.75)
 #'
 #' # Plot contributions of genotypes - with sign - sorted
-#' contrib.pcss.core(x = out1, ndim = 5)
+#' contrib(x = out1, ndim = 5)
 #'
 #' # Plot contributions of genotypes - without sign - sorted
-#' contrib.pcss.core(x = out1, ndim = 5, use.sign = FALSE)
+#' contrib(x = out1, ndim = 5, use.sign = FALSE)
 #'
 #' # Plot loadings/coordinates of genotypes - with sign - sorted
-#' contrib.pcss.core(x = out1, ndim = 5, plot.loadings = TRUE)
+#' contrib(x = out1, ndim = 5, plot.loadings = TRUE)
 #'
 #' # Plot contributions of genotypes - with sign - unsorted
-#' contrib.pcss.core(x = out1, ndim = 5, sort.value = FALSE)
+#' contrib(x = out1, ndim = 5, sort.value = FALSE)
 #'
 #' # Plot biplot with factoextra
 #' fviz_contrib(out1$raw.out, choice = "var", axes = 1)
@@ -83,16 +84,16 @@
 #'                   size = 0.2, var.threshold = 0.75)
 #'
 #' # Plot contributions of genotypes - with sign - sorted
-#' contrib.pcss.core(x = out2, ndim = 5)
+#' contrib(x = out2, ndim = 5)
 #'
 #' # Plot contributions of genotypes - without sign - sorted
-#' contrib.pcss.core(x = out2, ndim = 5, use.sign = FALSE)
+#' contrib(x = out2, ndim = 5, use.sign = FALSE)
 #'
 #' # Plot loadings/coordinates of genotypes - with sign - sorted
-#' contrib.pcss.core(x = out2, ndim = 5, plot.loadings = TRUE)
+#' contrib(x = out2, ndim = 5, plot.loadings = TRUE)
 #'
 #' # Plot contributions of genotypes - with sign - unsorted
-#' contrib.pcss.core(x = out2, ndim = 5, sort.value = FALSE)
+#' contrib(x = out2, ndim = 5, sort.value = FALSE)
 #'
 #' # Plot biplot with factoextra
 #' fviz_contrib(out2$raw.out, choice = "var", axes = 1)
@@ -107,16 +108,16 @@
 #'                   qualitative = qual, eigen.threshold = NULL)
 #'
 #' # Plot contributions of genotypes - sorted
-#' contrib.pcss.core(x = out3, ndim = 5)
+#' contrib(x = out3, ndim = 5)
 #'
 #' # Plot contributions of genotypes - without sign - sorted
-#' contrib.pcss.core(x = out3, ndim = 5, use.sign = FALSE)
+#' contrib(x = out3, ndim = 5, use.sign = FALSE)
 #'
 #' # Plot loadings/coordinates of genotypes - sorted
-#' contrib.pcss.core(x = out3, ndim = 5, plot.loadings = TRUE)
+#' contrib(x = out3, ndim = 5, plot.loadings = TRUE)
 #'
 #' # Plot contributions of genotypes - with sign - unsorted
-#' contrib.pcss.core(x = out3, ndim = 5, sort.value = FALSE)
+#' contrib(x = out3, ndim = 5, sort.value = FALSE)
 #'
 #' # Plot biplot with factoextra
 #' # fviz_contrib(out3$raw.out, choice = "quanti.var", axes = 1)
@@ -127,7 +128,7 @@
 contrib.pcss.core <- function(x, ndim = NULL,
                               plot.loadings = FALSE,
                               use.sign = TRUE,
-                              sort.value = TRUE) {
+                              sort.value = TRUE, ...) {
   # Checks ----
 
   # Check class of "x"

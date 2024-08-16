@@ -17,6 +17,7 @@
 #' @param criterion The core collection generation criterion. Either
 #'   \code{"size"}, \code{"variance"}, or \code{"logistic"}. See
 #'   \strong{Details}.
+#' @param ... Unused.
 #'
 #' @return A plot of cumulative variability retained by individuals/genotypes as
 #'   a \code{ggplot} object. In case of \code{criterion = "logistic"}, a list
@@ -65,13 +66,13 @@
 #'                   var.threshold = 0.75)
 #'
 #' # For core set constituted by size criterion
-#' coreplot.pcss.core(x = out1, criterion = "size")
+#' coreplot(x = out1, criterion = "size")
 #'
 #' # For core set constituted by variance criterion
-#' coreplot.pcss.core(x = out1, criterion = "variance")
+#' coreplot(x = out1, criterion = "variance")
 #'
 #' # For core set constituted by logistic regression criterion
-#' coreplot.pcss.core(x = out1, criterion = "logistic")
+#' coreplot(x = out1, criterion = "logistic")
 #'
 #' #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #' # Get core sets with PCSS (qualitative data)
@@ -82,13 +83,13 @@
 #'                   size = 0.2, var.threshold = 0.75)
 #'
 #' # For core set constituted by size criterion
-#' coreplot.pcss.core(x = out2, criterion = "size")
+#' coreplot(x = out2, criterion = "size")
 #'
 #' # For core set constituted by variance criterion
-#' coreplot.pcss.core(x = out2, criterion = "variance")
+#' coreplot(x = out2, criterion = "variance")
 #'
 #' # For core set constituted by logistic regression criterion
-#' coreplot.pcss.core(x = out2, criterion = "logistic")
+#' coreplot(x = out2, criterion = "logistic")
 #'
 #' #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #' # Get core sets with PCSS (quantitative and qualitative data)
@@ -99,16 +100,17 @@
 #'                   qualitative = qual, eigen.threshold = NULL)
 #'
 #' # For core set constituted by size criterion
-#' coreplot.pcss.core(x = out3, criterion = "size")
+#' coreplot(x = out3, criterion = "size")
 #'
 #' # For core set constituted by variance criterion
-#' coreplot.pcss.core(x = out3, criterion = "variance")
+#' coreplot(x = out3, criterion = "variance")
 #'
 #' # For core set constituted by logistic regression criterion
-#' coreplot.pcss.core(x = out3, criterion = "logistic")
+#' coreplot(x = out3, criterion = "logistic")
 #'
 coreplot.pcss.core <- function(x,
-                               criterion = c("size", "variance", "logistic")) {
+                               criterion = c("size", "variance", "logistic"),
+                               ...) {
 
   # Checks ----
 

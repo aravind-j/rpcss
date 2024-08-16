@@ -6,7 +6,7 @@
 #' can be constituted.
 #'
 #' @param x An object of class \code{pcss.core}.
-#' @param ... Unused
+#' @param ... Unused.
 #' @seealso \code{\link[rpcss]{pcss.core}}
 #'
 #' @export
