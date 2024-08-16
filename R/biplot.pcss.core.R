@@ -198,14 +198,14 @@ biplot.pcss.core <- function(x,
   # check show.traits argument
   show.traits <- match.arg(show.traits)
 
-  if (method == "MCA" | method == "FAMD") {
+  if (method == "MCA" || method == "FAMD") {
   # check qual.scale argument is numeric vector of unit length
   if (!(is.numeric(qual.scale) && length(qual.scale) == 1)) {
     stop('"qual.scale" should be a numeric vector of unit length.')
   }
   }
 
-  if (method == "PCA" | method == "FAMD") {
+  if (method == "PCA" || method == "FAMD") {
     # check quant.scale argument is numeric vector of unit length
     if (!(is.numeric(quant.scale) && length(quant.scale) == 1)) {
       stop('"quanti.scale" should be a numeric vector of unit length.')
@@ -218,7 +218,7 @@ biplot.pcss.core <- function(x,
   }
 
   # check if 'point.alpha' is a value between 0 and 1
-  if (point.alpha <= 0 | point.alpha >= 1) {
+  if (point.alpha <= 0 || point.alpha >= 1) {
     stop('"point.alpha" should be a value between 0 and 1.')
   }
 
@@ -228,7 +228,7 @@ biplot.pcss.core <- function(x,
   }
 
   # check if 'segment.alpha' is a value between 0 and 1
-  if (segment.alpha <= 0 | segment.alpha >= 1) {
+  if (segment.alpha <= 0 || segment.alpha >= 1) {
     stop('"segment.alpha" should be a value between 0 and 1.')
   }
 
@@ -367,7 +367,7 @@ biplot.pcss.core <- function(x,
     method <- attributes(x)$method
 
     if ((method == "PCA" &&
-         (show.traits == "all" | show.traits == "quantitative")) |
+         (show.traits == "all" || show.traits == "quantitative")) ||
         method == "FAMD" && show.traits == "quantitative") {
 
       bipg <- bipg +
@@ -387,7 +387,7 @@ biplot.pcss.core <- function(x,
     }
 
     if ((method == "MCA" &&
-         (show.traits == "all" | show.traits == "qualitative")) |
+         (show.traits == "all" || show.traits == "qualitative")) ||
         method == "FAMD" && show.traits == "qualitative") {
 
           bipg <- bipg +

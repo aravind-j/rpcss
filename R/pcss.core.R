@@ -262,7 +262,7 @@ pcss.core <- function(data, names, quantitative, qualitative,
   }
 
   # check if overlap exists between 'quantitative' and 'qualitative'
-  if ((!is.null(quantitative)) & (!is.null(qualitative))) {
+  if ((!is.null(quantitative)) && (!is.null(qualitative))) {
     if (length(intersect(quantitative, qualitative)) != 0) {
       stop(paste('The following column(s) is/are specified in both "quantitative" and "qualitative":\n',
                  paste(intersect(quantitative, qualitative),
@@ -325,7 +325,7 @@ pcss.core <- function(data, names, quantitative, qualitative,
   }
 
   # check if 'size' is a proportion between 0 and 1
-  if (size <= 0 | size >= 1) {
+  if (size <= 0 || size >= 1) {
     stop('"size" should be a proportion between 0 and 1.')
   }
 
@@ -337,7 +337,7 @@ pcss.core <- function(data, names, quantitative, qualitative,
   }
 
   # check if 'var.threshold' is a proportion between 0 and 1
-  if (var.threshold <= 0 | var.threshold >= 1) {
+  if (var.threshold <= 0 || var.threshold >= 1) {
     stop('"var.threshold" should be a proportion between 0 and 1.')
   }
 
@@ -355,7 +355,7 @@ pcss.core <- function(data, names, quantitative, qualitative,
 
   # PCA ----
 
-  if (is.null(qualitative) & !is.null(quantitative)) {
+  if (is.null(qualitative) && !is.null(quantitative)) {
 
     dataf <- dataf[, quantitative]
 
@@ -395,7 +395,7 @@ pcss.core <- function(data, names, quantitative, qualitative,
 
   # Run MCA ----
 
-  if (!is.null(qualitative) & is.null(quantitative)) {
+  if (!is.null(qualitative) && is.null(quantitative)) {
 
     dataf <- dataf[, qualitative]
 
@@ -440,7 +440,7 @@ pcss.core <- function(data, names, quantitative, qualitative,
 
   # Run FAMD ----
 
-  if (!is.null(qualitative) & !is.null(quantitative)) {
+  if (!is.null(qualitative) && !is.null(quantitative)) {
 
     dataf[, quantitative] <- lapply(dataf[, quantitative], function(x) {
       as.numeric(x)
