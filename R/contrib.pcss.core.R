@@ -213,12 +213,13 @@ contrib.pcss.core <- function(x, ndim = NULL,
       quali.levels <- attr(x, "quali.levels")
       quant <- attr(x, "quant")
 
-      rownames(pdata) <- c(quant,
-        unlist(
-        lapply(seq_along(quali.levels), function(i) {
-          paste(names(quali.levels)[i], quali.levels[[i]], sep = "_")
-        })
-      ))
+      rownames(pdata) <-
+        c(quant,
+          unlist(
+            lapply(seq_along(quali.levels), function(i) {
+              paste(names(quali.levels)[i], quali.levels[[i]], sep = "_")
+            })
+          ))
       colnames(pdata) <- gsub("Dim.", "Dim ", colnames(pdata))
 
     }
@@ -293,6 +294,3 @@ contrib.pcss.core <- function(x, ndim = NULL,
   return(contribg)
 
 }
-
-
-

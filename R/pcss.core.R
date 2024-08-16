@@ -509,7 +509,7 @@ pcss.core <- function(data, names, quantitative, qualitative,
   CRimax <- sort(CRimax, decreasing = TRUE)
 
   cumCRi <- cumsum(CRi)
-  cumCRimax <- cumsum(CRimax)
+  # cumCRimax <- cumsum(CRimax)
 
   # plot(cumCRimax, col = "green")
   # points(cumCRi, col = "red")
@@ -534,11 +534,11 @@ pcss.core <- function(data, names, quantitative, qualitative,
 
   # Fit a logistic model
   y <- gssdf$VarRet
-  starta = y[1] / (1 - y[1])
-  startb = -0.5
+  starta <- y[1] / (1 - y[1])
+  startb <- -0.5
 
-  maxiter = 1024
-  warnOnly = TRUE
+  maxiter <- 1024
+  warnOnly <- TRUE
 
   dat <- data.frame(n = gssdf$Rank, y = gssdf$VarRet)
 

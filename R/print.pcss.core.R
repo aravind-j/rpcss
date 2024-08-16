@@ -10,7 +10,7 @@
 #' @seealso \code{\link[rpcss]{pcss.core}}
 #'
 #' @export
-print.pcss.core <- function(x, ...){
+print.pcss.core <- function(x, ...) {
 
   cat("\nMethod\n")
   cat("========================\n")

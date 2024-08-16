@@ -181,8 +181,6 @@ biplot.pcss.core <- function(x,
     stop('At least 2 dimensions are to be specified in "ndim".')
   }
 
-  qualitative <- attributes(x)$qual
-  quantitative <- attributes(x)$quant
   method <- attr(x, "method")
 
   # check if ndim is not greater than total dimensions
@@ -199,10 +197,10 @@ biplot.pcss.core <- function(x,
   show.traits <- match.arg(show.traits)
 
   if (method == "MCA" || method == "FAMD") {
-  # check qual.scale argument is numeric vector of unit length
-  if (!(is.numeric(qual.scale) && length(qual.scale) == 1)) {
-    stop('"qual.scale" should be a numeric vector of unit length.')
-  }
+    # check qual.scale argument is numeric vector of unit length
+    if (!(is.numeric(qual.scale) && length(qual.scale) == 1)) {
+      stop('"qual.scale" should be a numeric vector of unit length.')
+    }
   }
 
   if (method == "PCA" || method == "FAMD") {
@@ -304,7 +302,7 @@ biplot.pcss.core <- function(x,
   }
 
   if (highlight.core != "none") {
-    core <- subset.pcss.core(x = x, criterion = highlight.core)
+    core <- subset(x = x, criterion = highlight.core)
 
     ind_coord <- data.frame(ind_coord, check.names = FALSE)
 
@@ -390,20 +388,20 @@ biplot.pcss.core <- function(x,
          (show.traits == "all" || show.traits == "qualitative")) ||
         method == "FAMD" && show.traits == "qualitative") {
 
-          bipg <- bipg +
-            geom_segment(data = qual_coord,
-                         aes(x = 0, y = 0,
-                             xend = .data[[biplot_comb[i, 1]]],
-                             yend = .data[[biplot_comb[i, 2]]]),
-                         arrow = arrow(length = unit(0.2, "cm")),
-                         color = "#00BA38", alpha = segment.alpha) +
-            geom_label_repel(data = qual_coord,
-                             aes(x = .data[[biplot_comb[i, 1]]],
-                                 y = .data[[biplot_comb[i, 2]]],
-                                 label = rownames(qual_coord)),
-                             # vjust = -0.5,
-                             fill = "#00BA38", colour = "white",
-                             alpha = segment.alpha)
+      bipg <- bipg +
+        geom_segment(data = qual_coord,
+                     aes(x = 0, y = 0,
+                         xend = .data[[biplot_comb[i, 1]]],
+                         yend = .data[[biplot_comb[i, 2]]]),
+                     arrow = arrow(length = unit(0.2, "cm")),
+                     color = "#00BA38", alpha = segment.alpha) +
+        geom_label_repel(data = qual_coord,
+                         aes(x = .data[[biplot_comb[i, 1]]],
+                             y = .data[[biplot_comb[i, 2]]],
+                             label = rownames(qual_coord)),
+                         # vjust = -0.5,
+                         fill = "#00BA38", colour = "white",
+                         alpha = segment.alpha)
     }
 
     if (method == "FAMD" && show.traits == "all") {

@@ -123,8 +123,6 @@ coreplot.pcss.core <- function(x,
 
   gssdf <- x$variability.ret
 
-  N <- nrow(gssdf)
-
   # By size specified ----
 
   if (criterion == "size") {
@@ -148,7 +146,7 @@ coreplot.pcss.core <- function(x,
                    colour = "red") +
       geom_text(data = size.segdf, aes(x = x, y = y, label = label),
                 vjust = -0.5, hjust = -0.5, colour = "red") +
-      scale_x_continuous(name = "Number of selected individuals" ,
+      scale_x_continuous(name = "Number of selected individuals",
                          sec.axis = sec_axis(transform = ~. / N,
                                              name = "Proportion of selected individuals")) +
       ylab("Variability retained (%)") +
@@ -180,7 +178,7 @@ coreplot.pcss.core <- function(x,
                    colour = "red") +
       geom_text(data = var.segdf, aes(x = x, y = y, label = label),
                 vjust = -0.5, hjust = -0.5, colour = "red") +
-      scale_x_continuous(name = "Number of selected individuals" ,
+      scale_x_continuous(name = "Number of selected individuals",
                          sec.axis = sec_axis(transform = ~. / N,
                                              name = "Proportion of selected individuals")) +
       ylab("Variability retained (%)") +
@@ -214,7 +212,7 @@ coreplot.pcss.core <- function(x,
                    colour = "red") +
       geom_text(data = reg.segdf, aes(x = x, y = y, label = label),
                 vjust = -0.5, hjust = -0.5, colour = "red") +
-      scale_x_continuous(name = "Number of selected individuals" ,
+      scale_x_continuous(name = "Number of selected individuals",
                          sec.axis = sec_axis(transform = ~. / N,
                                              name = "Proportion of selected individuals")) +
       ylab("Variability retained (%)") +
@@ -237,7 +235,7 @@ coreplot.pcss.core <- function(x,
                    colour = "red") +
       geom_text(data = reg.segdf2, aes(x = x, y = y, label = label),
                 vjust = -0.5, hjust = -0.5, colour = "red") +
-      scale_x_continuous(name = "Number of selected individuals" ,
+      scale_x_continuous(name = "Number of selected individuals",
                          sec.axis = sec_axis(transform = ~. / N,
                                              name = "Proportion of selected individuals")) +
       ylab("Rate of increase in variability retained (%)") +

@@ -9,7 +9,7 @@
 #' @export
 #' @keywords internal
 #'
-coreplot <- function(x, ...){
+coreplot <- function(x, ...) {
   UseMethod("coreplot")
 }
 
@@ -22,6 +22,6 @@ coreplot <- function(x, ...){
 #' @export
 #' @keywords internal
 #'
-contrib <- function(x, ...){
+contrib <- function(x, ...) {
   UseMethod("contrib")
 }
