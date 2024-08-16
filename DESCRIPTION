@@ -1,5 +1,5 @@
 Package: rpcss
-Title: Core Collection Constitution by Principal Component Scoring Strategy
+Title: Constitution of Core Collections by Principal Component Scoring Strategy
 Version: 0.0.0.9000
 Authors@R: c(
     person(given = "J.", family = "Aravind",
@@ -13,16 +13,18 @@ Description: Generate a Core Collection with Principal Component Scoring
 License: GPL-2 | GPL-3
 Encoding: UTF-8
 Depends: R (>= 3.5.0)
-VignetteBuilder: knitr
 RoxygenNote: 7.3.2
 BuildManual: TRUE
-Imports: FactoMineR,
+Imports: dplyr,
+    FactoMineR,
     ggplot2,
     ggrepel,
     gslnls,
     mathjaxr,
-    Rdpack
-Suggests:
+    Rdpack,
+    tidyr
+Suggests: EvaluateCore,
+    factoextra,
     knitr,
     rmarkdown,
     pander
