@@ -17,11 +17,113 @@
 #'
 #' @return The contributions/loadings bar plot as a \code{ggplot} object.
 #'
+#' @seealso \code{\link[rpcss]{pcss.core}}
+#'
 #' @import ggplot2
 #' @importFrom tidyr pivot_longer
 #' @export
 #'
 #' @examples
+#'
+#' #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#' # Prepare example data
+#' #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#'
+#' library(EvaluateCore)
+#'
+#' # Get data from EvaluateCore
+#'
+#' data("cassava_EC", package = "EvaluateCore")
+#' data = cbind(Genotypes = rownames(cassava_EC), cassava_EC)
+#' quant <- c("NMSR", "TTRN", "TFWSR", "TTRW", "TFWSS", "TTSW", "TTPW", "AVPW",
+#'            "ARSR", "SRDM")
+#' qual <- c("CUAL", "LNGS", "PTLC", "DSTA", "LFRT", "LBTEF", "CBTR", "NMLB",
+#'           "ANGB", "CUAL9M", "LVC9M", "TNPR9M", "PL9M", "STRP", "STRC",
+#'           "PSTR")
+#' rownames(data) <- NULL
+#'
+#' # Convert qualitative data columns to factor
+#' data[, qual] <- lapply(data[, qual], as.factor)
+#'
+#'
+#' library(FactoMineR)
+#' library(factoextra)
+#'
+#' #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#' # With quantitative data
+#' #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#'
+#' out1 <- pcss.core(data = data, names = "Genotypes",
+#'                   quantitative = quant,
+#'                   qualitative = NULL, eigen.threshold = NULL, size = 0.2,
+#'                   var.threshold = 0.75)
+#'
+#' # Plot contributions of genotypes - with sign - sorted
+#' contrib.pcss.core(x = out1, ndim = 5)
+#'
+#' # Plot contributions of genotypes - without sign - sorted
+#' contrib.pcss.core(x = out1, ndim = 5, use.sign = FALSE)
+#'
+#' # Plot loadings/coordinates of genotypes - with sign - sorted
+#' contrib.pcss.core(x = out1, ndim = 5, plot.loadings = TRUE)
+#'
+#' # Plot contributions of genotypes - with sign - unsorted
+#' contrib.pcss.core(x = out1, ndim = 5, sort.value = FALSE)
+#'
+#' # Plot biplot with factoextra
+#' fviz_contrib(out1$raw.out, choice = "var", axes = 1)
+#' fviz_contrib(out1$raw.out, choice = "var", axes = 2)
+#'
+#' #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#' # Get core sets with PCSS (qualitative data)
+#' #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#'
+#' out2 <- pcss.core(data = data, names = "Genotypes", quantitative = NULL,
+#'                   qualitative = qual, eigen.threshold = NULL,
+#'                   size = 0.2, var.threshold = 0.75)
+#'
+#' # Plot contributions of genotypes - with sign - sorted
+#' contrib.pcss.core(x = out2, ndim = 5)
+#'
+#' # Plot contributions of genotypes - without sign - sorted
+#' contrib.pcss.core(x = out2, ndim = 5, use.sign = FALSE)
+#'
+#' # Plot loadings/coordinates of genotypes - with sign - sorted
+#' contrib.pcss.core(x = out2, ndim = 5, plot.loadings = TRUE)
+#'
+#' # Plot contributions of genotypes - with sign - unsorted
+#' contrib.pcss.core(x = out2, ndim = 5, sort.value = FALSE)
+#'
+#' # Plot biplot with factoextra
+#' fviz_contrib(out2$raw.out, choice = "var", axes = 1)
+#' fviz_contrib(out2$raw.out, choice = "var", axes = 2)
+#'
+#' #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#' # Get core sets with PCSS (quantitative and qualitative data)
+#' #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#'
+#' out3 <- pcss.core(data = data, names = "Genotypes",
+#'                   quantitative = quant,
+#'                   qualitative = qual, eigen.threshold = NULL)
+#'
+#' # Plot contributions of genotypes - sorted
+#' contrib.pcss.core(x = out3, ndim = 5)
+#'
+#' # Plot contributions of genotypes - without sign - sorted
+#' contrib.pcss.core(x = out3, ndim = 5, use.sign = FALSE)
+#'
+#' # Plot loadings/coordinates of genotypes - sorted
+#' contrib.pcss.core(x = out3, ndim = 5, plot.loadings = TRUE)
+#'
+#' # Plot contributions of genotypes - with sign - unsorted
+#' contrib.pcss.core(x = out3, ndim = 5, sort.value = FALSE)
+#'
+#' # Plot biplot with factoextra
+#' # fviz_contrib(out3$raw.out, choice = "quanti.var", axes = 1)
+#' # fviz_contrib(out3$raw.out, choice = "quali.var", axes = 1)
+#' # fviz_contrib(out3$raw.out, choice = "quanti.var", axes = 2)
+#' # fviz_contrib(out3$raw.out, choice = "quali.var", axes = 2)
+#'
 contrib.pcss.core <- function(x, ndim = NULL,
                               plot.loadings = FALSE,
                               use.sign = TRUE,
@@ -56,22 +158,75 @@ contrib.pcss.core <- function(x, ndim = NULL,
 
   }
 
+  method <- attr(x, "method")
+
   if (plot.loadings) {
+
     pdata <- x$raw.out$svd$V
 
-    rownames(pdata) <- rownames(x$raw.out$var$coord)
-    colnames(pdata) <- colnames(x$raw.out$var$coord)
+    if (method != "FAMD") {
+
+      rownames(pdata) <- rownames(x$raw.out$var$coord)
+      colnames(pdata) <- colnames(x$raw.out$var$coord)
+
+    } else {
+
+      quali.levels <- attr(x, "quali.levels")
+      quant <- attr(x, "quant")
+
+      rownames(pdata) <- c(quant,
+                           unlist(
+                             lapply(seq_along(quali.levels), function(i) {
+                               paste(names(quali.levels)[i], quali.levels[[i]],
+                                     sep = "_")
+                             })
+                           ))
+      colnames(pdata) <- gsub("Dim.", "Dim ", colnames(pdata))
+    }
+
 
   } else {
-    pdata <- x$raw.out$var$contrib
 
-    if (use.sign) {
-      pdata <- pdata * sign(x$raw.out$var$coord)
+
+    if (method != "FAMD") {
+
+      pdata <- x$raw.out$var$contrib
+
+      if (use.sign) {
+        pdata <- pdata * sign(x$raw.out$var$coord)
+      }
+
+      rownames(pdata) <- rownames(x$raw.out$var$coord)
+      colnames(pdata) <- colnames(x$raw.out$var$coord)
+
+    } else {
+
+      pdata <- rbind(x$raw.out$quanti.var$contrib,
+                     x$raw.out$quali.var$contrib)
+
+      if (use.sign) {
+        pdata <- pdata *  rbind(sign(x$raw.out$quanti.var$coord),
+                                sign(x$raw.out$quali.var$coord))
+      }
+
+      quali.levels <- attr(x, "quali.levels")
+      quant <- attr(x, "quant")
+
+      rownames(pdata) <- c(quant,
+        unlist(
+        lapply(seq_along(quali.levels), function(i) {
+          paste(names(quali.levels)[i], quali.levels[[i]], sep = "_")
+        })
+      ))
+      colnames(pdata) <- gsub("Dim.", "Dim ", colnames(pdata))
+
     }
 
   }
 
-  pdata <- data.frame(pdata)
+  pdata <- data.frame(pdata, check.rows = FALSE)
+
+  eigdf <- x$eigen
 
   if (!is.null(ndim)) {
     if (nrow(eigdf) > ndim) {
@@ -82,21 +237,21 @@ contrib.pcss.core <- function(x, ndim = NULL,
   pdata$Trait <- rownames(pdata)
 
   pdata_long <- tidyr::pivot_longer(data = pdata, cols = !Trait,
-                               names_to = "Dimension",
-                               values_to = "Value")
+                                    names_to = "Dimension",
+                                    values_to = "Value")
   pdata_long$Dimension <- as.factor(as.integer(gsub("\\D", "",
-                                                     pdata_long$Dimension)))
+                                                    pdata_long$Dimension)))
   levels(pdata_long$Dimension) <- paste("Dim", levels(pdata_long$Dimension))
 
   pdata_long$Group <- ifelse(pdata_long$Value >= 0, TRUE, FALSE)
 
   pdata_long <- pdata_long[rev(order(pdata_long$Value)), ]
   pdata_long$Trait_Dim <- paste(pdata_long$Trait,
-                                pdata_long$Dimension, sep = "_")
+                                pdata_long$Dimension, sep = "#")
   pdata_long$Trait_Dim <- factor(pdata_long$Trait_Dim,
                                  levels = rev(paste(pdata_long$Trait,
                                                     pdata_long$Dimension,
-                                                    sep = "_")))
+                                                    sep = "#")))
 
   if (sort.value) {
 
@@ -105,7 +260,7 @@ contrib.pcss.core <- function(x, ndim = NULL,
       geom_bar(stat = "identity", show.legend = FALSE,
                colour = "transparent") +
       facet_wrap(vars(Dimension), scales = "free_y") +
-      scale_y_discrete(labels = function(x) gsub("_.+$", "", x)) +
+      scale_y_discrete(labels = function(x) gsub("#.+$", "", x)) +
       ylab("Trait") +
       theme_bw()
 
