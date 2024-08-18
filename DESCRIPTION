@@ -7,8 +7,10 @@ Authors@R: c(
            role = c("aut", "cre"),
 		       comment = c(ORCID = "0000-0002-4791-442X")))
 Description: Generate a Core Collection with Principal Component Scoring 
-    Strategy (PCSS) (Noirot et al. 1996 <doi:10.2307/2527837> ; Noirot et al. 
-    2003 <https://horizon.documentation.ird.fr/exl-doc/pleins_textes/divers21-03/010031886.pdf>) 
+    Strategy (PCSS) according to Hamon and Noirot 1990
+    <https://horizon.documentation.ird.fr/exl-doc/pleins_textes/pleins_textes_6/b_fdi_33-34/36506.pdf>,
+    Noirot et al. 1996 <doi:10.2307/2527837> and Noirot et al. 
+    2003 <https://horizon.documentation.ird.fr/exl-doc/pleins_textes/divers21-03/010031886.pdf> 
     using qualitative and/or quantitative trait data.
 License: GPL-2 | GPL-3
 Encoding: UTF-8
@@ -34,4 +36,5 @@ Suggests: EvaluateCore,
 RdMacros: mathjaxr,
     Rdpack
 URL: https://github.com/aravind-j/rpcss
+    https://aravind-j.github.io/rpcss
 BugReports: https://github.com/aravind-j/rpcss/issues
