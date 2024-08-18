@@ -123,6 +123,8 @@ coreplot.pcss.core <- function(x,
 
   gssdf <- x$variability.ret
 
+  N <- nrow(gssdf)
+
   # By size specified ----
 
   if (criterion == "size") {
