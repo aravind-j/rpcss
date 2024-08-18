@@ -86,7 +86,7 @@ Where \mjseqn{x_{ij}} is the component score or coordinate of the
 \mjseqn{i}th genotype on the \mjseqn{j}th principal component.
 
 \item For each genotype, its relative contribution to GSS or total
-variabilityis computed as below.
+variability is computed as below.
 
 \mjsdeqn{CR_{i} = \frac{P_{i}}{N \times K}}
 
