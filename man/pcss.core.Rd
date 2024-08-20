@@ -123,7 +123,7 @@ genotypes to GSS is computed.
  The rate of increase in the successive contribution of genotypes to GSS can
  be computed as
 
- \mjsdeqn{\frac{\mathrm{d} y}{\mathrm{d} x} = by(A-y)}
+ \mjseqn{\frac{\mathrm{d} y}{\mathrm{d} x} = by(A-y)}
 
  to find the point of inflection where the rate of increase starts declining.
 
