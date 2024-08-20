@@ -1,29 +1,34 @@
 template:
   bootstrap: 5
   math-rendering: mathjax
-  light-switch: true
+  light-switch: yes
   bslib:
-    # bootswatch: united
-    base_font: {google: "Fira Sans"}
-    heading_font: {google: "Fira Sans"}
-    code_font: {google: "Fira Mono"}
-    primary: "#ff0f0f" # (translucent) hover colour in the navbar and sidebar
-    pkgdown-navbar-bg: "#0f0f0f" # Background colur of navbar
-    navbar-light-color: "#f9f9f9" # Navbar text colour of items
-    navbar-light-hover-color: "#ff0f0f" # Navbar text colour of items on hover
-    navbar-light-brand-color: "#ff0f0f" # Navbar package name text colour
-    navbar-light-brand-hover-color: "#ff0f0f" # Navbar package name text colour on hover
-    link-color: "#ff0f0f" # Colour of links
-
+    base_font:
+      google: Fira Sans
+    heading_font:
+      google: Fira Sans
+    code_font:
+      google: Fira Mono
+    primary: '#ff0f0f'
+    pkgdown-navbar-bg: '#0f0f0f'
+    navbar-light-color: '#f9f9f9'
+    navbar-light-hover-color: '#ff0f0f'
+    navbar-light-brand-color: '#ff0f0f'
+    navbar-light-brand-hover-color: '#ff0f0f'
+    link-color: '#ff0f0f'
 deploy:
-  install_metadata: true
-
+  install_metadata: yes
 url: https://aravind-j.github.io/rpcss/
-
 navbar:
   structure:
-    left:  [home, reference, news]
-    right: [search, github, lightswitch]
+    left:
+    - home
+    - reference
+    - news
+    right:
+    - search
+    - github
+    - lightswitch
   components:
     home:
       icon: fa-home fa-lg
@@ -41,26 +46,19 @@ navbar:
       icon: fab fa-github-alt
       text: Github
       href: https://github.com/aravind-j/rpcss
-
 search:
-  exclude: ['news/index.html']
-
+  exclude: news/index.html
 reference:
-    - title: Constitute Core Collection
-      contents:
-         - '`pcss.core`'
+- title: Constitute Core Collection
+  contents: '`pcss.core`'
+- title: Fetch Genotypes/Individuals in the Core Set
+  contents: '`subset.pcss.core`'
+- title: Plotting Functions
+  contents:
+  - '`screeplot.pcss.core`'
+  - '`biplot.pcss.core`'
+  - '`contrib.pcss.core`'
+  - '`coreplot.pcss.core`'
+- title: Helper Functions
+  contents: '`print.pcss.core`'
 
-    - title: Fetch Genotypes/Individuals in the Core Set
-      contents:
-         - '`subset.pcss.core`'
-
-    - title: Plotting Functions
-      contents:
-         - '`screeplot.pcss.core`'
-         - '`biplot.pcss.core`'
-         - '`contrib.pcss.core`'
-         - '`coreplot.pcss.core`'
-
-    - title: Helper Functions
-      contents:
-         - '`print.pcss.core`'

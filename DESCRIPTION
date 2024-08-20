@@ -35,6 +35,5 @@ Suggests: EvaluateCore,
     pander
 RdMacros: mathjaxr,
     Rdpack
-URL: https://github.com/aravind-j/rpcss
-    https://aravind-j.github.io/rpcss
+URL: https://github.com/aravind-j/rpcss, https://aravind-j.github.io/rpcss/
 BugReports: https://github.com/aravind-j/rpcss/issues
