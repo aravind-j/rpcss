@@ -1,0 +1,32 @@
+
+/*
+Undeline navbar text on hover
+*/
+.navbar-nav a:hover {
+  text-decoration: underline;
+}
+
+/*
+Change Version number badge on navbar
+*/
+.text-muted {
+    color: #0f0f0f !important;
+    background-color: #f9f9f9;
+    border: 2px solid #f9f9f9;
+    border-radius: 5px;
+}
+
+/*
+Change colour of links within code
+*/
+
+code a {
+    color: $link-color !important;
+}
+
+/*
+code a {
+  color: #ff0f0f !important;
+}
+*/
+
