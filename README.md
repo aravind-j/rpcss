@@ -29,7 +29,7 @@ Size](https://img.shields.io/github/languages/code-size/aravind-j/rpcss.svg)](ht
 [![Project Status:
 WIP](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
 [![lifecycle](https://lifecycle.r-lib.org/articles/figures/lifecycle-maturing.svg)](https://lifecycle.r-lib.org/articles/stages.html#maturing)
-[![Last-changedate](https://img.shields.io/badge/last%20change-2024--08--16-yellowgreen.svg)](https://github.com/aravind-j/rpcss/)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2024--08--20-yellowgreen.svg)](https://github.com/aravind-j/rpcss/)
 <!-- [![Zenodo DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.xxxxxxxx.svg)](https://doi.org/10.5281/zenodo.xxxxxxxx) -->
 [![Website -
 pkgdown](https://img.shields.io/website-up-down-green-red/https/aravind-j.github.io/rpcss.svg)](https://aravind-j.github.io/rpcss/)
@@ -43,8 +43,10 @@ pkgdown](https://img.shields.io/website-up-down-green-red/https/aravind-j.github
 ## Description
 
 Generate a Core Collection with Principal Component Scoring Strategy
-(PCSS) (Noirot et al. 1996 [doi:10.2307/2527837\> ; Noirot et al. 2003
-\<https://horizon.documentation.ird.fr/exl-doc/pleins_textes/divers21-03/010031886.pdf](https://doi.org/10.2307/2527837%3E%20;%20Noirot%20et%20al.%202003%20%3Chttps://horizon.documentation.ird.fr/exl-doc/pleins_textes/divers21-03/010031886.pdf))
+(PCSS) according to Hamon and Noirot 1990
+<https://horizon.documentation.ird.fr/exl-doc/pleins_textes/pleins_textes_6/b_fdi_33-34/36506.pdf>,
+Noirot et al. 1996 [doi:10.2307/2527837\> and Noirot et al. 2003
+\<https://horizon.documentation.ird.fr/exl-doc/pleins_textes/divers21-03/010031886.pdf](https://doi.org/10.2307/2527837%3E%20and%20Noirot%20et%20al.%202003%20%3Chttps://horizon.documentation.ird.fr/exl-doc/pleins_textes/divers21-03/010031886.pdf)
 using qualitative and/or quantitative trait data.
 
 ## Installation
@@ -95,17 +97,18 @@ To cite the methods in the package use:
 citation("rpcss")
 ```
 
-    Warning in citation("rpcss"): could not determine year for 'rpcss' from package DESCRIPTION file
     To cite package 'rpcss' in publications use:
 
-      Aravind J (????). _rpcss: Core Collection Constitution by Principal Component Scoring Strategy_. R package version
-      0.0.0.9000, <https://github.com/aravind-j/rpcss>.
+      Aravind J (2024). _rpcss: Constitution of Core Collections by Principal Component
+      Scoring Strategy_. R package version 0.0.0.9000, <https://github.com/aravind-j/rpcss>.
 
     A BibTeX entry for LaTeX users is
 
       @Manual{,
-        title = {rpcss: Core Collection Constitution by Principal Component Scoring Strategy},
+        title = {rpcss: Constitution of Core Collections by Principal Component Scoring
+    Strategy},
         author = {J. Aravind},
+        year = {2024},
         note = {R package version 0.0.0.9000},
         url = {https://github.com/aravind-j/rpcss},
       }
