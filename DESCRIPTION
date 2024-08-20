@@ -7,11 +7,11 @@ Authors@R: c(
            role = c("aut", "cre"),
 		       comment = c(ORCID = "0000-0002-4791-442X")))
 Description: Generate a Core Collection with Principal Component Scoring 
-    Strategy (PCSS) according to Hamon and Noirot 1990
-    <https://horizon.documentation.ird.fr/exl-doc/pleins_textes/pleins_textes_6/b_fdi_33-34/36506.pdf>,
-    Noirot et al. 1996 <doi:10.2307/2527837> and Noirot et al. 
-    2003 <https://horizon.documentation.ird.fr/exl-doc/pleins_textes/divers21-03/010031886.pdf> 
-    using qualitative and/or quantitative trait data.
+    Strategy (PCSS)  using qualitative and/or quantitative trait data according 
+    to Hamon and Noirot 1990
+    <https://www.documentation.ird.fr/hor/fdi:36506>,
+    Noirot et al. 1996 <doi:10.2307/2527837> and Noirot et al. 2003 
+    <https://www.documentation.ird.fr/hor/fdi:010031886>.
 License: GPL-2 | GPL-3
 Encoding: UTF-8
 Depends: R (>= 3.5.0)

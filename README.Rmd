@@ -58,7 +58,46 @@ cat(paste("[![develVersion](https://img.shields.io/badge/devel%20version-", dver
 ***
 
 ## Description
-`r gsub("(<doi:)(.+)(>)", "[doi:\\2](https://doi.org/\\2)", gsub("\\n", " ", packageDescription("rpcss", fields = "Description")))`
+<!-- `r gsub("(<doi:)(.+)(>)", "[doi:\\2](https://doi.org/\\2)", gsub("\\n", " ", packageDescription("rpcss", fields = "Description")))` -->
+`r gsub("\\n", "", pkgdown:::linkify(packageDescription("rpcss", fields = "Description")))`
+
+```{r, echo=FALSE, out.width='100%', fig.height=8, fig.width=12, out.width='100%', dpi = 250}
+library(EvaluateCore)
+
+# Get data from EvaluateCore
+
+data("cassava_EC", package = "EvaluateCore")
+data = cbind(Genotypes = rownames(cassava_EC), cassava_EC)
+quant <- c("NMSR", "TTRN", "TFWSR", "TTRW", "TFWSS", "TTSW", "TTPW", "AVPW",
+           "ARSR", "SRDM")
+qual <- c("CUAL", "LNGS", "PTLC", "DSTA", "LFRT", "LBTEF", "CBTR", "NMLB",
+          "ANGB", "CUAL9M", "LVC9M", "TNPR9M", "PL9M", "STRP", "STRC",
+          "PSTR")
+rownames(data) <- NULL
+
+# Convert qualitative data columns to factor
+data[, qual] <- lapply(data[, qual], as.factor)
+
+
+
+out1 <- pcss.core(data = data, names = "Genotypes",
+                  quantitative = quant,
+                  qualitative = NULL, eigen.threshold = NULL, size = 0.2,
+                  var.threshold = 0.75)
+
+
+g1 <- coreplot(x = out1, criterion = "variance")
+g2 <- coreplot(x = out1, criterion = "logistic")[[2]]
+g3 <- screeplot(x = out1)
+g4 <- biplot(out1, ndim = 3, highlight.core = "size", quant.scale = 5,
+       point.alpha = 0.5)[[1]]
+
+library(patchwork)
+
+(g1 + g2)/
+  (g3 + g4)
+
+```
 
 ## Installation
 <!-- The package can be installed from CRAN as follows: 

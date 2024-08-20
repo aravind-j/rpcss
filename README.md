@@ -19,7 +19,7 @@ version](https://img.shields.io/badge/R%3E%3D-3.5.0-6666ff.svg?logo=R)](https://
 [![License: GPL
 v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version-last-release/rpcss)](https://cran.r-project.org/package=rpcss)
-[![Dependencies](https://tinyverse.netlify.com/badge/rpcss)](https://cran.r-project.org/package=rpcss)
+[![Dependencies](https://tinyverse.netlify.app/status/rpcss)](https://cran.r-project.org/package=rpcss)
 [![rstudio mirror
 downloads](https://cranlogs.r-pkg.org/badges/grand-total/rpcss?color=green)](https://CRAN.R-project.org/package=rpcss)
 [![develVersion](https://img.shields.io/badge/devel%20version-0.0.0.9000-orange.svg)](https://github.com/aravind-j/rpcss)
@@ -42,12 +42,18 @@ pkgdown](https://img.shields.io/website-up-down-green-red/https/aravind-j.github
 
 ## Description
 
-Generate a Core Collection with Principal Component Scoring Strategy
-(PCSS) according to Hamon and Noirot 1990
-<https://horizon.documentation.ird.fr/exl-doc/pleins_textes/pleins_textes_6/b_fdi_33-34/36506.pdf>,
-Noirot et al. 1996 [doi:10.2307/2527837\> and Noirot et al. 2003
-\<https://horizon.documentation.ird.fr/exl-doc/pleins_textes/divers21-03/010031886.pdf](https://doi.org/10.2307/2527837%3E%20and%20Noirot%20et%20al.%202003%20%3Chttps://horizon.documentation.ird.fr/exl-doc/pleins_textes/divers21-03/010031886.pdf)
-using qualitative and/or quantitative trait data.
+<!-- Generate a Core Collection with Principal Component Scoring Strategy (PCSS)  using qualitative and/or quantitative trait data according to Hamon and Noirot 1990 <https://www.documentation.ird.fr/hor/fdi:36506>, Noirot et al. 1996 [doi:10.2307/2527837> and Noirot et al. 2003 <https://www.documentation.ird.fr/hor/fdi:010031886](https://doi.org/10.2307/2527837> and Noirot et al. 2003 <https://www.documentation.ird.fr/hor/fdi:010031886). -->
+
+Generate a Core Collection with Principal Component ScoringStrategy
+(PCSS) using qualitative and/or quantitative trait data accordingto
+Hamon and Noirot
+1990\<<a href='https://www.documentation.ird.fr/hor/fdi:36506'>https://www.documentation.ird.fr/hor/fdi:36506</a>\>,Noirot
+et al. 1996
+\<<a href='https://doi.org/10.2307/2527837'>doi:10.2307/2527837</a>\>
+and Noirot et
+al. 2003\<<a href='https://www.documentation.ird.fr/hor/fdi:010031886'>https://www.documentation.ird.fr/hor/fdi:010031886</a>\>.
+
+<img src="inst/extdata/unnamed-chunk-5-1.png" width="100%" />
 
 ## Installation
 
@@ -97,18 +103,17 @@ To cite the methods in the package use:
 citation("rpcss")
 ```
 
+    Warning in citation("rpcss"): could not determine year for 'rpcss' from package DESCRIPTION file
     To cite package 'rpcss' in publications use:
 
-      Aravind J (2024). _rpcss: Constitution of Core Collections by Principal Component
-      Scoring Strategy_. R package version 0.0.0.9000, <https://github.com/aravind-j/rpcss>.
+      Aravind J (????). _rpcss: Constitution of Core Collections by Principal Component Scoring Strategy_. R package version
+      0.0.0.9000, <https://github.com/aravind-j/rpcss>.
 
     A BibTeX entry for LaTeX users is
 
       @Manual{,
-        title = {rpcss: Constitution of Core Collections by Principal Component Scoring
-    Strategy},
+        title = {rpcss: Constitution of Core Collections by Principal Component Scoring Strategy},
         author = {J. Aravind},
-        year = {2024},
         note = {R package version 0.0.0.9000},
         url = {https://github.com/aravind-j/rpcss},
       }
