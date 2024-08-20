@@ -53,7 +53,7 @@ et al. 1996
 and Noirot et
 al. 2003\<<a href='https://www.documentation.ird.fr/hor/fdi:010031886'>https://www.documentation.ird.fr/hor/fdi:010031886</a>\>.
 
-<img src="inst/extdata/unnamed-chunk-5-1.png" width="100%" />
+<img src="inst/extdata/readme-plot-1.png" width="100%" />
 
 ## Installation
 
@@ -103,17 +103,19 @@ To cite the methods in the package use:
 citation("rpcss")
 ```
 
-    Warning in citation("rpcss"): could not determine year for 'rpcss' from package DESCRIPTION file
-    To cite package 'rpcss' in publications use:
+    To cite the R package 'rpcss' in publications use:
 
-      Aravind J (????). _rpcss: Constitution of Core Collections by Principal Component Scoring Strategy_. R package version
-      0.0.0.9000, <https://github.com/aravind-j/rpcss>.
+      Aravind, J. (2024).  rpcss: Constitution of Core Collections by Principal Component
+      Scoring Strategy. R package version 0.0.0.9000, https://aravind-j.github.io/rpcss/.
 
     A BibTeX entry for LaTeX users is
 
       @Manual{,
         title = {rpcss: Constitution of Core Collections by Principal Component Scoring Strategy},
         author = {J. Aravind},
-        note = {R package version 0.0.0.9000},
-        url = {https://github.com/aravind-j/rpcss},
+        year = {2024},
+        note = {R package version 0.0.0.9000 https://aravind-j.github.io/rpcss/},
       }
+
+    This free and open-source software implements academic research by the authors and
+    co-workers. If you use it, please support the project by citing the package.
