@@ -240,6 +240,7 @@ coreplot.pcss.core <- function(x,
       scale_x_continuous(name = "Number of selected individuals",
                          sec.axis = sec_axis(transform = ~. / N,
                                              name = "Proportion of selected individuals")) +
+      scale_y_continuous(expand = expansion(mult = c(0, 0.1))) +
       ylab("Rate of increase in variability retained (%)") +
       theme_bw()
 
