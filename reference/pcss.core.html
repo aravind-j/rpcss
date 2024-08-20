@@ -183,9 +183,9 @@ genotypes to GSS is computed.</p></li>
  sorted according to the contribution to GSS and <em></em>\(A\) is the asymptote
  of the curve (<em></em>\(A = 100\)).</p>
 <p>The rate of increase in the successive contribution of genotypes to GSS can
- be computed as</p>
-<p>\[\frac{\mathrm{d} y}{\mathrm{d} x} = by(A-y)\]</p>
-<p>to find the point of inflection where the rate of increase starts declining.</p>
+ be computed by the following equation to find the point of inflection where
+ the rate of increase starts declining.</p>
+<p><em></em>\(\frac{\mathrm{d} y}{\mathrm{d} x} = by(A-y)\)</p>
 <p>The number of accessions included till the peak or infection point are
  selected to constitute the core collection.</p></li>
 </ol></li>
@@ -210,13 +210,11 @@ and independent variables or factors.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span><span class="op">~</span></span></span>
+<span class="r-in"><span><span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span></span>
 <span class="r-in"><span><span class="co"># Prepare example data</span></span></span>
 <span class="r-in"><span><span class="co">#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/aravind-j/EvaluateCore" class="external-link">EvaluateCore</a></span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~library(EvaluateCore)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x114a97938&gt;</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Get data from EvaluateCore</span></span></span>
 <span class="r-in"><span></span></span>
