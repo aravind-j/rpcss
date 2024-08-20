@@ -69,11 +69,10 @@
 #'  of the curve (\mjseqn{A = 100}).
 #'
 #'  The rate of increase in the successive contribution of genotypes to GSS can
-#'  be computed as
+#'  be computed by the following equation to find the point of inflection where
+#'  the rate of increase starts declining.
 #'
 #'  \mjseqn{\frac{\mathrm{d} y}{\mathrm{d} x} = by(A-y)}
-#'
-#'  to find the point of inflection where the rate of increase starts declining.
 #'
 #'  The number of accessions included till the peak or infection point are
 #'  selected to constitute the core collection.
