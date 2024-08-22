@@ -105,8 +105,9 @@ citation("rpcss")
 
     To cite the R package 'rpcss' in publications use:
 
-      Aravind, J. (2024).  rpcss: Constitution of Core Collections by Principal Component Scoring Strategy. R
-      package version 0.0.0.9000, https://aravind-j.github.io/rpcss/.
+      Aravind, J. (2024).  rpcss: Constitution of Core Collections by
+      Principal Component Scoring Strategy. R package version 0.0.0.9000,
+      https://aravind-j.github.io/rpcss/.
 
     A BibTeX entry for LaTeX users is
 
@@ -117,5 +118,6 @@ citation("rpcss")
         note = {R package version 0.0.0.9000 https://aravind-j.github.io/rpcss/},
       }
 
-    This free and open-source software implements academic research by the authors and co-workers. If you use
-    it, please support the project by citing the package.
+    This free and open-source software implements academic research by the
+    authors and co-workers. If you use it, please support the project by
+    citing the package.
