@@ -7,7 +7,7 @@ always_allow_html: true
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "",
-  fig.path = "inst/extdata/"
+  fig.path =  "man/figures/README-"
 )
 ```
 
@@ -62,7 +62,8 @@ cat(paste("[![develVersion](https://img.shields.io/badge/devel%20version-", dver
 `r gsub("\\n", "", pkgdown:::linkify(packageDescription("rpcss", fields = "Description")))`
 
 ```{r readme-plot, echo=FALSE, out.width='100%', fig.height=8, fig.width=12, out.width='100%', dpi = 250}
-library(EvaluateCore)
+
+suppressPackageStartupMessages(library(EvaluateCore))
 
 # Get data from EvaluateCore
 
