@@ -129,7 +129,7 @@ screeplot.pcss.core <- function(x, ndim = NULL, show.values = TRUE, ...) {
     eigen.threshold_label <- round(eigen.threshold, 3)
   }
 
-  K <- x$details["Number of eigen values selected", "Value"]
+  K <- x$details[x$details$Detail == "Number of eigen values selected", "Value"]
   K <- as.numeric(K)
 
   # Plot eigen values ----
@@ -162,7 +162,9 @@ screeplot.pcss.core <- function(x, ndim = NULL, show.values = TRUE, ...) {
       geom_label(aes(x = sl, y = eig, label = round(eig, 3)),
                  vjust = 1, hjust = -0.2) +
       scale_x_continuous(breaks = eigdf$sl,
-                         limits = c(1, length(eig) + 0.5))
+                         limits = c(1, length(eig) + 0.5)) +
+      scale_y_continuous(expand = expansion(mult = c(0.1, 0.05)))
+
   }
 
   return(eigg)
