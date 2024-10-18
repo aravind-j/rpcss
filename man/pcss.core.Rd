@@ -200,6 +200,9 @@ out3
 
 
 }
+\references{
+\insertAllCited{}
+}
 \seealso{
 \code{\link[FactoMineR]{PCA}}, \code{\link[FactoMineR]{CA}} and
   \code{\link[FactoMineR]{FAMD}}

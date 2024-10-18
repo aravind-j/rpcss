@@ -132,6 +132,10 @@
 #' @importFrom utils data
 #' @export
 #'
+#' @references
+#'
+#' \insertAllCited{}
+#'
 #' @examples
 #'
 #' #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
