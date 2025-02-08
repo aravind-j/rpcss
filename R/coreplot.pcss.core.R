@@ -142,6 +142,8 @@ coreplot.pcss.core <- function(x,
 
   N <- nrow(gssdf)
 
+  propname <- "Proportion of selected individuals"
+
   # By size specified ----
 
   if (criterion == "size") {
@@ -167,7 +169,7 @@ coreplot.pcss.core <- function(x,
                 vjust = -0.5, hjust = -0.5, colour = "red") +
       scale_x_continuous(name = "Number of selected individuals",
                          sec.axis = sec_axis(transform = ~. / N,
-                                             name = "Proportion of selected individuals")) +
+                                             name = propname)) +
       ylab("Variability retained (%)") +
       theme_bw()
 
@@ -199,7 +201,7 @@ coreplot.pcss.core <- function(x,
                 vjust = -0.5, hjust = -0.5, colour = "red") +
       scale_x_continuous(name = "Number of selected individuals",
                          sec.axis = sec_axis(transform = ~. / N,
-                                             name = "Proportion of selected individuals")) +
+                                             name = propname)) +
       ylab("Variability retained (%)") +
       theme_bw()
 
@@ -233,7 +235,7 @@ coreplot.pcss.core <- function(x,
                 vjust = -0.5, hjust = -0.5, colour = "red") +
       scale_x_continuous(name = "Number of selected individuals",
                          sec.axis = sec_axis(transform = ~. / N,
-                                             name = "Proportion of selected individuals")) +
+                                             name = propname)) +
       ylab("Variability retained (%)") +
       theme_bw()
 
@@ -256,7 +258,7 @@ coreplot.pcss.core <- function(x,
                 vjust = -0.5, hjust = -0.5, colour = "red") +
       scale_x_continuous(name = "Number of selected individuals",
                          sec.axis = sec_axis(transform = ~. / N,
-                                             name = "Proportion of selected individuals")) +
+                                             name = propname)) +
       scale_y_continuous(expand = expansion(mult = c(0.05, 0.1))) +
       ylab("Rate of increase in variability retained (%)") +
       theme_bw()

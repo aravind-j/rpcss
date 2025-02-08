@@ -264,7 +264,8 @@ pcss.core <- function(data, names, quantitative, qualitative,
   # check if 'quantitative' columns are present in 'data'
   if (!is.null(quantitative)) {
     if (FALSE %in% (quantitative %in% colnames(data)))  {
-      stop(paste('The following column(s) specified in "quantitative" not present in "data":\n',
+      stop(paste('The following column(s) specified in "quantitative" ',
+                 'not present in "data":\n',
                  paste(quantitative[!(quantitative %in% colnames(data))],
                        collapse = ", "),
                  sep = ""))
@@ -274,7 +275,8 @@ pcss.core <- function(data, names, quantitative, qualitative,
   # check if 'qualitative' columns are present in 'data'
   if (!is.null(qualitative)) {
     if (FALSE %in% (qualitative %in% colnames(data)))  {
-      stop(paste('The following column(s) specified in "qualitative" not present in "data":\n',
+      stop(paste('The following column(s) specified in "qualitative" ',
+                 'not present in "data":\n',
                  paste(qualitative[!(qualitative %in% colnames(data))],
                        collapse = ", "),
                  sep = ""))
@@ -284,7 +286,8 @@ pcss.core <- function(data, names, quantitative, qualitative,
   # check if overlap exists between 'quantitative' and 'qualitative'
   if ((!is.null(quantitative)) && (!is.null(qualitative))) {
     if (length(intersect(quantitative, qualitative)) != 0) {
-      stop(paste('The following column(s) is/are specified in both "quantitative" and "qualitative":\n',
+      stop(paste('The following column(s) is/are specified in both ',
+                 '"quantitative" and "qualitative":\n',
                  paste(intersect(quantitative, qualitative),
                        collapse = ", "),
                  sep = ""))
@@ -299,10 +302,13 @@ pcss.core <- function(data, names, quantitative, qualitative,
 
   # check if 'quantitative' columns are of type numeric/integer
   if (!is.null(quantitative)) {
-    intquantcols <- unlist(lapply(data[, quantitative],
-                                  function(x) FALSE %in% (is.vector(x, mode = "integer") | is.vector(x, mode = "numeric"))))
+    intquantcols <-
+      unlist(lapply(data[, quantitative],
+                    function(x) FALSE %in% (is.vector(x, mode = "integer") |
+                                              is.vector(x, mode = "numeric"))))
     if (TRUE %in% intquantcols) {
-      stop(paste('The following "quantitative" column(s) in "data" are not of type numeric:\n',
+      stop(paste('The following "quantitative" column(s) in "data" are not ',
+                 'of type numeric:\n',
                  paste(names(intquantcols[intquantcols]), collapse = ", ")))
     }
   }
@@ -312,7 +318,8 @@ pcss.core <- function(data, names, quantitative, qualitative,
     intqualcols <- unlist(lapply(data[, qualitative],
                                  function(x) is.factor(x)))
     if (FALSE %in% intqualcols) {
-      stop(paste('The following "qualitative" column(s) in "data" are not of type factor:\n',
+      stop(paste('The following "qualitative" column(s) in "data" are not ',
+                 'of type factor:\n',
                  paste(names(intqualcols[!intqualcols]), collapse = ", ")))
     }
   }
@@ -401,7 +408,8 @@ pcss.core <- function(data, names, quantitative, qualitative,
       data.frame(# `Standard deviation` = pca_out$svd$vs,
         `Eigen value` = pca_out$eig[, "eigenvalue"],
         `Percentage of variance` = pca_out$eig[, "percentage of variance"],
-        `Cumulative percentage of variance` = pca_out$eig[, "cumulative percentage of variance"],
+        `Cumulative percentage of variance` =
+          pca_out$eig[, "cumulative percentage of variance"],
         check.names = FALSE)
 
     rownames(imp) <- gsub("comp", "Dim", rownames(imp))
@@ -442,10 +450,12 @@ pcss.core <- function(data, names, quantitative, qualitative,
 
     ## Get Importance of factors/principal coordinates ----
     imp <-
-      data.frame(# `Standard deviation` = mca_out$svd$vs[1:(length(qualitative) - 1)],
+      data.frame(# `Standard deviation` =
+                 #   mca_out$svd$vs[1:(length(qualitative) - 1)],
         `Eigen value` = mca_out$eig[, "eigenvalue"],
         `Percentage of variance` = mca_out$eig[, "percentage of variance"],
-        `Cumulative percentage of variance` = mca_out$eig[, "cumulative percentage of variance"],
+        `Cumulative percentage of variance` =
+          mca_out$eig[, "cumulative percentage of variance"],
         check.names = FALSE)
 
     rownames(imp) <- gsub("dim", "Dim", rownames(imp))
@@ -488,7 +498,8 @@ pcss.core <- function(data, names, quantitative, qualitative,
       data.frame(#`Standard deviation` = famd_out$svd$vs,
         `Eigen value` = famd_out$eig[, "eigenvalue"],
         `Percentage of variance` = famd_out$eig[, "percentage of variance"],
-        `Cumulative percentage of variance` = famd_out$eig[, "cumulative percentage of variance"],
+        `Cumulative percentage of variance` =
+          famd_out$eig[, "cumulative percentage of variance"],
         check.names = FALSE)
 
     rownames(imp) <- gsub("comp", "Dim", rownames(imp))
