@@ -33,7 +33,7 @@ WIP](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.o
 <!-- [![Zenodo DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.xxxxxxxx.svg)](https://doi.org/10.5281/zenodo.xxxxxxxx) -->
 [![Website -
 pkgdown](https://img.shields.io/website-up-down-green-red/https/aravind-j.github.io/rpcss.svg)](https://aravind-j.github.io/rpcss/)
-[![.](https://pro-pulsar-193905.appspot.com/UA-199996472-2/welcome-page)](https://github.com/aravind-j/google-analytics-beacon)
+[![.](https://pro-pulsar-193905.appspot.com/G-B9EKQHWBD9/welcome-page)](https://github.com/aravind-j/google-analytics-beacon)
 <!-- [![packageversion](https://img.shields.io/badge/Package%20version-0.2.3.3-orange.svg)](https://github.com/aravind-j/rpcss) -->
 <!-- [![GitHub Download Count](https://github-basic-badges.herokuapp.com/downloads/aravind-j/rpcss/total.svg)] -->
 <!-- [![Rdoc](http://www.rdocumentation.org/badges/version/rpcss)](http://www.rdocumentation.org/packages/rpcss) -->

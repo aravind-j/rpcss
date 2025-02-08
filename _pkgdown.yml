@@ -21,6 +21,8 @@ template:
     navbar-light-brand-color: '#ff0f0f'
     navbar-light-brand-hover-color: '#ff0f0f'
     link-color: '#ff0f0f'
+  params:
+    ganalytics: G-BEF8VV6GWJ
 
 deploy:
   install_metadata: yes
