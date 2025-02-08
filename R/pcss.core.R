@@ -126,7 +126,7 @@
 #' @param var.threshold The desired proportion of total variability to be
 #'
 #' @return A list of class \code{pcss.core} with the following components.
-#'   \item{details}{The details of the core set generaton process.}
+#'   \item{details}{The details of the core set generation process.}
 #'   \item{raw.out}{The original output of \code{\link[FactoMineR]{PCA}},
 #'   \code{\link[FactoMineR]{CA}} and \code{\link[FactoMineR]{FAMD}} functions
 #'   of \code{\link[FactoMineR]{FactoMineR}}} \item{eigen}{A data frame with
