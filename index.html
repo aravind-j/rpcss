@@ -6,22 +6,27 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Constitution of Core Collections by Principal Component Scoring Strategy • rpcss</title>
-<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="apple-touch-icon.png">
-<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="apple-touch-icon-120x120.png">
-<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="apple-touch-icon-76x76.png">
-<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png">
+<!-- favicons --><link rel="icon" type="image/png" sizes="48x48" href="favicon-48x48.png">
+<link rel="icon" type="”image/svg+xml”" href="favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="icon" sizes="any" href="favicon.ico">
+<link rel="manifest" href="site.webmanifest">
 <script src="lightswitch.js"></script><script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/Fira_Sans-0.4.9/font.css" rel="stylesheet">
 <link href="deps/Fira_Mono-0.4.9/font.css" rel="stylesheet">
-<link href="deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
-<link href="deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Constitution of Core Collections by Principal Component Scoring Strategy">
 <meta name="description" content="Generate a Core Collection with Principal Component Scoring Strategy (PCSS) using qualitative and/or quantitative trait data according to Hamon and Noirot 1990 &lt;https://www.documentation.ird.fr/hor/fdi:36506&gt;, Noirot et al. 1996 &lt;doi:10.2307/2527837&gt; and Noirot et al. 2003 &lt;https://www.documentation.ird.fr/hor/fdi:010031886&gt;.">
 <meta property="og:description" content="Generate a Core Collection with Principal Component Scoring Strategy (PCSS) using qualitative and/or quantitative trait data according to Hamon and Noirot 1990 &lt;https://www.documentation.ird.fr/hor/fdi:36506&gt;, Noirot et al. 1996 &lt;doi:10.2307/2527837&gt; and Noirot et al. 2003 &lt;https://www.documentation.ird.fr/hor/fdi:010031886&gt;.">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-BEF8VV6GWJ"></script><script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BEF8VV6GWJ');
+</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
 </head>
 <body>
@@ -32,7 +37,7 @@
 
     <a class="navbar-brand me-2" href="index.html">rpcss</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -70,8 +75,8 @@
 <code>rpcss</code>: Constitution of Core Collections by Principal Component Scoring Strategy <img src="https://raw.githubusercontent.com/aravind-j/rpcss/master/inst/extdata/rpcss.png" align="right" alt="logo" width="173" height="200" style="border: none; float: right;"><a class="anchor" aria-label="anchor" href="#rpcss-constitution-of-core-collections-by-principal-component-scoring-strategy-"></a>
 </h2>
 <div class="section level6">
-<h6 id="version--0009000-license-gpl-2gpl-3">Version : <a href="https://aravind-j.github.io/rpcss/">0.0.0.9000</a>; License: <a href="https://www.r-project.org/Licenses/" class="external-link">GPL-2|GPL-3</a>
-<a class="anchor" aria-label="anchor" href="#version--0009000-license-gpl-2gpl-3"></a>
+<h6 id="version--010-license-gpl-2gpl-3">Version : <a href="https://aravind-j.github.io/rpcss/">0.1.0</a>; License: <a href="https://www.r-project.org/Licenses/" class="external-link">GPL-2|GPL-3</a>
+<a class="anchor" aria-label="anchor" href="#version--010-license-gpl-2gpl-3"></a>
 </h6>
 </div>
 <div class="section level5">
@@ -79,7 +84,7 @@
 </h5>
 <p>Division of Germplasm Conservation, ICAR-National Bureau of Plant Genetic Resources, New Delhi.</p>
 <hr>
-<p><a href="https://cran.r-project.org/" class="external-link"><img src="https://img.shields.io/badge/R%3E%3D-3.5.0-6666ff.svg?logo=R" alt="minimal R version"></a> <a href="https://www.gnu.org/licenses/gpl-3.0" class="external-link"><img src="https://img.shields.io/badge/License-GPL%20v3-blue.svg" alt="License: GPL v3"></a> <a href="https://cran.r-project.org/package=rpcss" class="external-link"><img src="https://www.r-pkg.org/badges/version-last-release/rpcss" alt="CRAN_Status_Badge"></a> <a href="https://cran.r-project.org/package=rpcss" class="external-link"><img src="https://tinyverse.netlify.app/status/rpcss" alt="Dependencies"></a> <a href="https://CRAN.R-project.org/package=rpcss" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/grand-total/rpcss?color=green" alt="rstudio mirror downloads"></a> <a href="https://github.com/aravind-j/rpcss" class="external-link"><img src="https://img.shields.io/badge/devel%20version-0.0.0.9000-orange.svg" alt="develVersion"></a> <a href="https://github.com/aravind-j/rpcss" class="external-link"><img src="https://img.shields.io/github/languages/code-size/aravind-j/rpcss.svg" alt="Github Code Size"></a> <a href="https://github.com/aravind-j/rpcss/actions" class="external-link"><img src="https://github.com/aravind-j/rpcss/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a> <a href="https://www.repostatus.org/#wip" class="external-link"><img src="https://www.repostatus.org/badges/latest/wip.svg" alt="Project Status: WIP"></a> <a href="https://lifecycle.r-lib.org/articles/stages.html#maturing" class="external-link"><img src="https://lifecycle.r-lib.org/articles/figures/lifecycle-maturing.svg" alt="lifecycle"></a> <a href="https://github.com/aravind-j/rpcss/" class="external-link"><img src="https://img.shields.io/badge/last%20change-2024--10--20-yellowgreen.svg" alt="Last-changedate"></a> <!-- [![Zenodo DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.xxxxxxxx.svg)](https://doi.org/10.5281/zenodo.xxxxxxxx) --> <a href="https://aravind-j.github.io/rpcss/"><img src="https://img.shields.io/website-up-down-green-red/https/aravind-j.github.io/rpcss.svg" alt="Website - pkgdown"></a> <a href="https://github.com/aravind-j/google-analytics-beacon" class="external-link"><img src="https://pro-pulsar-193905.appspot.com/UA-199996472-2/welcome-page" alt="."></a> <!-- [![packageversion](https://img.shields.io/badge/Package%20version-0.2.3.3-orange.svg)](https://github.com/aravind-j/rpcss) --> <!-- [![GitHub Download Count](https://github-basic-badges.herokuapp.com/downloads/aravind-j/rpcss/total.svg)] --> <!-- [![Rdoc](http://www.rdocumentation.org/badges/version/rpcss)](http://www.rdocumentation.org/packages/rpcss) --></p>
+<p><a href="https://cran.r-project.org/" class="external-link"><img src="https://img.shields.io/badge/R%3E%3D-3.5.0-6666ff.svg?logo=R" alt="minimal R version"></a> <a href="https://www.gnu.org/licenses/gpl-3.0" class="external-link"><img src="https://img.shields.io/badge/License-GPL%20v3-blue.svg" alt="License: GPL v3"></a> <a href="https://cran.r-project.org/package=rpcss" class="external-link"><img src="https://www.r-pkg.org/badges/version-last-release/rpcss" alt="CRAN_Status_Badge"></a> <a href="https://cran.r-project.org/package=rpcss" class="external-link"><img src="https://tinyverse.netlify.app/status/rpcss" alt="Dependencies"></a> <a href="https://CRAN.R-project.org/package=rpcss" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/grand-total/rpcss?color=green" alt="rstudio mirror downloads"></a> <a href="https://github.com/aravind-j/rpcss" class="external-link"><img src="https://img.shields.io/badge/devel%20version-0.0.0.9000-orange.svg" alt="develVersion"></a> <a href="https://github.com/aravind-j/rpcss" class="external-link"><img src="https://img.shields.io/github/languages/code-size/aravind-j/rpcss.svg" alt="Github Code Size"></a> <a href="https://github.com/aravind-j/rpcss/actions" class="external-link"><img src="https://github.com/aravind-j/rpcss/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a> <a href="https://www.repostatus.org/#wip" class="external-link"><img src="https://www.repostatus.org/badges/latest/wip.svg" alt="Project Status: WIP"></a> <a href="https://lifecycle.r-lib.org/articles/stages.html#maturing" class="external-link"><img src="https://lifecycle.r-lib.org/articles/figures/lifecycle-maturing.svg" alt="lifecycle"></a> <a href="https://github.com/aravind-j/rpcss/" class="external-link"><img src="https://img.shields.io/badge/last%20change-2025--02--09-yellowgreen.svg" alt="Last-changedate"></a> <!-- [![Zenodo DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.xxxxxxxx.svg)](https://doi.org/10.5281/zenodo.xxxxxxxx) --> <a href="https://aravind-j.github.io/rpcss/"><img src="https://img.shields.io/website-up-down-green-red/https/aravind-j.github.io/rpcss.svg" alt="Website - pkgdown"></a> <a href="https://github.com/aravind-j/google-analytics-beacon" class="external-link"><img src="https://pro-pulsar-193905.appspot.com/G-B9EKQHWBD9/welcome-page" alt="."></a> <a href="https://rpcss.goatcounter.com/" class="external-link"><img src="https://rpcss-gh.goatcounter.com/count?p=/test" alt="GoatCounter"></a> <!-- [![packageversion](https://img.shields.io/badge/Package%20version-0.2.3.3-orange.svg)](https://github.com/aravind-j/rpcss) --> <!-- [![GitHub Download Count](https://github-basic-badges.herokuapp.com/downloads/aravind-j/rpcss/total.svg)] --> <!-- [![Rdoc](http://www.rdocumentation.org/badges/version/rpcss)](http://www.rdocumentation.org/packages/rpcss) --></p>
 <hr>
 </div>
 </div>
@@ -99,7 +104,7 @@
 <p>The development version can be installed from github as follows:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Install development version from Github</span></span>
-<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"aravind-j/rpcss"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"aravind-j/rpcss"</span><span class="op">)</span></span></code></pre></div>
 <!-- ## Detailed tutorial
 For a detailed tutorial (vignette) on how to used this package type:
 &#10;
@@ -133,22 +138,19 @@ The vignette for the latest version is also available [online](https://aravind-j
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/citation.html" class="external-link">citation</a></span><span class="op">(</span><span class="st">"rpcss"</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>To cite the R package <span class="st">'rpcss'</span> <span class="cf">in</span> publications use<span class="sc">:</span></span>
 <span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>  Aravind, <span class="fu">J.</span> (<span class="dv">2024</span>).  rpcss<span class="sc">:</span> Constitution of Core Collections by</span>
-<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>  Principal Component Scoring Strategy. R package version <span class="dv">0</span>.<span class="dv">0</span>.<span class="fl">0.9000</span>,</span>
-<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>  https<span class="sc">:</span><span class="er">//</span>aravind<span class="sc">-</span>j.github.io<span class="sc">/</span>rpcss<span class="sc">/</span>.</span>
-<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a></span>
-<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>A BibTeX entry <span class="cf">for</span> LaTeX users is</span>
-<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a></span>
-<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a>  <span class="sc">@</span>Manual{,</span>
-<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a>    title <span class="ot">=</span> {rpcss<span class="sc">:</span> Constitution of Core Collections by Principal Component Scoring Strategy},</span>
-<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a>    author <span class="ot">=</span> {J. Aravind},</span>
-<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a>    year <span class="ot">=</span> {<span class="dv">2024</span>},</span>
-<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a>    note <span class="ot">=</span> {R package version <span class="dv">0</span>.<span class="dv">0</span>.<span class="fl">0.9000</span> https<span class="sc">:</span><span class="er">//</span>aravind<span class="sc">-</span>j.github.io<span class="sc">/</span>rpcss<span class="sc">/</span>},</span>
-<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a>  }</span>
-<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a></span>
-<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a>This free and open<span class="sc">-</span>source software implements academic research by the</span>
-<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a>authors and co<span class="sc">-</span>workers. If you use it, please support the project by</span>
-<span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a>citing the package.</span></code></pre></div>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>  Aravind, <span class="fu">J.</span> ().  rpcss<span class="sc">:</span> Constitution of Core Collections by Principal Component Scoring Strategy. R package version <span class="dv">0</span>.<span class="fl">1.0</span>,</span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>  https<span class="sc">:</span><span class="er">//</span>aravind<span class="sc">-</span>j.github.io<span class="sc">/</span>rpcss<span class="sc">/</span>.</span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a>A BibTeX entry <span class="cf">for</span> LaTeX users is</span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a>  <span class="sc">@</span>Manual{,</span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a>    title <span class="ot">=</span> {rpcss<span class="sc">:</span> Constitution of Core Collections by Principal Component Scoring Strategy},</span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a>    author <span class="ot">=</span> {J. Aravind},</span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a>    note <span class="ot">=</span> {R package version <span class="dv">0</span>.<span class="fl">1.0</span> https<span class="sc">:</span><span class="er">//</span>aravind<span class="sc">-</span>j.github.io<span class="sc">/</span>rpcss<span class="sc">/</span>},</span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a>  }</span>
+<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a>This free and open<span class="sc">-</span>source software implements academic research by the authors and co<span class="sc">-</span>workers. If you use it, please support the project by</span>
+<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a>citing the package.</span></code></pre></div>
 </div>
 
   </main><aside class="col-md-3"><div class="links">
@@ -180,6 +182,7 @@ The vignette for the latest version is also available [online](https://aravind-j
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>J. Aravind <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-4791-442X" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li><a href="authors.html">More about authors...</a></li>
 </ul>
 </div>
 
@@ -202,7 +205,6 @@ The vignette for the latest version is also available [online](https://aravind-j
 
 
 
-
-
-  </body>
+  <script data-goatcounter="https://rpcss.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</body>
 </html>
