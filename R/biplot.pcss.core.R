@@ -81,7 +81,7 @@
 #'
 #'
 #' library(FactoMineR)
-#' library(factoextra)
+#' suppressPackageStartupMessages(library(factoextra))
 #'
 #' #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #' # With quantitative data

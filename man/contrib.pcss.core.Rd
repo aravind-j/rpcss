@@ -63,7 +63,7 @@ data[, qual] <- lapply(data[, qual], as.factor)
 
 
 library(FactoMineR)
-library(factoextra)
+suppressPackageStartupMessages(library(factoextra))
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # With quantitative data
