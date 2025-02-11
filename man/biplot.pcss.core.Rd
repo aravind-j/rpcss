@@ -90,6 +90,7 @@ out1 <- pcss.core(data = data, names = "Genotypes",
                   qualitative = NULL, eigen.threshold = NULL, size = 0.2,
                   var.threshold = 0.75)
 
+\dontrun{
 # Plot biplot
 biplot(out1, ndim = 3, highlight.core = "size", quant.scale = 3,
        point.alpha = 0.5)
@@ -107,6 +108,7 @@ fviz_pca_biplot(out1$raw.out, geom.ind = "point", axes = c(1, 2))
 fviz_pca_biplot(out1$raw.out, geom.ind = "point", axes = c(1, 3))
 
 fviz_pca_biplot(out1$raw.out, geom.ind = "point", axes = c(2, 3))
+}
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Get core sets with PCSS (qualitative data)
@@ -116,6 +118,7 @@ out2 <- pcss.core(data = data, names = "Genotypes", quantitative = NULL,
                   qualitative = qual, eigen.threshold = NULL,
                   size = 0.2, var.threshold = 0.75)
 
+\dontrun{
 # Plot biplot
 biplot(out2, ndim = 3, highlight.core = "size", qual.scale = 1,
        point.alpha = 0.5)
@@ -133,6 +136,7 @@ fviz_mca_biplot(out2$raw.out, geom.ind = "point", axes = c(1, 2))
 fviz_mca_biplot(out2$raw.out, geom.ind = "point", axes = c(1, 3))
 
 fviz_mca_biplot(out2$raw.out, geom.ind = "point", axes = c(2, 3))
+}
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Get core sets with PCSS (quantitative and qualitative data)
@@ -142,6 +146,7 @@ out3 <- pcss.core(data = data, names = "Genotypes",
                   quantitative = quant,
                   qualitative = qual, eigen.threshold = NULL)
 
+\dontrun{
 # Plot biplot
 biplot(out3, ndim = 3, highlight.core = "size",
        quant.scale = 3, qual.scale = 1,
@@ -167,6 +172,7 @@ fviz_famd_ind(out3$raw.out, geom = "point", axes = c(1, 2))
 fviz_famd_ind(out3$raw.out, geom = "point", axes = c(1, 3))
 
 fviz_famd_ind(out3$raw.out, geom = "point", axes = c(2, 3))
+}
 
 }
 \seealso{

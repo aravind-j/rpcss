@@ -76,6 +76,7 @@
 #'                   qualitative = NULL, eigen.threshold = NULL, size = 0.2,
 #'                   var.threshold = 0.75)
 #'
+#'\dontrun{
 #' # Plot contributions of genotypes - with sign - sorted
 #' contrib(x = out1, ndim = 5)
 #'
@@ -91,6 +92,7 @@
 #' # Plot biplot with factoextra
 #' fviz_contrib(out1$raw.out, choice = "var", axes = 1)
 #' fviz_contrib(out1$raw.out, choice = "var", axes = 2)
+#'}
 #'
 #' #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #' # Get core sets with PCSS (qualitative data)
@@ -100,6 +102,7 @@
 #'                   qualitative = qual, eigen.threshold = NULL,
 #'                   size = 0.2, var.threshold = 0.75)
 #'
+#'\dontrun{
 #' # Plot contributions of genotypes - with sign - sorted
 #' contrib(x = out2, ndim = 5)
 #'
@@ -115,6 +118,7 @@
 #' # Plot biplot with factoextra
 #' fviz_contrib(out2$raw.out, choice = "var", axes = 1)
 #' fviz_contrib(out2$raw.out, choice = "var", axes = 2)
+#'}
 #'
 #' #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #' # Get core sets with PCSS (quantitative and qualitative data)
@@ -124,6 +128,7 @@
 #'                   quantitative = quant,
 #'                   qualitative = qual, eigen.threshold = NULL)
 #'
+#'\dontrun{
 #' # Plot contributions of genotypes - sorted
 #' contrib(x = out3, ndim = 5)
 #'
@@ -141,6 +146,7 @@
 #' # fviz_contrib(out3$raw.out, choice = "quali.var", axes = 1)
 #' # fviz_contrib(out3$raw.out, choice = "quanti.var", axes = 2)
 #' # fviz_contrib(out3$raw.out, choice = "quali.var", axes = 2)
+#'}
 #'
 contrib.pcss.core <- function(x, ndim = NULL,
                               plot.loadings = FALSE,
