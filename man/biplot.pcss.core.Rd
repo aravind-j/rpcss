@@ -61,7 +61,7 @@ regression. Use \code{"none"} to not highlight any accessions.
 # Prepare example data
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-library(EvaluateCore)
+suppressPackageStartupMessages(library(EvaluateCore))
 
 # Get data from EvaluateCore
 

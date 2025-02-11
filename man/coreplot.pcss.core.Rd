@@ -43,7 +43,7 @@ regression.
 # Prepare example data
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-library(EvaluateCore)
+suppressPackageStartupMessages(library(EvaluateCore))
 
 # Get data from EvaluateCore
 

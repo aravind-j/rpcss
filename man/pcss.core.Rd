@@ -151,7 +151,7 @@ In \code{rpcss}, PCA, MCA and FAMD are implemented via the
 # Prepare example data
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-library(EvaluateCore)
+suppressPackageStartupMessages(library(EvaluateCore))
 
 # Get data from EvaluateCore
 
