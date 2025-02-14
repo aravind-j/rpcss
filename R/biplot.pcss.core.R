@@ -92,7 +92,7 @@
 #'                   qualitative = NULL, eigen.threshold = NULL, size = 0.2,
 #'                   var.threshold = 0.75)
 #'
-#'\dontrun{
+#'\donttest{
 #' # Plot biplot
 #' biplot(out1, ndim = 3, highlight.core = "size", quant.scale = 3,
 #'        point.alpha = 0.5)
@@ -120,7 +120,7 @@
 #'                   qualitative = qual, eigen.threshold = NULL,
 #'                   size = 0.2, var.threshold = 0.75)
 #'
-#'\dontrun{
+#'\donttest{
 #' # Plot biplot
 #' biplot(out2, ndim = 3, highlight.core = "size", qual.scale = 1,
 #'        point.alpha = 0.5)
@@ -148,7 +148,7 @@
 #'                   quantitative = quant,
 #'                   qualitative = qual, eigen.threshold = NULL)
 #'
-#'\dontrun{
+#'\donttest{
 #' # Plot biplot
 #' biplot(out3, ndim = 3, highlight.core = "size",
 #'        quant.scale = 3, qual.scale = 1,

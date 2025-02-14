@@ -125,6 +125,26 @@
 #' # For core set constituted by logistic regression criterion
 #' coreplot(x = out3, criterion = "logistic")
 #'
+coreplot <- function(x,
+                     criterion = c("size", "variance", "logistic"),
+                     ...) {
+  UseMethod("coreplot")
+}
+
+#' @name coreplot
+#' @method coreplot default
+#' @export
+coreplot.default <- function(x,
+                             criterion = c("size", "variance", "logistic"),
+                             ...) {
+
+  coreplot.pcss.core(x,
+                     criterion = c("size", "variance", "logistic"),
+                     ...)
+}
+
+#' @name coreplot
+#' @export
 coreplot.pcss.core <- function(x,
                                criterion = c("size", "variance", "logistic"),
                                ...) {

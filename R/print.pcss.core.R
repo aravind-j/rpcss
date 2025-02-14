@@ -26,6 +26,9 @@
 #' @param ... Unused.
 #' @seealso \code{\link[rpcss]{pcss.core}}
 #'
+#' @return The argument x, invisibly as for all \code{\link[base]{print}}
+#'   methods.
+#'
 #' @export
 print.pcss.core <- function(x, ...) {
 

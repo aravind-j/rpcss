@@ -76,7 +76,7 @@
 #'                   qualitative = NULL, eigen.threshold = NULL, size = 0.2,
 #'                   var.threshold = 0.75)
 #'
-#'\dontrun{
+#'\donttest{
 #' # Plot contributions of genotypes - with sign - sorted
 #' contrib(x = out1, ndim = 5)
 #'
@@ -102,7 +102,7 @@
 #'                   qualitative = qual, eigen.threshold = NULL,
 #'                   size = 0.2, var.threshold = 0.75)
 #'
-#'\dontrun{
+#'\donttest{
 #' # Plot contributions of genotypes - with sign - sorted
 #' contrib(x = out2, ndim = 5)
 #'
@@ -128,7 +128,7 @@
 #'                   quantitative = quant,
 #'                   qualitative = qual, eigen.threshold = NULL)
 #'
-#'\dontrun{
+#'\donttest{
 #' # Plot contributions of genotypes - sorted
 #' contrib(x = out3, ndim = 5)
 #'
@@ -148,6 +148,29 @@
 #' # fviz_contrib(out3$raw.out, choice = "quali.var", axes = 2)
 #'}
 #'
+contrib <- function(x, ndim = NULL,
+                    plot.loadings = FALSE,
+                    use.sign = TRUE,
+                    sort.value = TRUE, ...) {
+  UseMethod("contrib")
+}
+
+#' @name contrib
+#' @method contrib default
+#' @export
+contrib.default <- function(x, ndim = NULL,
+                            plot.loadings = FALSE,
+                            use.sign = TRUE,
+                            sort.value = TRUE, ...) {
+
+  contrib.pcss.core(x, ndim = NULL,
+                    plot.loadings = FALSE,
+                    use.sign = TRUE,
+                    sort.value = TRUE)
+}
+
+#' @name contrib
+#' @export
 contrib.pcss.core <- function(x, ndim = NULL,
                               plot.loadings = FALSE,
                               use.sign = TRUE,

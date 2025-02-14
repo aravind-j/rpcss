@@ -11,6 +11,10 @@
 
 \item{...}{Unused.}
 }
+\value{
+The argument x, invisibly as for all \code{\link[base]{print}}
+  methods.
+}
 \description{
 \code{pcss.core} prints to console the summary of an object of class
 \code{pcss.core} including the dimensionality reduction method used, the
