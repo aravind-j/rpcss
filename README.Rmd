@@ -102,14 +102,13 @@ library(patchwork)
 ```
 
 ## Installation
-<!-- The package can be installed from CRAN as follows: 
+The package can be installed from CRAN as follows: 
 
 ```{r, eval=FALSE, echo=FALSE}
 # Install from CRAN
 install.packages('rpcss', dependencies=TRUE)
 ```
 
--->
 
 The development version can be installed from github as follows:
 
@@ -135,7 +134,7 @@ news(package='rpcss')
 
 ## Links
 
-<!-- [CRAN page](https://cran.r-project.org/package=rpcss) -->
+[CRAN page](https://cran.r-project.org/package=rpcss)
 
 [Github page](https://github.com/aravind-j/rpcss)
 
@@ -143,9 +142,9 @@ news(package='rpcss')
 
 <!-- [Zenodo DOI](https://doi.org/10.5281/zenodo.xxxxxxx) -->
 
-<!-- ## CRAN checks -->
+## CRAN checks
 
-```{r, echo = FALSE, eval=FALSE}
+```{r, echo = FALSE}
 pkgname <- "rpcss"
 
 osdf <-
