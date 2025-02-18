@@ -5,7 +5,7 @@
 
 ## `rpcss`: Constitution of Core Collections by Principal Component Scoring Strategy <img src="https://raw.githubusercontent.com/aravind-j/rpcss/master/inst/extdata/rpcss.png" align="right" alt="logo" width="173" height = "200" style = "border: none; float: right;">
 
-###### Version : [0.1.0.9000](https://aravind-j.github.io/rpcss/); License: [GPL-2\|GPL-3](https://www.r-project.org/Licenses/)
+###### Version : [0.1.0](https://aravind-j.github.io/rpcss/); License: [GPL-2\|GPL-3](https://www.r-project.org/Licenses/)
 
 ##### Aravind, J.
 
@@ -29,7 +29,7 @@ Size](https://img.shields.io/github/languages/code-size/aravind-j/rpcss.svg)](ht
 [![Project Status:
 WIP](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
 [![lifecycle](https://lifecycle.r-lib.org/articles/figures/lifecycle-maturing.svg)](https://lifecycle.r-lib.org/articles/stages.html#maturing)
-[![Last-changedate](https://img.shields.io/badge/last%20change-2025--02--17-yellowgreen.svg)](https://github.com/aravind-j/rpcss/)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2025--02--18-yellowgreen.svg)](https://github.com/aravind-j/rpcss/)
 <!-- [![Zenodo DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.xxxxxxxx.svg)](https://doi.org/10.5281/zenodo.xxxxxxxx) -->
 [![Website -
 pkgdown](https://img.shields.io/website-up-down-green-red/https/aravind-j.github.io/rpcss.svg)](https://aravind-j.github.io/rpcss/)
@@ -106,7 +106,7 @@ citation("rpcss")
     To cite the R package 'rpcss' in publications use:
 
       Aravind, J. ().  rpcss: Constitution of Core Collections by Principal Component Scoring
-      Strategy. R package version 0.1.0.9000,
+      Strategy. R package version 0.1.0,
       https://aravind-j.github.io/rpcss/https://cran.r-project.org/package=rpcss.
 
     A BibTeX entry for LaTeX users is
@@ -114,7 +114,7 @@ citation("rpcss")
       @Manual{,
         title = {rpcss: Constitution of Core Collections by Principal Component Scoring Strategy},
         author = {J. Aravind},
-        note = {R package version 0.1.0.9000 https://aravind-j.github.io/rpcss/ https://cran.r-project.org/package=rpcss},
+        note = {R package version 0.1.0 https://aravind-j.github.io/rpcss/ https://cran.r-project.org/package=rpcss},
       }
 
     This free and open-source software implements academic research by the authors and co-workers. If

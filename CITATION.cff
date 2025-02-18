@@ -6,21 +6,35 @@
 cff-version: 1.2.0
 message: 'To cite package "rpcss" in publications use:'
 type: software
-license:
-- GPL-2.0-only
-- GPL-3.0-only
-title: 'rpcss: Core Collection Constitution by Principal Component Scoring Strategy'
-version: 0.0.0.9000
+license: GPL-2.0-or-later
+title: 'rpcss: Constitution of Core Collections by Principal Component Scoring Strategy'
+version: 0.1.0
+identifiers:
+- type: doi
+  value: 10.32614/CRAN.package.rpcss
+- type: url
+  value: https://aravind-j.github.io/rpcss/
 abstract: Generate a Core Collection with Principal Component Scoring Strategy (PCSS)
-  (Noirot et al. 1996 <https://doi.org/10.2307/2527837> ; Noirot et al. 2003 <https://horizon.documentation.ird.fr/exl-doc/pleins_textes/divers21-03/010031886.pdf>)
-  using qualitative and/or quantitative trait data.
+  using qualitative and/or quantitative trait data according to Hamon and Noirot (1990)
+  <https://www.documentation.ird.fr/hor/fdi:36506>, Noirot et al. (1996) <https://doi.org/10.2307/2527837>
+  and Noirot et al. (2003) <https://www.documentation.ird.fr/hor/fdi:010031886>.
 authors:
 - family-names: Aravind
   given-names: J.
   email: j.aravind@icar.gov.in
   orcid: https://orcid.org/0000-0002-4791-442X
+preferred-citation:
+  type: manual
+  title: 'rpcss: Constitution of Core Collections by Principal Component Scoring Strategy'
+  authors:
+  - family-names: Aravind
+    given-names: J.
+    email: aravindj@nbpgr.ernet.in
+    orcid: https://orcid.org/0000-0002-4791-442X
+  notes: R package version 0.1.0 https://aravind-j.github.io/rpcss/ https://cran.r-project.org/package=rpcss
+repository: https://CRAN.R-project.org/package=rpcss
 repository-code: https://github.com/aravind-j/rpcss
-url: https://github.com/aravind-j/rpcss
+url: https://cran.r-project.org/package=rpcss
 contact:
 - family-names: Aravind
   given-names: J.

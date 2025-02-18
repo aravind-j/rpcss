@@ -1,17 +1,20 @@
 Package: rpcss
 Title: Constitution of Core Collections by Principal Component Scoring Strategy
-Version: 0.0.0.9000
+Version: 0.1.0
 Authors@R: c(
     person(given = "J.", family = "Aravind",
            email = "j.aravind@icar.gov.in",
            role = c("aut", "cre"),
-		       comment = c(ORCID = "0000-0002-4791-442X")))
+		       comment = c(ORCID = "0000-0002-4791-442X")),
+		person("ICAR-NBGPR",
+           role = c("cph"),
+		       comment = c(url = "www.nbpgr.ernet.in")))
 Description: Generate a Core Collection with Principal Component Scoring 
     Strategy (PCSS) using qualitative and/or quantitative trait data according 
     to Hamon and Noirot (1990) <https://www.documentation.ird.fr/hor/fdi:36506>, 
     Noirot et al. (1996) <doi:10.2307/2527837> and Noirot et al. (2003) 
     <https://www.documentation.ird.fr/hor/fdi:010031886>.
-License: GPL-2 | GPL-3
+License: GPL (>= 2)
 Encoding: UTF-8
 Depends: R (>= 3.5.0)
 RoxygenNote: 7.3.2
@@ -34,5 +37,8 @@ Suggests: EvaluateCore,
     pander
 RdMacros: mathjaxr,
     Rdpack
-URL: https://github.com/aravind-j/rpcss, https://aravind-j.github.io/rpcss/
+Copyright: 2024-2025, ICAR-NBPGR
+URL: https://github.com/aravind-j/rpcss
+   https://cran.r-project.org/package=rpcss
+   https://aravind-j.github.io/rpcss/
 BugReports: https://github.com/aravind-j/rpcss/issues
