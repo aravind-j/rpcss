@@ -29,6 +29,7 @@ jobs:
             local::.
             any::devtools
             any::kableExtra
+            any::RCurl
             any::EvaluateCore
             any::patchwork
 
