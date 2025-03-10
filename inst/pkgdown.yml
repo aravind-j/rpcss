@@ -1,8 +1,8 @@
 pandoc: '3.2'
 pkgdown: 2.1.1.9000
-pkgdown_sha: 18cca452d736fea33d47b19b4ef4973db9104a75
+pkgdown_sha: 7cf401f44a970ea13744fcdd883248552c68ff9d
 articles: {}
-last_built: 2025-02-17T15:57Z
+last_built: 2025-03-04T17:03Z
 urls:
   reference: https://aravind-j.github.io/rpcss/reference
   article: https://aravind-j.github.io/rpcss/articles
