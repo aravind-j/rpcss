@@ -146,6 +146,34 @@ subset.pcss.core <- function(x,
       x$cores.info[x$cores.info$Method == "By size specified", ]$Size
 
     subset <- gssdf[1:size.sel, ]$Id
+
+    if (!is.null(x$always.selected)) {
+      always.selected <- x$always.selected
+
+      incl_ind <-
+        !(always.selected %in%
+            x$variability.ret[(size.sel + 1):nrow(x$variability.ret), "Id"])
+
+      if (any(!incl_ind)) {
+        # selected excluding always.sel
+        sel.gssdf <- gssdf[1:size.sel, ]
+        sel.gssdf <- sel.gssdf[!(sel.gssdf$Id %in% always.selected), ]
+
+        # always.sel
+        alsel.gssdf <- gssdf[gssdf$Id %in% always.selected, ]
+
+        # remove from sel to accomodate always.sel
+        n.rem <- (nrow(sel.gssdf) + nrow(alsel.gssdf)) - size.sel
+
+        sel.gssdf <- sel.gssdf[1:(nrow(sel.gssdf) - n.rem), ]
+
+        # New sel
+        sel.gssdf <- rbind(sel.gssdf, alsel.gssdf)
+        sel.gssdf <- sel.gssdf[order(sel.gssdf$Rank), ]
+
+        subset <- sel.gssdf$Id
+      }
+    }
   }
 
   # By threshold variance ----
@@ -155,6 +183,56 @@ subset.pcss.core <- function(x,
       x$cores.info[x$cores.info$Method == "By threshold variance", ]$Size
 
     subset <- gssdf[1:var.sel, ]$Id
+
+    if (!is.null(x$always.selected)) {
+      always.selected <- x$always.selected
+
+      incl_ind <-
+        !(always.selected %in%
+            x$variability.ret[(var.sel + 1):nrow(x$variability.ret), "Id"])
+
+      if (any(!incl_ind)) {
+
+        var.threshold <-
+          x$cores.info[x$cores.info$Method == "By threshold variance", ]$VarRet
+
+        var.threshold2 <- var.threshold
+        var.sel2 <- var.sel
+
+        # always.sel
+        alsel.gssdf <- gssdf[gssdf$Id %in% always.selected, ]
+        alsel.gssdf$VarRet2 <- (cumsum(alsel.gssdf$CRi) / max(cumCRi)) * 100
+
+        alsel.var <- alsel.gssdf[length(always.selected), ]$VarRet2
+
+        # threshold without contribution by always.sel
+        var.threshold <- var.threshold - alsel.var
+
+        # new VarRet wihout always.sel
+        gssdf.wo.alsel <- gssdf[!(gssdf$Id %in% always.selected), ]
+        gssdf.wo.alsel$VarRet2 <- (cumsum(gssdf.wo.alsel$CRi) /
+                                     max(cumCRi)) * 100
+
+        # updated var.sel
+        var.sel <- max(which(gssdf.wo.alsel$VarRet2 <= var.threshold))
+
+        var.threshold <-
+          gssdf[which(gssdf$Id == gssdf.wo.alsel$Id[var.sel]), "VarRet"]
+        # var.sel <- gssdf[which(gssdf$Id == gssdf.wo.alsel$Id[var.sel]),
+        #                 "Rank"]
+
+        var.sel2 <-
+          var.sel +
+          sum(gssdf[(var.sel + 1):nrow(gssdf), ]$Id %in% always.selected)
+
+        rest.Ids <- gssdf[(var.sel + 1):nrow(gssdf), ]$Id
+
+        subset <-
+          c(gssdf[1:which(gssdf$Id == gssdf.wo.alsel$Id[var.sel]), "Id"],
+            rest.Ids[rest.Ids %in% always.selected])
+
+      }
+    }
   }
 
   # With logistic regression ----
@@ -164,6 +242,37 @@ subset.pcss.core <- function(x,
       x$cores.info[x$cores.info$Method == "By logistic regression", ]$Size
 
     subset <- gssdf[1:reg.sel, ]$Id
+
+    if (!is.null(x$always.selected)) {
+      always.selected <- x$always.selected
+
+      incl_ind <-
+        !(always.selected %in%
+            x$variability.ret[(reg.sel + 1):nrow(x$variability.ret), "Id"])
+
+      if (any(!incl_ind)) {
+
+        # selected excluding always.sel
+        sel.gssdf <- gssdf[1:reg.sel, ]
+        sel.gssdf <- sel.gssdf[!(sel.gssdf$Id %in% always.selected), ]
+
+        # always.sel
+        alsel.gssdf <- gssdf[gssdf$Id %in% always.selected, ]
+
+        # remove from sel to accomodate always.sel
+        n.rem <- (nrow(sel.gssdf) + nrow(alsel.gssdf)) - reg.sel
+
+        sel.gssdf <- sel.gssdf[1:(nrow(sel.gssdf) - n.rem), ]
+
+        # New sel
+        sel.gssdf <- rbind(sel.gssdf, alsel.gssdf)
+        sel.gssdf <- sel.gssdf[order(sel.gssdf$Rank), ]
+
+        subset <- sel.gssdf$Id
+
+      }
+
+    }
   }
 
   return(subset)

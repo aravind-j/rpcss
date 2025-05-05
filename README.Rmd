@@ -142,6 +142,7 @@ news(package='rpcss')
 
 [Zenodo DOI](https://doi.org/10.5281/zenodo.14889174)
 
+<!--
 ## CRAN checks
 
 ```{r, echo = FALSE}
@@ -218,6 +219,8 @@ pander::pandoc.table(osdf[osdf$OS == "macOS", c(2, 3)], split.tables = Inf,
 
 cat("\n")
 ```
+
+-->
 
 ## Citing `rpcss`
 To cite the methods in the package use:

@@ -124,6 +124,9 @@
 #'   eigen values.
 #' @param size The desired core set size proportion.
 #' @param var.threshold The desired proportion of total variability to be
+#'   sampled.
+#' @param always.selected Names of genotypes to be always included in the core
+#'   set as a character vector.
 #'
 #' @return A list of class \code{pcss.core} with the following components.
 #'   \item{details}{The details of the core set generation process.}
@@ -209,7 +212,8 @@
 #'
 pcss.core <- function(data, names, quantitative, qualitative,
                       eigen.threshold = NULL,
-                      size = 0.2, var.threshold = 0.75) {
+                      size = 0.2, var.threshold = 0.75,
+                      always.selected = NULL) {
 
   # Checks ----
 
@@ -265,7 +269,7 @@ pcss.core <- function(data, names, quantitative, qualitative,
   if (!is.null(quantitative)) {
     if (FALSE %in% (quantitative %in% colnames(data)))  {
       stop(paste('The following column(s) specified in "quantitative" ',
-                 'not present in "data":\n',
+                 'are not present in "data":\n',
                  paste(quantitative[!(quantitative %in% colnames(data))],
                        collapse = ", "),
                  sep = ""))
@@ -276,7 +280,7 @@ pcss.core <- function(data, names, quantitative, qualitative,
   if (!is.null(qualitative)) {
     if (FALSE %in% (qualitative %in% colnames(data)))  {
       stop(paste('The following column(s) specified in "qualitative" ',
-                 'not present in "data":\n',
+                 'are not present in "data":\n',
                  paste(qualitative[!(qualitative %in% colnames(data))],
                        collapse = ", "),
                  sep = ""))
@@ -367,6 +371,24 @@ pcss.core <- function(data, names, quantitative, qualitative,
   if (var.threshold <= 0 || var.threshold >= 1) {
     stop('"var.threshold" should be a proportion between 0 and 1.')
   }
+
+   if (!is.null(always.selected)) {
+     # check if 'always.selected' is a character vector
+    if (!is.character(always.selected)) {
+      stop('"always.selected" should be a character vector.')
+    }
+
+     # check if always.selected is present in the entire set
+     if (any(!(always.selected %in% data[, names]))) {
+       alsel_miss <- always.selected[!(always.selected %in% data[, names])]
+       stop(paste('The following accession(s) specified in "always.selected" ',
+                  'are not present in "data":\n',
+                  paste(alsel_miss, collapse = ", "),
+                  sep = ""))
+     }
+  }
+
+
 
   # Prepare data ----
 
@@ -549,6 +571,7 @@ pcss.core <- function(data, names, quantitative, qualitative,
 
   # Generalized sum of squares
   gssdf <- data.frame(Rank = seq_along(cumCRi),
+                      CRi = CRi,
                       VarRet = (cumCRi / max(cumCRi)) * 100)
   gssdf <- cbind(Id = rownames(gssdf), gssdf)
   rownames(gssdf) <- NULL
@@ -556,6 +579,32 @@ pcss.core <- function(data, names, quantitative, qualitative,
   ## By size specified ----
   size.sel <- ceiling(size * N)
   size.var <- gssdf[gssdf$Rank == size.sel, ]$VarRet
+
+  if (!is.null(always.selected)) {
+    incl_ind <- !(always.selected %in% data[(size.sel + 1):nrow(data), names])
+    if (any(!incl_ind)) {
+
+      # selected excluding always.sel
+      sel.gssdf <- gssdf[1:size.sel, ]
+      sel.gssdf <- sel.gssdf[!(sel.gssdf$Id %in% always.selected), ]
+
+      # always.sel
+      alsel.gssdf <- gssdf[gssdf$Id %in% always.selected, ]
+
+      # remove from sel to accomodate always.sel
+      n.rem <- (nrow(sel.gssdf) + nrow(alsel.gssdf)) - size.sel
+
+      sel.gssdf <- sel.gssdf[1:(nrow(sel.gssdf) - n.rem), ]
+
+      # New sel
+      sel.gssdf <- rbind(sel.gssdf, alsel.gssdf)
+      sel.gssdf <- sel.gssdf[order(sel.gssdf$Rank), ]
+      sel.gssdf$VarRet2 <- (cumsum(sel.gssdf$CRi) / max(cumCRi)) * 100
+
+      size.var <- sel.gssdf[size.sel, ]$VarRet2
+
+    }
+  }
 
   ## By threshold variance ----
   var.threshold <- var.threshold * 100
@@ -592,8 +641,28 @@ pcss.core <- function(data, names, quantitative, qualitative,
   reg.sel <- dat[dat$rate == max(dat$rate), ]$n
   reg.var <- gssdf[gssdf$Rank == reg.sel, ]$VarRet
 
+  if (!is.null(always.selected)) {
+    incl_ind <- !(always.selected %in% data[(reg.sel + 1):nrow(data), names])
+    if (any(!incl_ind)) {
 
-  # Generate ouput ----
+      # selected excluding always.sel
+      sel.gssdf <- gssdf[1:reg.sel, ]
+
+      # always.sel
+      alsel.gssdf <- gssdf[gssdf$Id %in% always.selected[!incl_ind], ]
+
+      # New sel
+      sel.gssdf <- rbind(sel.gssdf, alsel.gssdf)
+      sel.gssdf <- sel.gssdf[order(sel.gssdf$Rank), ]
+      sel.gssdf$VarRet2 <- (cumsum(sel.gssdf$CRi) / max(cumCRi)) * 100
+
+      reg.sel <- nrow(sel.gssdf)
+      reg.var <- sel.gssdf[reg.sel, ]$VarRet2
+
+    }
+  }
+
+  # Generate output ----
 
   rawout_ind <- c(pca_out = !is.null(pca_out),
                   mca_out = !is.null(mca_out),
@@ -632,7 +701,8 @@ pcss.core <- function(data, names, quantitative, qualitative,
               rotation = rot,
               scores = scores,
               variability.ret = gssdf,
-              cores.info = coreinfodf)
+              cores.info = coreinfodf,
+              always.selected = always.selected)
 
   quali.levels <- NULL
 

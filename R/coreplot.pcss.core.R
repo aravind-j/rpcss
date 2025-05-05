@@ -159,6 +159,7 @@ coreplot.pcss.core <- function(x,
   criterion <- match.arg(criterion)
 
   gssdf <- x$variability.ret
+  cumCRi <- cumsum(gssdf$CRi)
 
   N <- nrow(gssdf)
 
@@ -173,12 +174,77 @@ coreplot.pcss.core <- function(x,
     size.var <-
       x$cores.info[x$cores.info$Method == "By size specified", ]$VarRet
 
+    if (!is.null(x$always.selected)) {
+      always.selected <- x$always.selected
+
+      incl_ind <-
+        !(always.selected %in%
+            x$variability.ret[(size.sel + 1):nrow(x$variability.ret), "Id"])
+
+      if (any(!incl_ind)) {
+
+        # selected excluding always.sel
+        sel.gssdf <- gssdf[1:size.sel, ]
+        sel.gssdf <- sel.gssdf[!(sel.gssdf$Id %in% always.selected), ]
+
+        # always.sel
+        alsel.gssdf <- gssdf[gssdf$Id %in% always.selected, ]
+
+        # remove from sel to accomodate always.sel
+        n.rem <- (nrow(sel.gssdf) + nrow(alsel.gssdf)) - size.sel
+
+        sel.gssdf <- sel.gssdf[1:(nrow(sel.gssdf) - n.rem), ]
+
+        # New sel
+        sel.gssdf <- rbind(sel.gssdf, alsel.gssdf)
+        sel.gssdf <- sel.gssdf[order(sel.gssdf$Rank), ]
+
+        # New sel including always.sel in orginal size.sel
+        acc.sel <- sel.gssdf$Id
+        acc.sel <- acc.sel[!(acc.sel %in% always.selected)]
+        acc.sel <- c(acc.sel, always.selected[incl_ind])
+
+        size.sel <- length(acc.sel)
+
+        sel.gssdf_a <- gssdf[gssdf$Id %in% acc.sel, ]
+        sel.gssdf_a <- sel.gssdf_a[order(sel.gssdf_a$Rank), ]
+        sel.gssdf_a$VarRet2 <- (cumsum(sel.gssdf_a$CRi) / max(cumCRi)) * 100
+
+        size.var <- sel.gssdf_a[size.sel, ]$VarRet2
+
+        # # always.sel not in orginal size.sel
+        # size.sel2 <- length(always.selected[!incl_ind])
+        #
+        # sel.gssdf_b <- gssdf[gssdf$Id %in%  always.selected[!incl_ind], ]
+        # sel.gssdf_b <- sel.gssdf_b[order(sel.gssdf_b$Rank), ]
+        # sel.gssdf_b$VarRet2 <- (cumsum(sel.gssdf_b$CRi) / max(cumCRi)) * 100
+        #
+        # size.var2 <- sel.gssdf_b[size.sel2, ]$VarRet2
+
+      }
+
+    }
+
     size.segdf <- data.frame(x = c(-Inf, size.sel),
                              xend = c(size.sel, size.sel),
                              y = c(size.var, -Inf),
                              yend = c(size.var, size.var))
     size.segdf$label <- as.character(c(round(size.segdf[1, "y"], 2),
                                        size.segdf[2, "x"]))
+
+    if (!is.null(x$always.selected)) {
+      if (any(!incl_ind)) {
+
+        size.segdf$label <-
+          paste(size.segdf$label,
+                as.character(c(round(
+                  x$cores.info[x$cores.info$Method ==
+                                 "By size specified", ]$VarRet, 2),
+                  x$cores.info[x$cores.info$Method ==
+                                 "By size specified", ]$Size)),
+                sep = " / ")
+      }
+    }
 
     size.gssg <- ggplot(gssdf, aes(x = Rank, y = VarRet)) +
       geom_point() +
@@ -193,6 +259,18 @@ coreplot.pcss.core <- function(x,
       ylab("Variability retained (%)") +
       theme_bw()
 
+    if (!is.null(x$always.selected)) {
+      if (any(!incl_ind)) {
+
+        gssdf2 <- gssdf[gssdf$Id %in% always.selected, ]
+
+        size.gssg <-
+          size.gssg +
+          geom_point(data = gssdf2, colour = "red")
+
+      }
+    }
+
     return(size.gssg)
   }
 
@@ -205,12 +283,63 @@ coreplot.pcss.core <- function(x,
     var.threshold <-
       x$cores.info[x$cores.info$Method == "By threshold variance", ]$VarRet
 
+    if (!is.null(x$always.selected)) {
+      always.selected <- x$always.selected
+
+      incl_ind <-
+        !(always.selected %in%
+            x$variability.ret[(var.sel + 1):nrow(x$variability.ret), "Id"])
+
+      if (any(!incl_ind)) {
+
+        var.threshold2 <- var.threshold
+        var.sel2 <- var.sel
+
+        # always.sel
+        alsel.gssdf <- gssdf[gssdf$Id %in% always.selected, ]
+        alsel.gssdf$VarRet2 <- (cumsum(alsel.gssdf$CRi) / max(cumCRi)) * 100
+
+        alsel.var <- alsel.gssdf[length(always.selected), ]$VarRet2
+
+        # threshold without contribution by always.sel
+        var.threshold <- var.threshold - alsel.var
+
+        # new VarRet wihout always.sel
+        gssdf.wo.alsel <- gssdf[!(gssdf$Id %in% always.selected), ]
+        gssdf.wo.alsel$VarRet2 <- (cumsum(gssdf.wo.alsel$CRi) /
+                                     max(cumCRi)) * 100
+
+        # updated var.sel
+        var.sel <- max(which(gssdf.wo.alsel$VarRet2 <= var.threshold))
+
+        var.threshold <-
+          gssdf[which(gssdf$Id == gssdf.wo.alsel$Id[var.sel]), "VarRet"]
+        var.sel <- gssdf[which(gssdf$Id == gssdf.wo.alsel$Id[var.sel]), "Rank"]
+
+        var.sel2 <-
+          var.sel +
+          sum(gssdf[(var.sel + 1):nrow(gssdf), ]$Id %in% always.selected)
+
+      }
+
+    }
+
     var.segdf <- data.frame(x = c(-Inf, var.sel),
                             xend = c(var.sel, var.sel),
                             y = c(var.threshold, -Inf),
                             yend = c(var.threshold, var.threshold))
     var.segdf$label <- as.character(c(round(var.segdf[1, "y"], 2),
                                       var.segdf[2, "x"]))
+
+    if (!is.null(x$always.selected)) {
+      if (any(!incl_ind)) {
+
+        var.segdf$label <-
+          paste(var.segdf$label,
+                as.character(c(round(var.threshold2, 2), var.sel2)),
+                sep = " / ")
+      }
+    }
 
     var.gssg <- ggplot(gssdf, aes(x = Rank, y = VarRet)) +
       geom_point() +
@@ -224,6 +353,18 @@ coreplot.pcss.core <- function(x,
                                              name = propname)) +
       ylab("Variability retained (%)") +
       theme_bw()
+
+    if (!is.null(x$always.selected)) {
+      if (any(!incl_ind)) {
+
+        gssdf2 <- gssdf[gssdf$Id %in% always.selected, ]
+
+        var.gssg <-
+          var.gssg +
+          geom_point(data = gssdf2, colour = "red")
+
+      }
+    }
 
     return(var.gssg)
   }
@@ -239,12 +380,68 @@ coreplot.pcss.core <- function(x,
 
     b <- attributes(x)$slope
 
+    if (!is.null(x$always.selected)) {
+      always.selected <- x$always.selected
+
+      incl_ind <-
+        !(always.selected %in%
+            x$variability.ret[(reg.sel + 1):nrow(x$variability.ret), "Id"])
+
+      if (any(!incl_ind)) {
+
+        # selected excluding always.sel
+        sel.gssdf <- gssdf[1:reg.sel, ]
+        sel.gssdf <- sel.gssdf[!(sel.gssdf$Id %in% always.selected), ]
+
+        # always.sel
+        alsel.gssdf <- gssdf[gssdf$Id %in% always.selected, ]
+
+        # remove from sel to accomodate always.sel
+        n.rem <- (nrow(sel.gssdf) + nrow(alsel.gssdf)) - reg.sel
+
+        sel.gssdf <- sel.gssdf[1:(nrow(sel.gssdf) - n.rem), ]
+
+        # New sel
+        sel.gssdf <- rbind(sel.gssdf, alsel.gssdf)
+        sel.gssdf <- sel.gssdf[order(sel.gssdf$Rank), ]
+
+        # New sel including always.sel in orginal reg.sel
+        acc.sel <- sel.gssdf$Id
+        acc.sel <- acc.sel[!(acc.sel %in% always.selected)]
+        acc.sel <- c(acc.sel, always.selected[incl_ind])
+
+        reg.sel <- length(acc.sel)
+
+        sel.gssdf_a <- gssdf[gssdf$Id %in% acc.sel, ]
+        sel.gssdf_a <- sel.gssdf_a[order(sel.gssdf_a$Rank), ]
+        sel.gssdf_a$VarRet2 <- (cumsum(sel.gssdf_a$CRi) / max(cumCRi)) * 100
+
+        reg.var <- sel.gssdf_a[reg.sel, ]$VarRet2
+
+      }
+
+    }
+
     reg.segdf <- data.frame(x = c(-Inf, reg.sel),
                             xend = c(reg.sel, reg.sel),
                             y = c(reg.var, -Inf),
                             yend = c(reg.var, reg.var))
     reg.segdf$label <- as.character(c(round(reg.segdf[1, "y"], 2),
                                       reg.segdf[2, "x"]))
+
+    if (!is.null(x$always.selected)) {
+      if (any(!incl_ind)) {
+
+        reg.segdf$label <-
+          paste(reg.segdf$label,
+                as.character(c(round(
+                  x$cores.info[x$cores.info$Method ==
+                                 "By logistic regression", ]$VarRet, 2),
+                  x$cores.info[x$cores.info$Method ==
+                                 "By logistic regression", ]$Size)),
+                sep = " / ")
+      }
+    }
 
     reg.gssg <- ggplot(gssdf, aes(x = Rank, y = VarRet)) +
       geom_point() +
@@ -259,7 +456,20 @@ coreplot.pcss.core <- function(x,
       ylab("Variability retained (%)") +
       theme_bw()
 
-    dat <- data.frame(n = gssdf$Rank, y = gssdf$VarRet)
+
+    if (!is.null(x$always.selected)) {
+      if (any(!incl_ind)) {
+
+        gssdf2 <- gssdf[gssdf$Id %in% always.selected, ]
+
+        reg.gssg <-
+          reg.gssg +
+          geom_point(data = gssdf2, colour = "red")
+
+      }
+    }
+
+    dat <- data.frame(n = gssdf$Rank, y = gssdf$VarRet, Id = gssdf$Id)
     dat$rate <- -b * dat$y * (100 - dat$y)
 
     reg.segdf2 <- data.frame(x = c(-Inf, reg.sel),
@@ -282,6 +492,18 @@ coreplot.pcss.core <- function(x,
       scale_y_continuous(expand = expansion(mult = c(0.05, 0.1))) +
       ylab("Rate of increase in variability retained (%)") +
       theme_bw()
+
+    if (!is.null(x$always.selected)) {
+      if (any(!incl_ind)) {
+
+        dat2 <- dat[dat$Id %in% always.selected, ]
+
+        reg.gssrateg <-
+          reg.gssrateg +
+          geom_point(data = dat2, colour = "red")
+
+      }
+    }
 
     return(list(`Cumulative contribution` = reg.gssg,
                 `Rate of cumulative contribution` = reg.gssrateg))

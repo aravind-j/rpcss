@@ -11,7 +11,8 @@ pcss.core(
   qualitative,
   eigen.threshold = NULL,
   size = 0.2,
-  var.threshold = 0.75
+  var.threshold = 0.75,
+  always.selected = NULL
 )
 }
 \arguments{
@@ -34,7 +35,11 @@ eigen values.}
 
 \item{size}{The desired core set size proportion.}
 
-\item{var.threshold}{The desired proportion of total variability to be}
+\item{var.threshold}{The desired proportion of total variability to be
+sampled.}
+
+\item{always.selected}{Names of genotypes to be always included in the core
+set as a character vector.}
 }
 \value{
 A list of class \code{pcss.core} with the following components.

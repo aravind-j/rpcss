@@ -40,7 +40,7 @@ if (getRversion() >= "2.15.1")  {
       "Type", "Trait", "Trait_Dim", "Value", "Ty", "Group",
       "Dimension", "Rank", "VarRet", "xend", "y",
       "yend", "label", "n", "rate", "sl",
-      "gp"
+      "gp", "cumCRi"
     )
   )
 }
