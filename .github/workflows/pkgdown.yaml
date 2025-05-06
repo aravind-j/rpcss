@@ -23,7 +23,7 @@ jobs:
         with:
           extra-packages: |
             local::.
-            any::EvaluateCore
+            github::r-lib/EvaluateCore?reinstall
             any::patchwork
             github::r-lib/pkgdown?reinstall
 
