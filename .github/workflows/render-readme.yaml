@@ -30,7 +30,7 @@ jobs:
             any::devtools
             any::kableExtra
             any::RCurl
-            github::r-lib/EvaluateCore?reinstall
+            github::aravind-j/EvaluateCore?reinstall
             any::patchwork
 
       - name: Render README.md using rmarkdown
