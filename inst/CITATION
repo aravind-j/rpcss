@@ -10,7 +10,7 @@ bibentry(header = hd,
          bibtype = "Manual",
          title  = "rpcss: Constitution of Core Collections by Principal Component Scoring Strategy",
          author = c(person(given = "J.", family = "Aravind",
-                           email = "aravindj@nbpgr.ernet.in",
+                           email = "j.aravind@icar.org.in",
                            role = c("aut", "cre"))),
          year = year,
          textVersion = paste(

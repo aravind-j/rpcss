@@ -3,12 +3,12 @@ Title: Constitution of Core Collections by Principal Component Scoring Strategy
 Version: 0.1.0.9000
 Authors@R: c(
     person(given = "J.", family = "Aravind",
-           email = "j.aravind@icar.gov.in",
+           email = "j.aravind@icar.org.in",
            role = c("aut", "cre"),
 		       comment = c(ORCID = "0000-0002-4791-442X")),
 		person("ICAR-NBGPR",
            role = c("cph"),
-		       comment = c(url = "www.nbpgr.ernet.in")))
+		       comment = c(url = "https://nbpgr.org.in/")))
 Description: Generate a Core Collection with Principal Component Scoring 
     Strategy (PCSS) using qualitative and/or quantitative trait data according 
     to Hamon and Noirot (1990) <https://www.documentation.ird.fr/hor/fdi:36506>, 
