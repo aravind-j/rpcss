@@ -47,106 +47,106 @@
 #' # Prepare example data
 #' #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #'
-#' suppressPackageStartupMessages(library(EvaluateCore))
+#' if (requireNamespace('EvaluateCore', quietly = TRUE) &
+#'     requireNamespace("factoextra", quietly = TRUE)) {
 #'
-#' # Get data from EvaluateCore
+#'   # Get data from EvaluateCore
 #'
-#' data("cassava_EC", package = "EvaluateCore")
-#' data = cbind(Genotypes = rownames(cassava_EC), cassava_EC)
-#' quant <- c("NMSR", "TTRN", "TFWSR", "TTRW", "TFWSS", "TTSW", "TTPW", "AVPW",
-#'            "ARSR", "SRDM")
-#' qual <- c("CUAL", "LNGS", "PTLC", "DSTA", "LFRT", "LBTEF", "CBTR", "NMLB",
-#'           "ANGB", "CUAL9M", "LVC9M", "TNPR9M", "PL9M", "STRP", "STRC",
-#'           "PSTR")
-#' rownames(data) <- NULL
+#'   data("cassava_EC", package = "EvaluateCore")
+#'   data = cbind(Genotypes = rownames(cassava_EC), cassava_EC)
+#'   quant <- c("NMSR", "TTRN", "TFWSR", "TTRW", "TFWSS", "TTSW", "TTPW", "AVPW",
+#'              "ARSR", "SRDM")
+#'   qual <- c("CUAL", "LNGS", "PTLC", "DSTA", "LFRT", "LBTEF", "CBTR", "NMLB",
+#'             "ANGB", "CUAL9M", "LVC9M", "TNPR9M", "PL9M", "STRP", "STRC",
+#'             "PSTR")
+#'   rownames(data) <- NULL
 #'
-#' # Convert qualitative data columns to factor
-#' data[, qual] <- lapply(data[, qual], as.factor)
+#'   # Convert qualitative data columns to factor
+#'   data[, qual] <- lapply(data[, qual], as.factor)
 #'
 #'
-#' library(FactoMineR)
-#' suppressPackageStartupMessages(library(factoextra))
+#'   library(FactoMineR)
+#'   suppressPackageStartupMessages(library(factoextra))
 #'
 #' #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #' # With quantitative data
 #' #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #'
-#' out1 <- pcss.core(data = data, names = "Genotypes",
-#'                   quantitative = quant,
-#'                   qualitative = NULL, eigen.threshold = NULL, size = 0.2,
-#'                   var.threshold = 0.75)
+#'   out1 <- pcss.core(data = data, names = "Genotypes",
+#'                     quantitative = quant,
+#'                     qualitative = NULL, eigen.threshold = NULL, size = 0.2,
+#'                     var.threshold = 0.75)
 #'
-#'\donttest{
-#' # Plot contributions of genotypes - with sign - sorted
-#' contrib(x = out1, ndim = 5)
+#'   # Plot contributions of genotypes - with sign - sorted
+#'   contrib(x = out1, ndim = 5)
 #'
-#' # Plot contributions of genotypes - without sign - sorted
-#' contrib(x = out1, ndim = 5, use.sign = FALSE)
+#'   # Plot contributions of genotypes - without sign - sorted
+#'   contrib(x = out1, ndim = 5, use.sign = FALSE)
 #'
-#' # Plot loadings/coordinates of genotypes - with sign - sorted
-#' contrib(x = out1, ndim = 5, plot.loadings = TRUE)
+#'   # Plot loadings/coordinates of genotypes - with sign - sorted
+#'   contrib(x = out1, ndim = 5, plot.loadings = TRUE)
 #'
-#' # Plot contributions of genotypes - with sign - unsorted
-#' contrib(x = out1, ndim = 5, sort.value = FALSE)
+#'   # Plot contributions of genotypes - with sign - unsorted
+#'   contrib(x = out1, ndim = 5, sort.value = FALSE)
 #'
-#' # Plot biplot with factoextra
-#' fviz_contrib(out1$raw.out, choice = "var", axes = 1)
-#' fviz_contrib(out1$raw.out, choice = "var", axes = 2)
-#'}
+#'   # Plot biplot with factoextra
+#'   fviz_contrib(out1$raw.out, choice = "var", axes = 1)
+#'   fviz_contrib(out1$raw.out, choice = "var", axes = 2)
 #'
 #' #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #' # Get core sets with PCSS (qualitative data)
 #' #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #'
-#' out2 <- pcss.core(data = data, names = "Genotypes", quantitative = NULL,
-#'                   qualitative = qual, eigen.threshold = NULL,
-#'                   size = 0.2, var.threshold = 0.75)
+#'   out2 <- pcss.core(data = data, names = "Genotypes", quantitative = NULL,
+#'                     qualitative = qual, eigen.threshold = NULL,
+#'                     size = 0.2, var.threshold = 0.75)
 #'
-#'\donttest{
-#' # Plot contributions of genotypes - with sign - sorted
-#' contrib(x = out2, ndim = 5)
+#'   # Plot contributions of genotypes - with sign - sorted
+#'   contrib(x = out2, ndim = 5)
 #'
-#' # Plot contributions of genotypes - without sign - sorted
-#' contrib(x = out2, ndim = 5, use.sign = FALSE)
+#'   # Plot contributions of genotypes - without sign - sorted
+#'   contrib(x = out2, ndim = 5, use.sign = FALSE)
 #'
-#' # Plot loadings/coordinates of genotypes - with sign - sorted
-#' contrib(x = out2, ndim = 5, plot.loadings = TRUE)
+#'   # Plot loadings/coordinates of genotypes - with sign - sorted
+#'   contrib(x = out2, ndim = 5, plot.loadings = TRUE)
 #'
-#' # Plot contributions of genotypes - with sign - unsorted
-#' contrib(x = out2, ndim = 5, sort.value = FALSE)
+#'   # Plot contributions of genotypes - with sign - unsorted
+#'   contrib(x = out2, ndim = 5, sort.value = FALSE)
 #'
-#' # Plot biplot with factoextra
-#' fviz_contrib(out2$raw.out, choice = "var", axes = 1)
-#' fviz_contrib(out2$raw.out, choice = "var", axes = 2)
-#'}
+#'   # Plot biplot with factoextra
+#'   fviz_contrib(out2$raw.out, choice = "var", axes = 1)
+#'   fviz_contrib(out2$raw.out, choice = "var", axes = 2)
 #'
 #' #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #' # Get core sets with PCSS (quantitative and qualitative data)
 #' #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #'
-#' out3 <- pcss.core(data = data, names = "Genotypes",
-#'                   quantitative = quant,
-#'                   qualitative = qual, eigen.threshold = NULL)
+#'   out3 <- pcss.core(data = data, names = "Genotypes",
+#'                     quantitative = quant,
+#'                     qualitative = qual, eigen.threshold = NULL)
 #'
-#'\donttest{
-#' # Plot contributions of genotypes - sorted
-#' contrib(x = out3, ndim = 5)
+#'   # Plot contributions of genotypes - sorted
+#'   contrib(x = out3, ndim = 5)
 #'
-#' # Plot contributions of genotypes - without sign - sorted
-#' contrib(x = out3, ndim = 5, use.sign = FALSE)
+#'   # Plot contributions of genotypes - without sign - sorted
+#'   contrib(x = out3, ndim = 5, use.sign = FALSE)
 #'
-#' # Plot loadings/coordinates of genotypes - sorted
-#' contrib(x = out3, ndim = 5, plot.loadings = TRUE)
+#'   # Plot loadings/coordinates of genotypes - sorted
+#'   contrib(x = out3, ndim = 5, plot.loadings = TRUE)
 #'
-#' # Plot contributions of genotypes - with sign - unsorted
-#' contrib(x = out3, ndim = 5, sort.value = FALSE)
+#'   # Plot contributions of genotypes - with sign - unsorted
+#'   contrib(x = out3, ndim = 5, sort.value = FALSE)
 #'
-#' # Plot biplot with factoextra
-#' # fviz_contrib(out3$raw.out, choice = "quanti.var", axes = 1)
-#' # fviz_contrib(out3$raw.out, choice = "quali.var", axes = 1)
-#' # fviz_contrib(out3$raw.out, choice = "quanti.var", axes = 2)
-#' # fviz_contrib(out3$raw.out, choice = "quali.var", axes = 2)
-#'}
+#'   # Plot biplot with factoextra
+#'   # Has a bug (https://github.com/kassambara/factoextra/issues/184)
+#'   # fviz_contrib(out3$raw.out, choice = "quanti.var", axes = 1)
+#'   # fviz_contrib(out3$raw.out, choice = "quali.var", axes = 1)
+#'   # fviz_contrib(out3$raw.out, choice = "quanti.var", axes = 2)
+#'   # fviz_contrib(out3$raw.out, choice = "quali.var", axes = 2)
+#'
+#' } else {
+#'   message('Packages "EvaluateCore" and "factoextra" are required to run these examples.')
+#' }
 #'
 contrib <- function(x, ndim = NULL,
                     plot.loadings = FALSE,

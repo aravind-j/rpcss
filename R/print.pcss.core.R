@@ -30,6 +30,7 @@
 #'   methods.
 #'
 #' @export
+#'
 print.pcss.core <- function(x, ...) {
 
   cat("\nMethod\n")

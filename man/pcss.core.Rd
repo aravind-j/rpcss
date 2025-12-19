@@ -156,53 +156,58 @@ In \code{rpcss}, PCA, MCA and FAMD are implemented via the
 # Prepare example data
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-suppressPackageStartupMessages(library(EvaluateCore))
+if (requireNamespace('EvaluateCore', quietly = TRUE)) {
 
-# Get data from EvaluateCore
+  suppressPackageStartupMessages(library(EvaluateCore))
 
-data("cassava_EC", package = "EvaluateCore")
-data = cbind(Genotypes = rownames(cassava_EC), cassava_EC)
-quant <- c("NMSR", "TTRN", "TFWSR", "TTRW", "TFWSS", "TTSW", "TTPW", "AVPW",
-           "ARSR", "SRDM")
-qual <- c("CUAL", "LNGS", "PTLC", "DSTA", "LFRT", "LBTEF", "CBTR", "NMLB",
-          "ANGB", "CUAL9M", "LVC9M", "TNPR9M", "PL9M", "STRP", "STRC",
-          "PSTR")
-rownames(data) <- NULL
+  # Get data from EvaluateCore
 
-# Convert qualitative data columns to factor
-data[, qual] <- lapply(data[, qual], as.factor)
+  data("cassava_EC", package = "EvaluateCore")
+  data = cbind(Genotypes = rownames(cassava_EC), cassava_EC)
+  quant <- c("NMSR", "TTRN", "TFWSR", "TTRW", "TFWSS", "TTSW", "TTPW",
+             "AVPW", "ARSR", "SRDM")
+  qual <- c("CUAL", "LNGS", "PTLC", "DSTA", "LFRT", "LBTEF", "CBTR", "NMLB",
+            "ANGB", "CUAL9M", "LVC9M", "TNPR9M", "PL9M", "STRP", "STRC",
+            "PSTR")
+  rownames(data) <- NULL
+
+  # Convert qualitative data columns to factor
+  data[, qual] <- lapply(data[, qual], as.factor)
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Get core sets with PCSS (quantitative data)
+  # Get core sets with PCSS (quantitative data)
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-out1 <- pcss.core(data = data, names = "Genotypes",
-                  quantitative = quant,
-                  qualitative = NULL, eigen.threshold = NULL, size = 0.2,
-                  var.threshold = 0.75)
+  out1 <- pcss.core(data = data, names = "Genotypes",
+                    quantitative = quant,
+                    qualitative = NULL, eigen.threshold = NULL, size = 0.2,
+                    var.threshold = 0.75)
 
-out1
+  out1
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Get core sets with PCSS (qualitative data)
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-out2 <- pcss.core(data = data, names = "Genotypes", quantitative = NULL,
-                  qualitative = qual, eigen.threshold = NULL,
-                  size = 0.2, var.threshold = 0.75)
+  out2 <- pcss.core(data = data, names = "Genotypes", quantitative = NULL,
+                    qualitative = qual, eigen.threshold = NULL,
+                    size = 0.2, var.threshold = 0.75)
 
-out2
+  out2
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Get core sets with PCSS (quantitative and qualitative data)
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-out3 <- pcss.core(data = data, names = "Genotypes",
-                  quantitative = quant,
-                  qualitative = qual, eigen.threshold = NULL)
+  out3 <- pcss.core(data = data, names = "Genotypes",
+                    quantitative = quant,
+                    qualitative = qual, eigen.threshold = NULL)
 
-out3
+  out3
 
+} else {
+  message('Package "EvaluateCore" is required to run these examples.')
+}
 
 }
 \references{
