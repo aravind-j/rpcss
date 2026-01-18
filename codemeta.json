@@ -2,25 +2,32 @@
   "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
   "@type": "SoftwareSourceCode",
   "identifier": "rpcss",
-  "description": "Generate a Core Collection with Principal Component Scoring Strategy (PCSS) (Noirot et al. 1996 <doi:10.2307/2527837> ; Noirot et al. 2003 <https://horizon.documentation.ird.fr/exl-doc/pleins_textes/divers21-03/010031886.pdf>) using qualitative and/or quantitative trait data.",
-  "name": "rpcss: Core Collection Constitution by Principal Component Scoring Strategy",
+  "description": "Generate a Core Collection with Principal Component Scoring Strategy (PCSS) using qualitative and/or quantitative trait data according to Hamon and Noirot (1990) <https://www.documentation.ird.fr/hor/fdi:36506>, Noirot et al. (1996) <doi:10.2307/2527837> and Noirot et al. (2003) <https://www.documentation.ird.fr/hor/fdi:010031886>.",
+  "name": "rpcss: Constitution of Core Collections by Principal Component Scoring Strategy",
+  "relatedLink": ["https://cran.r-project.org/package=rpcss", "https://aravind-j.github.io/rpcss/", "https://doi.org/10.5281/zenodo.14889174"],
   "codeRepository": "https://github.com/aravind-j/rpcss",
   "issueTracker": "https://github.com/aravind-j/rpcss/issues",
   "license": "https://spdx.org/licenses/GPL-2.0",
-  "version": "0.0.0.9000",
+  "version": "0.1.0.9000",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R Under development (unstable) (2024-07-20 r86909 ucrt)",
+  "runtimePlatform": "R Under development (unstable) (2025-12-09 r89129 ucrt)",
   "author": [
     {
       "@type": "Person",
       "givenName": "J.",
       "familyName": "Aravind",
-      "email": "j.aravind@icar.gov.in",
+      "email": "j.aravind@icar.org.in",
       "@id": "https://orcid.org/0000-0002-4791-442X"
+    }
+  ],
+  "copyrightHolder": [
+    {
+      "@type": "Organization",
+      "name": "ICAR-NBGPR"
     }
   ],
   "maintainer": [
@@ -28,7 +35,7 @@
       "@type": "Person",
       "givenName": "J.",
       "familyName": "Aravind",
-      "email": "j.aravind@icar.gov.in",
+      "email": "j.aravind@icar.org.in",
       "@id": "https://orcid.org/0000-0002-4791-442X"
     }
   ],
@@ -103,6 +110,18 @@
     },
     "2": {
       "@type": "SoftwareApplication",
+      "identifier": "dplyr",
+      "name": "dplyr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=dplyr"
+    },
+    "3": {
+      "@type": "SoftwareApplication",
       "identifier": "FactoMineR",
       "name": "FactoMineR",
       "provider": {
@@ -113,7 +132,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=FactoMineR"
     },
-    "3": {
+    "4": {
       "@type": "SoftwareApplication",
       "identifier": "ggplot2",
       "name": "ggplot2",
@@ -125,7 +144,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=ggplot2"
     },
-    "4": {
+    "5": {
       "@type": "SoftwareApplication",
       "identifier": "ggrepel",
       "name": "ggrepel",
@@ -137,7 +156,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=ggrepel"
     },
-    "5": {
+    "6": {
       "@type": "SoftwareApplication",
       "identifier": "gslnls",
       "name": "gslnls",
@@ -149,7 +168,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=gslnls"
     },
-    "6": {
+    "7": {
       "@type": "SoftwareApplication",
       "identifier": "mathjaxr",
       "name": "mathjaxr",
@@ -161,7 +180,12 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=mathjaxr"
     },
-    "7": {
+    "8": {
+      "@type": "SoftwareApplication",
+      "identifier": "methods",
+      "name": "methods"
+    },
+    "9": {
       "@type": "SoftwareApplication",
       "identifier": "Rdpack",
       "name": "Rdpack",
@@ -173,7 +197,49 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=Rdpack"
     },
+    "10": {
+      "@type": "SoftwareApplication",
+      "identifier": "stats",
+      "name": "stats"
+    },
+    "11": {
+      "@type": "SoftwareApplication",
+      "identifier": "tidyr",
+      "name": "tidyr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=tidyr"
+    },
+    "12": {
+      "@type": "SoftwareApplication",
+      "identifier": "utils",
+      "name": "utils"
+    },
     "SystemRequirements": null
   },
-  "fileSize": "815.655KB"
+  "fileSize": "2341.993KB",
+  "citation": [
+    {
+      "@type": "SoftwareSourceCode",
+      "author": [
+        {
+          "@type": "Person",
+          "givenName": "J.",
+          "familyName": "Aravind",
+          "email": "j.aravind@icar.org.in"
+        }
+      ],
+      "name": "rpcss: Constitution of Core Collections by Principal Component Scoring Strategy",
+      "description": "R package version 0.1.0.9000 https://aravind-j.github.io/rpcss/ https://cran.r-project.org/package=rpcss https://doi.org/10.5281/zenodo.14889174"
+    }
+  ],
+  "releaseNotes": "https://github.com/aravind-j/rpcss/blob/main/NEWS.md",
+  "readme": "https://github.com/aravind-j/rpcss/blob/master/README.md",
+  "contIntegration": "https://github.com/aravind-j/rpcss/actions",
+  "developmentStatus": ["https://www.repostatus.org/#wip", "https://lifecycle.r-lib.org/articles/stages.html#maturing"],
+  "keywords": ["core-collections", "genebank", "germplasm", "pgr", "plant-genetic-resources", "r"]
 }

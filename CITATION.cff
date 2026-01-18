@@ -8,12 +8,12 @@ message: 'To cite package "rpcss" in publications use:'
 type: software
 license: GPL-2.0-or-later
 title: 'rpcss: Constitution of Core Collections by Principal Component Scoring Strategy'
-version: 0.1.0
+version: 0.1.0.9000
 identifiers:
-- type: doi
-  value: 10.32614/CRAN.package.rpcss
 - type: url
   value: https://aravind-j.github.io/rpcss/
+- type: url
+  value: https://doi.org/10.5281/zenodo.14889174
 abstract: Generate a Core Collection with Principal Component Scoring Strategy (PCSS)
   using qualitative and/or quantitative trait data according to Hamon and Noirot (1990)
   <https://www.documentation.ird.fr/hor/fdi:36506>, Noirot et al. (1996) <https://doi.org/10.2307/2527837>
@@ -21,7 +21,7 @@ abstract: Generate a Core Collection with Principal Component Scoring Strategy (
 authors:
 - family-names: Aravind
   given-names: J.
-  email: j.aravind@icar.gov.in
+  email: j.aravind@icar.org.in
   orcid: https://orcid.org/0000-0002-4791-442X
 preferred-citation:
   type: manual
@@ -29,15 +29,22 @@ preferred-citation:
   authors:
   - family-names: Aravind
     given-names: J.
-    email: aravindj@nbpgr.ernet.in
+    email: j.aravind@icar.org.in
     orcid: https://orcid.org/0000-0002-4791-442X
-  notes: R package version 0.1.0 https://aravind-j.github.io/rpcss/ https://cran.r-project.org/package=rpcss
-repository: https://CRAN.R-project.org/package=rpcss
+  notes: R package version 0.1.0.9000 https://aravind-j.github.io/rpcss/ https://cran.r-project.org/package=rpcss
+    https://doi.org/10.5281/zenodo.14889174
 repository-code: https://github.com/aravind-j/rpcss
 url: https://cran.r-project.org/package=rpcss
 contact:
 - family-names: Aravind
   given-names: J.
-  email: j.aravind@icar.gov.in
+  email: j.aravind@icar.org.in
   orcid: https://orcid.org/0000-0002-4791-442X
+keywords:
+- core-collections
+- genebank
+- germplasm
+- pgr
+- plant-genetic-resources
+- r
 

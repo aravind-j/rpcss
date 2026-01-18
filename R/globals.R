@@ -1,6 +1,6 @@
 ### This file is part of 'rpcss' package for R.
 
-### Copyright (C) 2024-2025, ICAR-NBPGR.
+### Copyright (C) 2024-2026, ICAR-NBPGR.
 #
 # rpcss is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
 
 ### This file is part of 'EvaluateCore' package for R.
 
-### Copyright (C) 2018-2025, ICAR-NBPGR.
+### Copyright (C) 2018-2026, ICAR-NBPGR.
 #
 # EvaluateCore is free software: you can redistribute it and/or modify it
 # under the terms of the GNU General Public License as published by
