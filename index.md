@@ -29,7 +29,6 @@ WIP](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.o
 DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.zenodo.14889174.svg)](https://doi.org/10.5281/zenodo.14889174)
 [![Website -
 pkgdown](https://img.shields.io/website-up-down-green-red/https/aravind-j.github.io/rpcss.svg)](https://aravind-j.github.io/rpcss/)
-[![.](https://pro-pulsar-193905.appspot.com/G-B9EKQHWBD9/welcome-page)](https://github.com/aravind-j/google-analytics-beacon)
 [![GoatCounter](https://rpcss-gh.goatcounter.com/count?p=/test)](https://rpcss-gh.goatcounter.com/)
 
 ------------------------------------------------------------------------
