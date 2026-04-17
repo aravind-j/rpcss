@@ -16,8 +16,21 @@ template:
     navbar-light-brand-color: '#ff0f0f'
     navbar-light-brand-hover-color: '#ff0f0f'
     link-color: '#ff0f0f'
-  params:
-    ganalytics: G-BEF8VV6GWJ
+  includes:
+    in_header: |
+       <!-- Global site tag (gtag.js) - Google Analytics -->
+       <script async src="https://www.googletagmanager.com/gtag/js?id=G-BEF8VV6GWJ" ></script>
+       <script>
+         window.dataLayer = window.dataLayer || [];
+         function gtag(){dataLayer.push(arguments);}
+         gtag('js', new Date());
+
+         gtag('config', 'G-BEF8VV6GWJ');
+       </script>
+       <!-- Google tag (gtag.js) -->
+    after_body: >
+      <script data-goatcounter="https://rpcss.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
 
 deploy:
   install_metadata: yes
