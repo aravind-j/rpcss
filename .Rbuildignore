@@ -16,6 +16,7 @@
 ^rpcss\.pdf$
 ^pkgdown$
 ^cran-comments\.md$
+^cran-comments-archive\.md$
 ^vignettes$
 ^CRAN-RELEASE$
 ^\.github$
