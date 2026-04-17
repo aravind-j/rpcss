@@ -34,7 +34,7 @@ WIP](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.o
 DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.zenodo.14889174.svg)](https://doi.org/10.5281/zenodo.14889174)
 [![Website -
 pkgdown](https://img.shields.io/website-up-down-green-red/https/aravind-j.github.io/rpcss.svg)](https://aravind-j.github.io/rpcss/)
-[![.](https://pro-pulsar-193905.appspot.com/G-B9EKQHWBD9/welcome-page)](https://github.com/aravind-j/google-analytics-beacon)
+<!-- [![.](https://pro-pulsar-193905.appspot.com/G-B9EKQHWBD9/welcome-page)](https://github.com/aravind-j/google-analytics-beacon) -->
 [![GoatCounter](https://rpcss-gh.goatcounter.com/count?p=/test)](https://rpcss-gh.goatcounter.com/)
 <!-- [![packageversion](https://img.shields.io/badge/Package%20version-0.2.3.3-orange.svg)](https://github.com/aravind-j/rpcss) -->
 <!-- [![GitHub Download Count](https://github-basic-badges.herokuapp.com/downloads/aravind-j/rpcss/total.svg)] -->
@@ -160,8 +160,8 @@ citation("rpcss")
 
     To cite the R package 'rpcss' in publications use:
 
-      Aravind, J. (2026).  rpcss: Constitution of Core Collections by Principal Component Scoring
-      Strategy. R package version 0.1.0.9000,
+      Aravind, J. (2026).  rpcss: Constitution of Core Collections by Principal Component Scoring Strategy. R
+      package version 0.1.1,
       https://aravind-j.github.io/rpcss/https://cran.r-project.org/package=rpcsshttps://doi.org/10.5281/zenodo.14889174.
 
     A BibTeX entry for LaTeX users is
@@ -169,9 +169,9 @@ citation("rpcss")
       @Manual{,
         title = {rpcss: Constitution of Core Collections by Principal Component Scoring Strategy},
         author = {J. Aravind},
-        note = {R package version 0.1.0.9000 https://aravind-j.github.io/rpcss/ https://cran.r-project.org/package=rpcss https://doi.org/10.5281/zenodo.14889174},
+        note = {R package version 0.1.1 https://aravind-j.github.io/rpcss/ https://cran.r-project.org/package=rpcss https://doi.org/10.5281/zenodo.14889174},
         year = {2026},
       }
 
-    This free and open-source software implements academic research by the authors and co-workers. If
-    you use it, please support the project by citing the package.
+    This free and open-source software implements academic research by the authors and co-workers. If you use
+    it, please support the project by citing the package.
