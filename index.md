@@ -1,8 +1,8 @@
 ## `rpcss`: Constitution of Core Collections by Principal Component Scoring Strategy ![logo](https://raw.githubusercontent.com/aravind-j/rpcss/master/inst/extdata/rpcss.png)
 
-###### Version : [0.1.0.9000](https://aravind-j.github.io/rpcss/); License: [GPL-2\|GPL-3](https://www.r-project.org/Licenses/)
+###### Version : [0.1.1](https://aravind-j.github.io/rpcss/); Copyright (C) 2024-2026: [ICAR-NBPGR](https://nbpgr.org.in/); License: [GPL-2\|GPL-3](https://www.r-project.org/Licenses/)
 
-##### Aravind, J.
+##### Aravind, J. and Singh, Anju Mahendru
 
 Division of Germplasm Conservation, ICAR-National Bureau of Plant
 Genetic Resources, New Delhi.
@@ -17,32 +17,32 @@ v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org
 [![Dependencies](https://tinyverse.netlify.app/status/rpcss)](https://cran.r-project.org/package=rpcss)
 [![rstudio mirror
 downloads](https://cranlogs.r-pkg.org/badges/grand-total/rpcss?color=green)](https://CRAN.R-project.org/package=rpcss)
-[![develVersion](https://img.shields.io/badge/devel%20version-0.1.0.9000-orange.svg)](https://github.com/aravind-j/rpcss)
+[![develVersion](https://img.shields.io/badge/devel%20version-0.1.1-orange.svg)](https://github.com/aravind-j/rpcss)
 [![Github Code
 Size](https://img.shields.io/github/languages/code-size/aravind-j/rpcss.svg)](https://github.com/aravind-j/rpcss)
 [![R-CMD-check](https://github.com/aravind-j/rpcss/workflows/R-CMD-check/badge.svg)](https://github.com/aravind-j/rpcss/actions)
 [![Project Status:
 WIP](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
 [![lifecycle](https://lifecycle.r-lib.org/articles/figures/lifecycle-maturing.svg)](https://lifecycle.r-lib.org/articles/stages.html#maturing)
-[![Last-changedate](https://img.shields.io/badge/last%20change-2025--12--14-yellowgreen.svg)](https://github.com/aravind-j/rpcss/)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2026--04--17-yellowgreen.svg)](https://github.com/aravind-j/rpcss/)
 [![Zenodo
 DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.zenodo.14889174.svg)](https://doi.org/10.5281/zenodo.14889174)
 [![Website -
 pkgdown](https://img.shields.io/website-up-down-green-red/https/aravind-j.github.io/rpcss.svg)](https://aravind-j.github.io/rpcss/)
 [![.](https://pro-pulsar-193905.appspot.com/G-B9EKQHWBD9/welcome-page)](https://github.com/aravind-j/google-analytics-beacon)
-[![GoatCounter](https://rpcss-gh.goatcounter.com/count?p=/test)](https://rpcss.goatcounter.com/)
+[![GoatCounter](https://rpcss-gh.goatcounter.com/count?p=/test)](https://rpcss-gh.goatcounter.com/)
 
 ------------------------------------------------------------------------
 
 ## Description
 
-Generate a Core Collection with Principal Component Scoring Strategy
-(PCSS) using qualitative and/or quantitative trait data according to
+Generate a Core Collection with Principal Component ScoringStrategy
+(PCSS) using qualitative and/or quantitative trait data accordingto
 Hamon and Noirot (1990)
-\<<https://www.documentation.ird.fr/hor/fdi:36506>\>, Noirot et
+\<<https://www.documentation.ird.fr/hor/fdi:36506>\>,Noirot et
 al. (1996) \<[doi:10.2307/2527837](https://doi.org/10.2307/2527837)\>
-and Noirot et al. (2003)
-\<<https://www.documentation.ird.fr/hor/fdi:010031886>\>.
+and Noirot et
+al. (2003)\<<https://www.documentation.ird.fr/hor/fdi:010031886>\>.
 
 ![](reference/figures/README-readme-plot-1.png)
 
@@ -86,8 +86,8 @@ citation("rpcss")
 ``` R
 To cite the R package 'rpcss' in publications use:
 
-  Aravind, J. ().  rpcss: Constitution of Core Collections by Principal Component Scoring
-  Strategy. R package version 0.1.0.9000,
+  Aravind, J. (2026).  rpcss: Constitution of Core Collections by
+  Principal Component Scoring Strategy. R package version 0.1.1,
   https://aravind-j.github.io/rpcss/https://cran.r-project.org/package=rpcsshttps://doi.org/10.5281/zenodo.14889174.
 
 A BibTeX entry for LaTeX users is
@@ -95,9 +95,11 @@ A BibTeX entry for LaTeX users is
   @Manual{,
     title = {rpcss: Constitution of Core Collections by Principal Component Scoring Strategy},
     author = {J. Aravind},
-    note = {R package version 0.1.0.9000 https://aravind-j.github.io/rpcss/ https://cran.r-project.org/package=rpcss https://doi.org/10.5281/zenodo.14889174},
+    note = {R package version 0.1.1 https://aravind-j.github.io/rpcss/ https://cran.r-project.org/package=rpcss https://doi.org/10.5281/zenodo.14889174},
+    year = {2026},
   }
 
-This free and open-source software implements academic research by the authors and co-workers.
-If you use it, please support the project by citing the package.
+This free and open-source software implements academic research by the
+authors and co-workers. If you use it, please support the project by
+citing the package.
 ```
