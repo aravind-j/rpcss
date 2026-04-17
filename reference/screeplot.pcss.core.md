@@ -112,6 +112,5 @@ if (requireNamespace('EvaluateCore', quietly = TRUE) &
 } else {
   message('Packages "EvaluateCore" and "factoextra" are required to run these examples.')
 }
-#> Warning: Ignoring empty aesthetic: `width`.
 
 ```

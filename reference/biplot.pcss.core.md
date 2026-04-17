@@ -206,9 +206,8 @@ if (requireNamespace('EvaluateCore', quietly = TRUE) &
 } else {
   message('Packages "EvaluateCore" and "factoextra" are required to run these examples.')
 }
-#> Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
-#> ℹ Please use `linewidth` instead.
-#> ℹ The deprecated feature was likely used in the ggpubr package.
-#>   Please report the issue at <https://github.com/kassambara/ggpubr/issues>.
+#> Registered S3 method overwritten by 'lme4':
+#>   method           from
+#>   na.action.merMod car 
 
 ```

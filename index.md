@@ -24,7 +24,7 @@ Size](https://img.shields.io/github/languages/code-size/aravind-j/rpcss.svg)](ht
 [![Project Status:
 WIP](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
 [![lifecycle](https://lifecycle.r-lib.org/articles/figures/lifecycle-maturing.svg)](https://lifecycle.r-lib.org/articles/stages.html#maturing)
-[![Last-changedate](https://img.shields.io/badge/last%20change-2026--01--19-yellowgreen.svg)](https://github.com/aravind-j/rpcss/)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2025--12--14-yellowgreen.svg)](https://github.com/aravind-j/rpcss/)
 [![Zenodo
 DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.zenodo.14889174.svg)](https://doi.org/10.5281/zenodo.14889174)
 [![Website -
@@ -36,13 +36,13 @@ pkgdown](https://img.shields.io/website-up-down-green-red/https/aravind-j.github
 
 ## Description
 
-Generate a Core Collection with Principal Component ScoringStrategy
-(PCSS) using qualitative and/or quantitative trait data accordingto
+Generate a Core Collection with Principal Component Scoring Strategy
+(PCSS) using qualitative and/or quantitative trait data according to
 Hamon and Noirot (1990)
-\<<https://www.documentation.ird.fr/hor/fdi:36506>\>,Noirot et
+\<<https://www.documentation.ird.fr/hor/fdi:36506>\>, Noirot et
 al. (1996) \<[doi:10.2307/2527837](https://doi.org/10.2307/2527837)\>
-and Noirot et
-al. (2003)\<<https://www.documentation.ird.fr/hor/fdi:010031886>\>.
+and Noirot et al. (2003)
+\<<https://www.documentation.ird.fr/hor/fdi:010031886>\>.
 
 ![](reference/figures/README-readme-plot-1.png)
 
@@ -86,8 +86,8 @@ citation("rpcss")
 ``` R
 To cite the R package 'rpcss' in publications use:
 
-  Aravind, J. (2026).  rpcss: Constitution of Core Collections by
-  Principal Component Scoring Strategy. R package version 0.1.0.9000,
+  Aravind, J. ().  rpcss: Constitution of Core Collections by Principal Component Scoring
+  Strategy. R package version 0.1.0.9000,
   https://aravind-j.github.io/rpcss/https://cran.r-project.org/package=rpcsshttps://doi.org/10.5281/zenodo.14889174.
 
 A BibTeX entry for LaTeX users is
@@ -96,10 +96,8 @@ A BibTeX entry for LaTeX users is
     title = {rpcss: Constitution of Core Collections by Principal Component Scoring Strategy},
     author = {J. Aravind},
     note = {R package version 0.1.0.9000 https://aravind-j.github.io/rpcss/ https://cran.r-project.org/package=rpcss https://doi.org/10.5281/zenodo.14889174},
-    year = {2026},
   }
 
-This free and open-source software implements academic research by the
-authors and co-workers. If you use it, please support the project by
-citing the package.
+This free and open-source software implements academic research by the authors and co-workers.
+If you use it, please support the project by citing the package.
 ```
