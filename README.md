@@ -7,7 +7,7 @@
 
 ###### Version : [0.1.1](https://aravind-j.github.io/rpcss/); Copyright (C) 2024-2026: [ICAR-NBPGR](https://nbpgr.org.in/); License: [GPL-2\|GPL-3](https://www.r-project.org/Licenses/)
 
-##### Aravind, J. and Singh, Anju Mahendru
+##### *Aravind, J. and Singh, Anju Mahendru*
 
 Division of Germplasm Conservation, ICAR-National Bureau of Plant
 Genetic Resources, New Delhi.

@@ -26,7 +26,7 @@ devtools::load_all(".", quiet = TRUE) # quiet = T for hiding macOS compiler warn
 
 ###### Version : [`r getNamespaceVersion("rpcss")`](https://aravind-j.github.io/rpcss/); Copyright (C) 2024-`r  format(Sys.Date(), "%Y")`: [ICAR-NBPGR](https://nbpgr.org.in/); License: [GPL-2|GPL-3](https://www.r-project.org/Licenses/)
 
-##### Aravind, J. and Singh, Anju Mahendru
+##### *Aravind, J. and Singh, Anju Mahendru*
 
 Division of Germplasm Conservation, ICAR-National Bureau of Plant Genetic Resources, New Delhi.
 
