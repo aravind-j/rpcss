@@ -6,7 +6,7 @@ Authors@R: c(
            email = "j.aravind@icar.org.in",
            role = c("aut", "cre"),
 		       comment = c(ORCID = "0000-0002-4791-442X")),
-    person(given = "Anju Mahendru", family = "Singh",
+    person(given = c("Anju", "Mahendru"), family = "Singh",
            email = "anju.singh@icar.org.in",
 		       role = "aut",
 		       comment = c(ORCID = "0000-0001-6958-1630")),
