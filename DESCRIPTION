@@ -6,9 +6,14 @@ Authors@R: c(
            email = "j.aravind@icar.org.in",
            role = c("aut", "cre"),
 		       comment = c(ORCID = "0000-0002-4791-442X")),
-		person("ICAR-NBGPR",
+    person(given = "Anju Mahendru", family = "Singh",
+           email = "anju.singh@icar.org.in",
+		       role = "aut",
+		       comment = c(ORCID = "0000-0001-6958-1630")),
+    person("ICAR-NBGPR",
            role = c("cph"),
-		       comment = c(url = "https://nbpgr.org.in/")))
+		       comment = c(ROR = "https://ror.org/00scbd467",
+		                   url = "https://nbpgr.org.in/")))
 Description: Generate a Core Collection with Principal Component Scoring 
     Strategy (PCSS) using qualitative and/or quantitative trait data according 
     to Hamon and Noirot (1990) <https://www.documentation.ird.fr/hor/fdi:36506>, 
