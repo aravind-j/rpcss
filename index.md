@@ -35,13 +35,13 @@ pkgdown](https://img.shields.io/website-up-down-green-red/https/aravind-j.github
 
 ## Description
 
-Generate a Core Collection with Principal Component ScoringStrategy
-(PCSS) using qualitative and/or quantitative trait data accordingto
+Generate a Core Collection with Principal Component Scoring Strategy
+(PCSS) using qualitative and/or quantitative trait data according to
 Hamon and Noirot (1990)
-\<<https://www.documentation.ird.fr/hor/fdi:36506>\>,Noirot et
+\<<https://www.documentation.ird.fr/hor/fdi:36506>\>, Noirot et
 al. (1996) \<[doi:10.2307/2527837](https://doi.org/10.2307/2527837)\>
-and Noirot et
-al. (2003)\<<https://www.documentation.ird.fr/hor/fdi:010031886>\>.
+and Noirot et al. (2003)
+\<<https://www.documentation.ird.fr/hor/fdi:010031886>\>.
 
 ![](reference/figures/README-readme-plot-1.png)
 
@@ -85,8 +85,8 @@ citation("rpcss")
 ``` R
 To cite the R package 'rpcss' in publications use:
 
-  Aravind, J. (2026).  rpcss: Constitution of Core Collections by
-  Principal Component Scoring Strategy. R package version 0.1.1,
+  Aravind, J. (2026).  rpcss: Constitution of Core Collections by Principal Component Scoring Strategy. R
+  package version 0.1.1,
   https://aravind-j.github.io/rpcss/https://cran.r-project.org/package=rpcsshttps://doi.org/10.5281/zenodo.14889174.
 
 A BibTeX entry for LaTeX users is
@@ -98,7 +98,6 @@ A BibTeX entry for LaTeX users is
     year = {2026},
   }
 
-This free and open-source software implements academic research by the
-authors and co-workers. If you use it, please support the project by
-citing the package.
+This free and open-source software implements academic research by the authors and co-workers. If you use
+it, please support the project by citing the package.
 ```

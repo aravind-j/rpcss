@@ -23,6 +23,6 @@ https://aravind-j.github.io/rpcss/https://cran.r-project.org/package=rpcsshttps:
 
     @Manual{,
       title = {rpcss: Constitution of Core Collections by Principal Component Scoring Strategy},
-      author = {J. Aravind},
+      author = {J. Aravind and Anju Mahendru Singh},
       note = {R package version 0.1.1 https://aravind-j.github.io/rpcss/ https://cran.r-project.org/package=rpcss https://doi.org/10.5281/zenodo.14889174},
     }
