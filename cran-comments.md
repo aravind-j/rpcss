@@ -12,4 +12,5 @@
 
 ### R CMD check results
 * There were no ERRORs or WARNINGs.
-* There were no NOTEs other than the maintainer change one. 
+* There is a NOTE - "misspelled words in DESCRIPTION, Hamon, Noirot, PCSS, al and et", which can be ignored.
+* There were no further NOTEs other than the maintainer change one. 
