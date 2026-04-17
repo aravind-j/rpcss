@@ -8,13 +8,13 @@
   "codeRepository": "https://github.com/aravind-j/rpcss",
   "issueTracker": "https://github.com/aravind-j/rpcss/issues",
   "license": "https://spdx.org/licenses/GPL-2.0",
-  "version": "0.1.0.9000",
+  "version": "0.1.1",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R Under development (unstable) (2025-12-09 r89129 ucrt)",
+  "runtimePlatform": "R Under development (unstable) (2026-03-23 r89685 ucrt)",
   "author": [
     {
       "@type": "Person",
@@ -22,6 +22,13 @@
       "familyName": "Aravind",
       "email": "j.aravind@icar.org.in",
       "@id": "https://orcid.org/0000-0002-4791-442X"
+    },
+    {
+      "@type": "Person",
+      "givenName": "Anju Mahendru",
+      "familyName": "Singh",
+      "email": "anju.singh@icar.org.in",
+      "@id": "https://orcid.org/0000-0001-6958-1630"
     }
   ],
   "copyrightHolder": [
@@ -221,7 +228,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "2341.993KB",
+  "fileSize": "2341.388KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",
@@ -234,7 +241,7 @@
         }
       ],
       "name": "rpcss: Constitution of Core Collections by Principal Component Scoring Strategy",
-      "description": "R package version 0.1.0.9000 https://aravind-j.github.io/rpcss/ https://cran.r-project.org/package=rpcss https://doi.org/10.5281/zenodo.14889174"
+      "description": "R package version 0.1.1 https://aravind-j.github.io/rpcss/ https://cran.r-project.org/package=rpcss https://doi.org/10.5281/zenodo.14889174"
     }
   ],
   "releaseNotes": "https://github.com/aravind-j/rpcss/blob/main/NEWS.md",
