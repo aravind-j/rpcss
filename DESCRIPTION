@@ -1,6 +1,6 @@
 Package: rpcss
 Title: Constitution of Core Collections by Principal Component Scoring Strategy
-Version: 0.1.1
+Version: 0.1.1.9000
 Authors@R: c(
     person(given = "J.", family = "Aravind",
            email = "j.aravind@icar.org.in",
