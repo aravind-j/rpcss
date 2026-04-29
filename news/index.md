@@ -1,6 +1,10 @@
 # Changelog
 
+## rpcss 0.1.2
+
 ## rpcss 0.1.1
+
+CRAN release: 2026-04-29
 
 ### UPDATED FUNCTIONS:
 
