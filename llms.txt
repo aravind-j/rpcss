@@ -74,6 +74,34 @@ news(package='rpcss')
 
 [Zenodo DOI](https://doi.org/10.5281/zenodo.14889174)
 
+## CRAN checks
+
+[![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)](https://cran.r-project.org/web/checks/check_results_rpcss.html)
+
+| Flavour                           | CRAN check                                                                                                                                                                                             |
+|-----------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| r-devel-linux-x86_64-debian-clang | [![CRAN check - r-devel-linux-x86_64-debian-clang](https://badges.cranchecks.info/flavor/r-devel-linux-x86_64-debian-clang/rpcss.svg)](https://cran.r-project.org/web/checks/check_results_rpcss.html) |
+| r-devel-linux-x86_64-debian-gcc   | [![CRAN check - r-devel-linux-x86_64-debian-gcc](https://badges.cranchecks.info/flavor/r-devel-linux-x86_64-debian-gcc/rpcss.svg)](https://cran.r-project.org/web/checks/check_results_rpcss.html)     |
+| r-devel-linux-x86_64-fedora-clang | [![CRAN check - r-devel-linux-x86_64-fedora-clang](https://badges.cranchecks.info/flavor/r-devel-linux-x86_64-fedora-clang/rpcss.svg)](https://cran.r-project.org/web/checks/check_results_rpcss.html) |
+| r-devel-linux-x86_64-fedora-gcc   | [![CRAN check - r-devel-linux-x86_64-fedora-gcc](https://badges.cranchecks.info/flavor/r-devel-linux-x86_64-fedora-gcc/rpcss.svg)](https://cran.r-project.org/web/checks/check_results_rpcss.html)     |
+| r-patched-linux-x86_64            | [![CRAN check - r-patched-linux-x86_64](https://badges.cranchecks.info/flavor/r-patched-linux-x86_64/rpcss.svg)](https://cran.r-project.org/web/checks/check_results_rpcss.html)                       |
+| r-release-linux-x86_64            | [![CRAN check - r-release-linux-x86_64](https://badges.cranchecks.info/flavor/r-release-linux-x86_64/rpcss.svg)](https://cran.r-project.org/web/checks/check_results_rpcss.html)                       |
+
+[![Windows](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)](https://cran.r-project.org/web/checks/check_results_rpcss.html)
+
+| Flavour                  | CRAN check                                                                                                                                                                           |
+|--------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| r-devel-windows-x86_64   | [![CRAN check - r-devel-windows-x86_64](https://badges.cranchecks.info/flavor/r-devel-windows-x86_64/rpcss.svg)](https://cran.r-project.org/web/checks/check_results_rpcss.html)     |
+| r-release-windows-x86_64 | [![CRAN check - r-release-windows-x86_64](https://badges.cranchecks.info/flavor/r-release-windows-x86_64/rpcss.svg)](https://cran.r-project.org/web/checks/check_results_rpcss.html) |
+| r-oldrel-windows-x86_64  | [![CRAN check - r-oldrel-windows-x86_64](https://badges.cranchecks.info/flavor/r-oldrel-windows-x86_64/rpcss.svg)](https://cran.r-project.org/web/checks/check_results_rpcss.html)   |
+
+[![MacOS](https://img.shields.io/badge/mac%20os-000000?style=for-the-badge&logo=apple&logoColor=white)](https://cran.r-project.org/web/checks/check_results_rpcss.html)
+
+| Flavour                | CRAN check                                                                                                                                                                       |
+|------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| r-release-macos-x86_64 | [![CRAN check - r-release-macos-x86_64](https://badges.cranchecks.info/flavor/r-release-macos-x86_64/rpcss.svg)](https://cran.r-project.org/web/checks/check_results_rpcss.html) |
+| r-oldrel-macos-x86_64  | [![CRAN check - r-oldrel-macos-x86_64](https://badges.cranchecks.info/flavor/r-oldrel-macos-x86_64/rpcss.svg)](https://cran.r-project.org/web/checks/check_results_rpcss.html)   |
+
 ## Citing `rpcss`
 
 To cite the methods in the package use:
