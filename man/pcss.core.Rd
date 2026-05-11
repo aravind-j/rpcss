@@ -175,7 +175,7 @@ if (requireNamespace('EvaluateCore', quietly = TRUE)) {
   data[, qual] <- lapply(data[, qual], as.factor)
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  # Get core sets with PCSS (quantitative data)
+# Get core sets with PCSS (quantitative data)
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   out1 <- pcss.core(data = data, names = "Genotypes",
