@@ -17,8 +17,8 @@
 Source:
 [`inst/CITATION`](https://github.com/aravind-j/rpcss/blob/master/inst/CITATION)
 
-Aravind, J. (). rpcss: Constitution of Core Collections by Principal
-Component Scoring Strategy. R package version 0.1.1.9000,
+Aravind, J. and Singh, A. M. (). rpcss: Constitution of Core Collections
+by Principal Component Scoring Strategy. R package version 0.1.1.9000,
 https://aravind-j.github.io/rpcss/https://cran.r-project.org/package=rpcsshttps://doi.org/10.5281/zenodo.14889174.
 
     @Manual{,
