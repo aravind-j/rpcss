@@ -17,7 +17,7 @@ bibentry(header = hd,
 		                       role = "aut")),
          year = year,
          textVersion = paste(
-           "Aravind, J. (",
+           "Aravind, J. and Singh, A. M. (",
            year, ").  rpcss: Constitution of Core Collections by Principal Component Scoring Strategy. ",
            vers, ", ", "https://aravind-j.github.io/rpcss/", "https://cran.r-project.org/package=rpcss",
            "https://doi.org/10.5281/zenodo.14889174",
