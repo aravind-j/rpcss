@@ -24,6 +24,7 @@ jobs:
           extra-packages: |
             local::.
             any::EvaluateCore
+            any::factoextra
             any::patchwork
             github::r-lib/pkgdown?reinstall
 
