@@ -3,7 +3,7 @@
 ## Constitute Core Collection
 
 - [`pcss.core()`](https://aravind-j.github.io/rpcss/reference/pcss.core.md)
-  : Principal Component Scoring to Generate Core collections
+  : Principal Component Scoring to Generate Core Collections
 
 ## Fetch Genotypes/Individuals in the Core Set
 

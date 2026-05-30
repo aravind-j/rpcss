@@ -1,4 +1,4 @@
-# Principal Component Scoring to Generate Core collections
+# Principal Component Scoring to Generate Core Collections
 
 Generate a Core Collection with Principal Component Scoring Strategy
 (PCSS) (Hamon and Noirot 1990; Noirot et al. 1996; Noirot et al. 2003)
