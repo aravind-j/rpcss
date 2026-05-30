@@ -15,7 +15,7 @@
 #  A copy of the GNU General Public License is available at
 #  https://www.r-project.org/Licenses/
 
-#' Principal Component Scoring to Generate Core collections
+#' Principal Component Scoring to Generate Core Collections
 #'
 #' Generate a Core Collection with Principal Component Scoring Strategy (PCSS)
 #' \insertCite{hamon_proposed_1990,noirot_principal_1996,noirot_method_2003}{rpcss}

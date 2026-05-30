@@ -2,7 +2,7 @@
 % Please edit documentation in R/pcss.core.R
 \name{pcss.core}
 \alias{pcss.core}
-\title{Principal Component Scoring to Generate Core collections}
+\title{Principal Component Scoring to Generate Core Collections}
 \usage{
 pcss.core(
   data,
